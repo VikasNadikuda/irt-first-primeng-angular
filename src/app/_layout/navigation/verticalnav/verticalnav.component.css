@@ -1,0 +1,8 @@
+.disab{
+    pointer-events: none;
+    color: rgb(153, 144, 144) !important;
+
+}
+.hiding{
+    display: none;
+}

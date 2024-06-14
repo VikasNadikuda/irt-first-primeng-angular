@@ -1,0 +1,249 @@
+<div class="app-content content">
+    <div class="content-wrapper">
+      <div class="content-header row" >
+        <app-breadcrumb class="col-12 content-header-title" [title]="true" [action]="false" [breadcrumb]="breadcrumb"></app-breadcrumb>
+      </div>
+      <div class="content-body ">
+        <div class="row">
+          <div class="col-md-12" *blockUI="'addOrg'; message: 'Loading'" >
+            <m-card [options]="options">
+              <!-- <ng-container mCardHeaderTitle>
+                Project Info
+              </ng-container> -->
+              <ng-container mCardBody >
+                <!-- <div class="card-text">
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                </div> -->
+                <form class="form" [formGroup]="addOrEditOrg" style="padding:1rem">
+                  <div class="form-body" >
+                    <!-- <h4 class="form-section"><i class="feather ft-user"></i> Personal Info</h4> -->
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <span class="p-float-label">
+                            <input id="float-input1" class="form-control" type="text" formControlName="ORGANIZATIONID" pInputText > 
+                            <label for="float-input">Organisation Id</label>
+                          </span>
+
+                          <div *ngIf="addOrEditOrg.controls.ORGANIZATIONID.errors && addOrEditOrg.controls.ORGANIZATIONID.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                            <div *ngIf="addOrEditOrg.controls.ORGANIZATIONID.errors['required'] ">Organisation Id is required</div>
+                            <div *ngIf="addOrEditOrg.controls.ORGANIZATIONID.errors['maxlength'] ">Maximum 30 characters</div>
+
+                          </div>
+                          <!-- <input type="text" id="projectinput1" class="form-control" formControlName="firstName"
+                            placeholder="First Name" /> -->
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <span class="p-float-label">
+                            <input id="float-input2" class="form-control" type="text" formControlName="ORGANIZATIONNAME" pInputText> 
+                            <label for="float-input2">Organisation Name</label>
+                          </span>
+                          
+                          <div *ngIf="addOrEditOrg.controls.ORGANIZATIONNAME.errors && addOrEditOrg.controls.ORGANIZATIONNAME.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                            <div *ngIf="addOrEditOrg.controls.ORGANIZATIONNAME.errors['required'] ">Organisation name is required</div>
+                            <div *ngIf="addOrEditOrg.controls.ORGANIZATIONNAME.errors['maxlength'] ">Maximum 100 characters</div>
+
+                          </div>
+                          <!-- <input type="text" id="projectinput2" class="form-control" formControlName="lastName"
+                            placeholder="Last Name" /> -->
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row ">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <span class="p-float-label">
+                            <input id="float-input3" required class="form-control" type="text" formControlName="address1" pInputText> 
+                            <label for="float-input3">Address 1</label>
+                          </span>
+                          <div *ngIf="addOrEditOrg.controls.address1.errors && addOrEditOrg.controls.address1.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                            <div *ngIf="addOrEditOrg.controls.address1.errors['required'] ">Field is required</div>
+                            <div *ngIf="addOrEditOrg.controls.address1.errors['maxlength'] ">Maximum 150 characters</div>
+
+                          </div>
+                          <!-- <input type="text" id="projectinput3" class="form-control" formControlName="email"
+                            placeholder="E-mail" /> -->
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <span class="p-float-label">
+                            <input id="float-input4" class="form-control" type="text" formControlName="address2" pInputText> 
+                            <label for="float-input4">Address 2</label>
+                          </span>
+                          <div *ngIf="addOrEditOrg.controls.address2.errors && addOrEditOrg.controls.address2.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                            <div *ngIf="addOrEditOrg.controls.address2.errors['required'] ">Field is required</div>
+                            <div *ngIf="addOrEditOrg.controls.address2.errors['maxlength'] ">Maximum 150 characters</div>
+
+                          </div>
+                          <!-- <input type="text" id="projectinput4" class="form-control" formControlName="phone"
+                            placeholder="Phone" /> -->
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row ">
+                      <div class="col-md-6">
+                        <div class="form-group p-float-label">
+                          <p-dropdown inputId="drop10" [autoDisplayFirst]="false" (onChange)="countryChanged(addOrEditOrg.controls.country.value)" [style]="{'width':'100%'}" [options]="countries"   formControlName="country"  optionLabel="LIBRARY_VALUE" optionValue='LIBRARY_ID'></p-dropdown>
+                          <label for="drop10">Select Country</label>
+                          <!-- <select id="projectinput5" class="form-control" placeholder="Select a Country" (change)='countryChanged()' formControlName="country">
+                            <option value=''>Select a Country</option>
+                            <option *ngFor="let interest of countries" [value]="interest">{{interest}}</option>
+                          </select> -->
+                          <div *ngIf="addOrEditOrg.controls.country.errors && addOrEditOrg.controls.country.touched" style="margin-top:8px;" class="invalid-feedback1">
+                            <div *ngIf="addOrEditOrg.controls.country.errors['required'] ">Field is required</div>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group p-float-label">
+                          <p-dropdown inputId="drop11" [autoDisplayFirst]="false" (onChange)="stateChanged(addOrEditOrg.controls.state.value)"  [style]="{'width':'100%'}" [options]="states"   formControlName="state"  optionLabel="LIBRARY_VALUE" optionValue='LIBRARY_ID'></p-dropdown>
+                          <label for="drop11">Select State</label>
+                          <!-- <select id="projectinput6" class="form-control"  (change)='stateChanged()' formControlName="state">
+                            <option value=''>Select a State</option>
+                            <option *ngFor="let range of states" [value]="range">{{range}}</option>
+                          </select> -->
+                          <div *ngIf="addOrEditOrg.controls.state.errors && addOrEditOrg.controls.state.touched" style="margin-top:8px;" class="invalid-feedback1">
+                            <div *ngIf="addOrEditOrg.controls.country.invalid ">Please Select Any Country</div>
+                            <div *ngIf="addOrEditOrg.controls.country.valid ">Field is required</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row ">
+                      <div class="col-md-6">
+                        <div class="form-group p-float-label">
+                          <p-dropdown inputId="drop12" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="cities"   formControlName="city" optionLabel="LIBRARY_VALUE" optionValue='LIBRARY_ID' ></p-dropdown>
+                          <label for="drop12">Select City</label>
+                          <!-- <select id="projectinput7" class="form-control" formControlName="city">
+                            <option value="">Select a City</option>
+                            <option *ngFor="let interest of cities" [value]="interest">{{interest}}</option>
+                          </select> -->
+                          <div *ngIf="addOrEditOrg.controls.city.errors && addOrEditOrg.controls.city.touched" style="margin-top:8px;" class="invalid-feedback1">
+                            <div *ngIf="addOrEditOrg.controls.state.invalid ">Please Select Any State</div>
+                            <div *ngIf="addOrEditOrg.controls.state.valid ">Field is required</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <span class="p-float-label">
+                            <input id="float-input5" class="form-control" type="text" formControlName="zip" pInputText> 
+                            <label for="float-input5">Zip Postal Code</label>
+                          </span>
+                          <div *ngIf="addOrEditOrg.controls.zip.errors && addOrEditOrg.controls.zip.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                            <div *ngIf="addOrEditOrg.controls.zip.errors['required'] ">Field is required</div>
+                            <div *ngIf="addOrEditOrg.controls.zip.errors['maxlength'] ">Maximum 10 characters</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row ">
+                      <div class="col-md-6">
+                        <div class="form-group p-float-label">
+                          <p-dropdown inputId="drop13" [autoDisplayFirst]="false"  [style]="{'width':'100%'}" [options]="status"   formControlName="STATUS"  optionLabel="LIBRARY_VALUE" optionValue="LIBRARY_ID"></p-dropdown>
+                          <label for="drop13">Select Status</label>
+                          <div *ngIf="addOrEditOrg.controls.STATUS.errors && addOrEditOrg.controls.STATUS.touched" style="margin-top:8px;" class="invalid-feedback1">
+                            <div *ngIf="addOrEditOrg.controls.STATUS.errors['required'] ">Field is required</div>
+                          </div>
+                          <!-- <input type="text" id="projectinput3" class="form-control" formControlName="email"
+                            placeholder="E-mail" /> -->
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <span class="p-float-label">
+                            <input id="float-input9" class="form-control" type="text" formControlName="contact" pInputText> 
+                            <label for="float-input9">Contact Number</label>
+                          </span>
+                          <div *ngIf="addOrEditOrg.controls.contact.errors && addOrEditOrg.controls.contact.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                            <div *ngIf="addOrEditOrg.controls.contact.errors['required'] ">Field is required</div>
+                            <div *ngIf="addOrEditOrg.controls.contact.errors['maxlength'] ">Maximum 25 characters</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row  ">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <div style="font-family: Quicksand,Georgia,Times New Roman,Times,serif;margin-bottom: 8px;">
+                            <h5>No. of users</h5>
+                          </div>
+                          <span class="p-field-radiobutton" style="display: inline-flex !important;">
+                            <span style="margin-right: 8px;">
+                              <p-radioButton  inputId="limitedUser" value="Limited"  formControlName="NAMEDUSERS"></p-radioButton>
+                              <label  class="radioLabel"  for="limitedUser">Limited</label>
+                            </span>
+                            <span>
+                              <p-radioButton inputId="unlimitedUser" value="Unlimited"  formControlName="NAMEDUSERS"></p-radioButton>
+                              <label class="radioLabel"  for="unlimitedUser">Unlimited</label>
+                            </span>
+                          </span>
+                          
+                          <div *ngIf="addOrEditOrg.controls.NAMEDUSERS.value=='Limited'" style="margin-top: 8px;">
+                            <span class="p-float-label">
+                              <input type="number"  pInputText class="form-control" id="NAMEDUSERSVALUE"  formControlName="NAMEDUSERSVALUE"   required="addOrEditOrg.controls.NAMEDUSERS.value=='Limited'" >
+                              <label for="NAMEDUSERSVALUE">No. of users</label>
+                            </span>
+                            <div *ngIf="addOrEditOrg.controls.NAMEDUSERSVALUE.errors " class="invalid-feedback1">
+                              <div *ngIf="addOrEditOrg.controls.NAMEDUSERSVALUE.errors['required'] ">Field is required</div>
+                              <div *ngIf="addOrEditOrg.controls.NAMEDUSERSVALUE.errors['min'] ">Minimum 1 user is required</div>
+                              <div *ngIf="addOrEditOrg.controls.NAMEDUSERSVALUE.errors['pattern'] ">Only integers allowed</div>
+                            </div>
+                          </div>
+              
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <div class="form-group">
+                            <div style="font-family: Quicksand,Georgia,Times New Roman,Times,serif;margin-bottom: 8px;">
+                              <h5>No. of Studies</h5>
+                            </div>
+                            <span class="p-field-radiobutton" >
+                              <span style="margin-right:8px">
+                                <p-radioButton   inputId="limitedStudies" value="Limited"  formControlName="PRODTYPE"></p-radioButton>
+                                <label  class="radioLabel" for="limitedStudies">Limited</label>
+                              </span>
+                              <span>
+                                <p-radioButton   inputId="unlimitedStudies" value="Unlimited"  formControlName="PRODTYPE"></p-radioButton>
+                                <label class="radioLabel"  for="unlimitedStudies">Unlimited</label>
+                              </span>
+                            </span>
+                            <div *ngIf="addOrEditOrg.controls.PRODTYPE.value=='Limited'" >
+                              <span class="p-float-label">
+                                <input type="number" pInputText class="form-control" id="PRODTYPEVALUE"  formControlName="PRODTYPEVALUE"  required="addOrEditOrg.controls.PRODTYPE.value=='Limited'" >
+                                <label for="NAMEDUSERSVALUE">No. of studies</label>
+                              </span>
+                              <div *ngIf="addOrEditOrg.controls.PRODTYPEVALUE.errors "  class="invalid-feedback1">
+                                <div *ngIf="addOrEditOrg.controls.PRODTYPEVALUE.errors['required'] ">Field is required</div>
+                                <div *ngIf="addOrEditOrg.controls.PRODTYPEVALUE.errors['min'] ">Minimum 1 user is required</div>
+                                <div *ngIf="addOrEditOrg.controls.PRODTYPEVALUE.errors['pattern'] ">Only integers allowed</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+  
+                  </div>
+                  <div class="form-actions" style="padding:20px 0 0 0">
+                    <button type="button" pButton (click)="resetForm()" class=" p-button-warning mr-2">
+                      <i class="feather ft-x"></i> Reset
+                    </button>
+                    <button type="submit" pButton  (click)="saveOrganisation()" [disabled]="addOrEditOrg.invalid" class="p-button-success">
+                      <i class="feather ft-check"></i> {{submitButton}}
+                    </button>
+                  </div>
+                </form>
+              </ng-container>
+            </m-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

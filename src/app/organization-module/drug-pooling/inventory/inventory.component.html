@@ -1,0 +1,65 @@
+<div class="app-content content">
+    <div class="content-wrapper">
+        <div class="content-header row ">
+            <h3 class="col-12 content-header-title" >
+               Inventory
+            </h3>
+        </div>
+        <div class="content-body " style="margin-top: 16px;">
+            <div class="row">
+                <div class="col-md-12">
+                    <div  class="card" *blockUI="'inventory'; message: 'Loading'"  >
+                        <div class="card-body">
+                            <div class="row">
+                                <div  style="padding-top:8px;font-weight: 600;padding-left: 32px;color: black;"  class="col-md-2 offset-md-2">
+                                    <span>Inventory Type: </span>
+                                </div>
+                                <div class="col-md-6 p-float-label">
+                                    <p-dropdown inputId="drop29"  [autoDisplayFirst]="false" [style]="{'width':'100%'}"  [options]="inventory_types"   [(ngModel)]="inventory"  optionLabel="LIBRARY_VALUE" optionValue='LIBRARY_ID' ></p-dropdown>
+                                    <label style="left: 1.75rem !important;" for="drop29">Select Inventory</label>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 24px;">
+                                <div  style="padding-top:48px;font-weight: 600;padding-left: 32px;color: black;"  class="col-md-2 offset-md-2">
+                                    <span>Select File to Upload: </span>
+                                </div>
+                                <div class="col-md-6 p-mr-auto" style="font-family: Quicksand,Georgia,Times New Roman,Times,serif;margin-bottom: 8px;font-weight: 500;margin-top: 16px;">
+                                    <!-- <h5>Select a File to upload</h5> -->
+                                    <p-fileUpload  #fileInput3
+                                    name="demo[]" (onUpload)="onUpload($event)"[style]="{padding:'0'}"  (onClear)="removeFiles()"  (onRemove)="removeFiles()"   (onSelect)="selectFilesToUpload()"    [showUploadButton]="false"
+                                     maxFileSize="1000000">
+                                        <!-- <ng-template pTemplate="content"> -->
+                                            <div *ngIf="uploadedFiles.length"  style="padding: 0px !important;">
+                                                {{uploadedFiles[0].name}} - {{uploadedFiles[0].size}} bytes
+                                            </div>
+                                        <!-- </ng-template> -->
+                                    </p-fileUpload>
+                                </div>
+                              
+                            </div>
+                            <div class="row" *ngIf="uploadedFiles.length" style="margin-top: 24px;">
+                                <div  style="padding-top:8px;font-weight: 600;padding-left: 32px;color: black;"  class="col-md-2 offset-md-2">
+                                    <span>File Name :</span>
+                                </div>
+                                <div class="col-md-6 p-float-label">
+                                    <span class="p-float-label">
+                                        <input id="float-input85" class="form-control"  type="text" [(ngModel)]="fileName" pInputText> 
+                                        <label for="float-input85">Name of the file</label>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 24px;">
+                                <div class="col-md-6 offset-md-4 ">
+                                    <button style="margin-right: 16px;" icon="pi pi-download" pButton pRipple type="button" *ngIf="inventory=='Discrete'" label="Sample File Format to upload" (click)="downloadSample('Discrete')" class="p-button-outlined p-button-info"></button>
+                                    <button style="margin-right: 16px;" icon="pi pi-download" pButton pRipple type="button" *ngIf="inventory=='Bulk'" label="Sample File Format to upload" (click)="downloadSample('Bulk')"  class="p-button-outlined p-button-info"></button>
+                                    <p-button icon="pi pi-check"  [disabled]="uploadedFiles.length==0 || fileName?.length<1" (click)="upload()" label="Upload" class="p-button-text"></p-button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

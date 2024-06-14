@@ -1,0 +1,75 @@
+<div class="app-content content">
+    <div class="content-wrapper">
+        <div class="content-header row ">
+            <h3 class="col-12 content-header-title" >
+                  Transact Orders
+            </h3>
+        </div>
+        <div class="content-body" style="margin-bottom:32px;margin-top: 32px;" *blockUI="'supTransact'; message: 'Loading'">
+            <div class="row">
+                <div class="col-xl-4 offset-xl-2 col-md-6">
+                  <div class="card pull-up ">
+                    <div class="card-content">
+                        <div class="card-header head12">
+                            <a [routerLink]="" class="headTitle">
+                                Depot Orders
+                            </a>
+                        </div>
+                        <div class="card-body cleartfix">
+                            <div class="media align-items-stretch">
+                                <div class="media-body">
+                                    <!-- <h4 style="font-weight: bold;">Suppy Info</h4> -->
+                                    <div class="row" style="margin-top: 16px;">
+                                        <div class="col-7"  style="font-weight: bold;" >
+                                            Number of Depots :
+                                        </div>
+                                        <div class="col-5">
+                                            2
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer" style="    border-top: none; float: right;">
+                            <div style="align-items: flex-end;">
+                                <button pButton pRipple icon="pi pi-chevron-right"  pTooltip="Edit" tooltipPosition="bottom" class="p-button  d p-button-info p-button-outlined p-mr-2" (click)="route('depots')"></button>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                  <div class="card pull-up">
+                    <div class="card-content">
+                        <div class="card-header head12">
+                            <a [routerLink]="" class="headTitle">
+                                Site Orders
+                            </a>
+                        </div>
+                        <div class="card-body cleartfix">
+                            <div class="media align-items-stretch">
+                                <div class="media-body">
+                                    <!-- <h4 style="font-weight: bold;">Kits Workflow</h4> -->
+                                    <div class="row" style="margin-top: 16px;">
+                                        <div class="col-7"  style="font-weight: bold;" >
+                                            Number of Sites :
+                                        </div>
+                                        <div class="col-5">
+                                            3
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer" style="    border-top: none; float: right;">
+                            <div style="align-items: flex-end;">
+                                <button pButton pRipple icon="pi pi-chevron-right"  pTooltip="Edit" tooltipPosition="bottom" class="p-button  d p-button-info p-button-outlined p-mr-2" ></button>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

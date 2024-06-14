@@ -1,0 +1,47 @@
+<div class="app-content content">
+    <div class="content-wrapper">
+        <div class="content-header row" >
+            <app-breadcrumb class="col-12 content-header-title" [title]="true" [action]="false" [breadcrumb]="breadcrumb"></app-breadcrumb>
+        </div>
+        <div class="content-body ">
+            <form class="form" [formGroup]="addOrEditSupplyInfo">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div  class="card" *blockUI="'supplyInfo'; message: 'Loading'"  >
+                            <div class="card-title titleStyle" >
+                            Settings
+                            </div>
+                            <div class="card-body"   >
+                                <div class="form-body"  >
+                                    <div class="row marginTop">
+                                        <div class="col-md-3 offset-md-1 ">
+                                            <div style="font-family: Quicksand,Georgia,Times New Roman,Times,serif;padding-top: 8px;text-align:end">
+                                                <h5 class="font500">Sequence Number <span class="invalid-feedback1">* :</span>  </h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <span class="p-float-label">
+                                                <p-dropdown  inputId="supply1" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="seq_types"   formControlName="Sequence"  optionLabel="LIBRARY_ID" optionValue='LIBRARY_VALUE' ></p-dropdown>
+                                                <label for="supply1">Select</label>
+                                            </span>
+                                            <div *ngIf="addOrEditSupplyInfo.controls.Sequence.errors && addOrEditSupplyInfo.controls.Sequence.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                              <div *ngIf="addOrEditSupplyInfo.controls.Sequence.errors['required']  ">Field is required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row p-ml-auto p-mr-auto">
+                                    <button pButton pRipple type="button" icon="pi pi-check" label="{{submitButton}}" (click)="saveSettings()" class="p-button-outlined p-mr-2"></button>
+                                    <button pButton pRipple type="button" icon="pi pi-times" label="Cancel" (click)="cancel()" class="p-button-outlined p-button-danger"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+.margintop{
+    /* margin-top:8px */
+}
+.radioLabel{
+    margin-left: 8px;
+    margin-bottom: 0px;
+    font-size: medium;
+}
+.invalid-feedback1{
+    color: #ff4961;
+}
+.isValid{
+    border-color: #ff4961;
+  }
+  .p-dropdown{
+      width: 100% !important;
+  }
+.titleStyle{
+    padding: 8px;
+    font-weight: 600;
+    color: white;
+    background: #217ba7;
+    margin-bottom: 0 !important;
+}

@@ -1,0 +1,366 @@
+<div class="app-content content">
+    <div class="content-wrapper">
+        <div class="content-body">
+            <div id="user-profile">
+                <section id="timeline" class="timeline-center timeline-wrapper">
+                    <h3 class="page-title text-center" style="font-weight: bold;">Study Details</h3>
+                    <ul class="timeline">
+                        <li class="timeline-line  mt-3"></li>
+                    </ul>
+                    <ul class="timeline negMargin">
+                        <li class="timeline-line"></li>
+                        <li class="timeline-item">
+                            <div class="timeline-badge">
+                            <span class="bg-blue bg-lighten-1" data-toggle="tooltip" data-placement="right"
+                                title="Settings"><i class="la la-angle-left backg"></i></span>
+                            </div>
+                            <div class="timeline-card card card pull-up  border-grey border-lighten-2" >
+                                <!-- <m-card> -->
+                                    <div class="card-header head12">
+                                        <a [routerLink]="" class="headTitle">
+                                            Settings
+                                        </a>
+                                    </div>
+                                    <div class="card-body"  style="padding: 0 1.5rem 1.5rem 1.5rem !important;">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="head">Protocol ID:</span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{study.PROTOCAL_ID}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="head">Study Code:</span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{study.STUDY_CODE}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="head">Sponsor:</span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{study.CONTACT_NAME}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="head">Contact Number:</span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{study.PHONE_NUMBER}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="head">Title:</span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{study.DESCRIPTION}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                <!-- </m-card> -->
+                            </div>
+                        </li>
+                        <li class="timeline-item mt-3">
+                            <div class="timeline-badge">
+                                <span class="bg-blue bg-lighten-1" data-toggle="tooltip" data-placement="right"
+                                    title="Settings"><i class="la la-angle-right  backg"></i></span>
+                            </div>
+                            <div class="timeline-card card card pull-up  border-grey border-lighten-2" >
+                            <!-- <m-card > -->
+                                <div class="card-header head12">
+                                    <a [routerLink]="" class="headTitle">
+                                        Treatment Assignment
+                                    </a>
+                                </div>
+                                <div class="card-body" style="padding: 0 1.5rem 1.5rem 1.5rem !important;" >
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <span class="head">Blind Type:</span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            {{study.BLINDED_TYPE}}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <span class="head">Unblind Authority:</span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            {{study.BLINDED_APPROVAL}}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <span class="head">Enrollment Type:</span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            {{study.ENROLLMENT_TYPE}}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <span class="head">Site as Factor:</span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            {{study.SITE_AS_FACTOR}}
+                                        </div>
+                                    </div>
+                                </div>
+                            <!-- </m-card> -->
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="timeline negMargin">
+                        <li class="timeline-line"></li>
+                        <li class="timeline-item">
+                            <div class="timeline-badge">
+                            <span class="bg-blue bg-lighten-1" data-toggle="tooltip" data-placement="right"
+                                title="Settings"><i class="la la-angle-left backg"></i></span>
+                            </div>
+                            <div class="timeline-card card card pull-up  border-grey border-lighten-2" >
+                                <!-- <m-card> -->
+                                    <div class="card-header head12">
+                                        <a [routerLink]="" class="headTitle">
+                                            Supplies
+                                        </a>
+                                    </div>
+                                    <div class="card-body"  style="padding: 0 1.5rem 1.5rem 1.5rem !important;">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="head">Shipment ID Format:</span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{study.SHIPMENT_ID}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="head">Auto Order:</span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{study.AUTO_ORDER}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="head">Kit Replacement Type:</span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{study.KIT_REPLACEMENT}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="head">Inventory:</span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{study.INVENTORY}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="head">Kit Destruction:</span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{study.KIT_DESTRUCTION}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="head">Drug Pooling:</span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{study.DRUG_POOLING}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                <!-- </m-card> -->
+                            </div>
+                        </li>
+                        <li class="timeline-item">
+                            <div class="timeline-badge">
+                            <span class="bg-blue bg-lighten-1" data-toggle="tooltip" data-placement="right"
+                                title="Settings"><i class="la la-angle-right  backg"></i></span>
+                            </div>
+                            <div class="timeline-card card card pull-up  border-grey border-lighten-2" >
+                                <!-- <m-card> -->
+                                    <div class="card-header head12">
+                                        <a [routerLink]="" class="headTitle">
+                                            Subject Settings
+                                        </a>
+                                    </div>
+                                    <div class="card-body"  style="padding: 0 1.5rem 1.5rem 1.5rem !important;">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="head">Subject Length:</span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{study.SUBJECT_LENGTH}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="head">Subject ID Seperator:</span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{study.SUBJECT_SEPARATE}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="head">Follow Up after Discontinue:</span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{study.FOLLOWUP_DIS}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="head">Sub Group:</span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{study.SUBGROUP}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="head">Stratification Factor:</span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{study.STRATA_FACTOR}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="head">Direct To Subject:</span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{study.DTP}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                <!-- </m-card> -->
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="timeline negMargin">
+                        <li class="timeline-line"></li>
+                        <li class="timeline-item">
+                            <div class="timeline-badge">
+                                <span class="bg-blue bg-lighten-1" data-toggle="tooltip" data-placement="left"
+                                    title="Settings"><i class="la la-angle-left backg"></i></span>
+                            </div>
+                            <div class="timeline-card card card pull-up  border-grey border-lighten-2" >
+                            <!-- <m-card > -->
+                                <div class="card-header head12">
+                                    <a [routerLink]="" class="headTitle">
+                                        Force Randomization
+                                    </a>
+                                </div>
+                                <div class="card-body" style="padding: 0 1.5rem 1.5rem 1.5rem !important;" >
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <span class="head">Allow Force Randomization:</span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            {{study.FORCED_RAND}}
+                                        </div>
+                                    </div>
+                                    <div class="row" *ngIf="study.FORCED_RAND=='Yes'">
+                                        <div class="col-md-6">
+                                            <span class="head">Type:</span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            {{study.FORCED_TYPE}}
+                                        </div>
+                                    </div>
+                                </div>
+                            <!-- </m-card> -->
+                            </div>
+                        </li>
+                        <li class="timeline-item">
+                            <div class="timeline-badge">
+                                <span class="bg-blue bg-lighten-1" data-toggle="tooltip" data-placement="right"
+                                    title="Settings"><i class="la la-angle-right  backg"></i></span>
+                            </div>
+                            <div class="timeline-card card card pull-up  border-grey border-lighten-2" >
+                            <!-- <m-card > -->
+                                <div class="card-header head12">
+                                    <a [routerLink]="" class="headTitle">
+                                        Cohort
+                                    </a>
+                                </div>
+                                <div class="card-body" style="padding: 0 1.5rem 1.5rem 1.5rem !important;" >
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <span class="head">Allow Cohort</span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            {{study.COHORT}}
+                                        </div>
+                                    </div>
+                                </div>
+                            <!-- </m-card> -->
+                            </div>
+                        </li>
+                        <li class="timeline-item ">
+                            <div class="timeline-badge">
+                                <span class="bg-blue bg-lighten-1" data-toggle="tooltip" data-placement="left"
+                                    title="Settings"><i class="la la-angle-left backg"></i></span>
+                            </div>
+                            <div class="timeline-card card card pull-up  border-grey border-lighten-2" >
+                            <!-- <m-card > -->
+                                <div class="card-header head12">
+                                    <a [routerLink]="" class="headTitle">
+                                        Study and Screening Cap
+                                    </a>
+                                </div>
+                                <div class="card-body" style="padding: 0 1.5rem 1.5rem 1.5rem !important;" >
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <span class="head">Screening Cap:</span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            {{study.SCREENING_CAP}}
+                                        </div>
+                                    </div>
+                                    <div class="row" >
+                                        <div class="col-md-6">
+                                            <span class="head">Screening Alert:</span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            {{study.SCREENING_ALERT}}
+                                        </div>
+                                    </div>
+                                    <div class="row" >
+                                        <div class="col-md-6">
+                                            <span class="head">Study Cap:</span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            {{study.STUDY_CAP}}
+                                        </div>
+                                    </div>
+                                    <div class="row" >
+                                        <div class="col-md-6">
+                                            <span class="head">Study Cap Alert:</span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            {{study.STUDY_CAP_ALERT}}
+                                        </div>
+                                    </div>
+                                </div>
+                            <!-- </m-card> -->
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </div>
+  </div>

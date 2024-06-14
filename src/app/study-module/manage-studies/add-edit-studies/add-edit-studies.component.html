@@ -1,0 +1,447 @@
+<div class="app-content content">
+    <div class="content-wrapper">
+        <div class="content-header row" >
+            <app-breadcrumb class="col-12 content-header-title" [title]="true" [action]="false" [breadcrumb]="breadcrumb"></app-breadcrumb>
+        </div>
+        <div class="content-body ">
+            <form class="form" [formGroup]="addOrEditStudy">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div  class="card" *blockUI="'addStudies'; message: 'Loading'"  >
+                            <div class="card-title titleStyle" >
+                            Settings
+                            </div>
+                            <div class="card-body"   >
+                                <div class="form-body"  >
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <span class="p-float-label">
+                                                    <input id="studies1" class="form-control" type="text" formControlName="PROTOCAL_ID" pInputText > 
+                                                    <label for="studies1">Protocol ID</label>
+                                                </span>  
+                                                <div *ngIf="addOrEditStudy.controls.PROTOCAL_ID.errors && addOrEditStudy.controls.PROTOCAL_ID.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                                                    <div *ngIf="addOrEditStudy.controls.PROTOCAL_ID.errors['maxlength'] ">Maximum 50 characters</div>
+                                                    <div *ngIf="addOrEditStudy.controls.PROTOCAL_ID.errors['required'] ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <span class="p-float-label">
+                                                    <input id="studies2" class="form-control" type="text" formControlName="STUDY_CODE" pInputText > 
+                                                    <label for="studies2">Study Code</label>
+                                                </span>  
+                                                <div *ngIf="addOrEditStudy.controls.STUDY_CODE.errors && addOrEditStudy.controls.STUDY_CODE.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                                                    <div *ngIf="addOrEditStudy.controls.STUDY_CODE.errors['maxlength'] ">Maximum 50 characters</div>
+                                                    <div *ngIf="addOrEditStudy.controls.STUDY_CODE.errors['required'] ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <span class="p-float-label">
+                                                    <input id="studies3" class="form-control" type="text" formControlName="CONTACT_NAME" pInputText > 
+                                                    <label for="studies3">Sponsor</label>
+                                                </span>  
+                                                <div *ngIf="addOrEditStudy.controls.CONTACT_NAME.errors && addOrEditStudy.controls.CONTACT_NAME.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                                                    <div *ngIf="addOrEditStudy.controls.CONTACT_NAME.errors['maxlength'] ">Maximum 100 characters</div>
+                                                    <div *ngIf="addOrEditStudy.controls.CONTACT_NAME.errors['required'] ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <span class="p-float-label">
+                                                    <input id="studies4" class="form-control" type="text" formControlName="PHONE_NUMBER" pInputText > 
+                                                    <label for="studies4">Contact Name</label>
+                                                </span>  
+                                                <div *ngIf="addOrEditStudy.controls.PHONE_NUMBER.errors && addOrEditStudy.controls.PHONE_NUMBER.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                                                    <div *ngIf="addOrEditStudy.controls.PHONE_NUMBER.errors['maxlength'] ">Maximum 30 characters</div>
+                                                    <div *ngIf="addOrEditStudy.controls.PHONE_NUMBER.errors['required'] ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <span class="p-float-label">
+                                                    <textarea id="studies5" rows="3" cols="50" required class="form-control"  formControlName="DESCRIPTION" pInputTextarea> </textarea>
+                                                    <label for="studies5">Title</label>
+                                                </span>  
+                                                <div *ngIf="addOrEditStudy.controls.DESCRIPTION.errors && addOrEditStudy.controls.DESCRIPTION.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                                                    <div *ngIf="addOrEditStudy.controls.DESCRIPTION.errors['maxlength'] ">Maximum 500 characters</div>
+                                                    <div *ngIf="addOrEditStudy.controls.DESCRIPTION.errors['required'] ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div  class="card" *blockUI="'addStudies'; message: 'Loading'"  >
+                            <div class="card-title titleStyle" >
+                            Treatment Assignment
+                            </div>
+                            <div class="card-body"   >
+                                <div class="form-body"  >
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group p-float-label">
+
+                                                <p-dropdown  inputId="stDrop4" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="blinded_types"   formControlName="BLINDED_TYPE"  optionLabel="LIBRARY_ID" optionValue='LIBRARY_VALUE' ></p-dropdown>
+                                                <label for="stDrop4">Select Blinded Type</label>
+                                                <div *ngIf="addOrEditStudy.controls.BLINDED_TYPE.errors && addOrEditStudy.controls.BLINDED_TYPE.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                                  <div *ngIf="addOrEditStudy.controls.BLINDED_TYPE.errors['required']  ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group p-float-label">
+                                                <p-dropdown  inputId="stDrop2" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="general_types"   formControlName="BLINDED_APPROVAL" [disabled]="addOrEditStudy.controls.BLINDED_TYPE?.value!='Blinded'" [required]="addOrEditStudy.controls.BLINDED_TYPE?.value=='Blinded'" optionLabel="LIBRARY_ID" optionValue='LIBRARY_VALUE' ></p-dropdown>
+                                                <label for="stDrop2">Unblinded Authority</label>
+                                                <div *ngIf="addOrEditStudy.controls.BLINDED_APPROVAL.errors && addOrEditStudy.controls.BLINDED_APPROVAL.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                                  <div *ngIf="addOrEditStudy.controls.BLINDED_APPROVAL.errors['required']  ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group p-float-label">
+                                                <p-dropdown  inputId="stDrop3" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="enrollment_types"   formControlName="TREAT_ASSIGN"  optionLabel="LIBRARY_ID" optionValue='LIBRARY_VALUE' ></p-dropdown>
+                                                <label for="stDrop3">Type</label>
+                                                <div *ngIf="addOrEditStudy.controls.TREAT_ASSIGN.errors && addOrEditStudy.controls.TREAT_ASSIGN.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                                  <div *ngIf="addOrEditStudy.controls.TREAT_ASSIGN.errors['required']  ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6" style="padding-top: 8px;font-size: medium;">
+                                            <div class="form-group p-field-checkbox">
+                                                <p-checkbox binary="true" trueValue="1" falseValue="0" [formControl]="addOrEditStudy.controls['SITE_AS_FACTOR']" inputId="stcheck"></p-checkbox>
+                                                <label style="margin-top:8px" for="stcheck">Site as Factor</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div  class="card" *blockUI="'addStudies'; message: 'Loading'"  >
+                            <div class="card-title titleStyle" >
+                            Subject Settings
+                            </div>
+                            <div class="card-body"   >
+                                <div class="form-body"  >
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <span class="p-float-label">
+                                                    <input id="studies6" class="form-control" type="number" formControlName="SUBJECT_LENGTH" pInputText > 
+                                                    <label for="studies6">Subject Length</label>
+                                                </span>  
+                                                <div *ngIf="addOrEditStudy.controls.SUBJECT_LENGTH.errors && addOrEditStudy.controls.SUBJECT_LENGTH.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                                                    <div *ngIf="addOrEditStudy.controls.SUBJECT_LENGTH.errors['required'] ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <span class="p-float-label">
+                                                    <input id="studies7" class="form-control" type="text" formControlName="SUBJECT_SEPARATE" pInputText > 
+                                                    <label for="studies7">Subject ID Seperator</label>
+                                                </span>  
+                                                <div *ngIf="addOrEditStudy.controls.SUBJECT_SEPARATE.errors && addOrEditStudy.controls.SUBJECT_SEPARATE.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                                                  <div *ngIf="addOrEditStudy.controls.SUBJECT_SEPARATE.errors['required']  ">Field is required</div>
+                                                  <div *ngIf="addOrEditStudy.controls.SUBJECT_SEPARATE.errors['pattern'] ">Only special characters allowed</div>
+                                                  <div *ngIf="addOrEditStudy.controls.SUBJECT_SEPARATE.errors['maxlength'] ">Only 1 character allowed</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group p-float-label">
+                                                <p-dropdown  inputId="stDrop4" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="general_types"   formControlName="FOLLOWUP_DIS"  optionLabel="LIBRARY_ID" optionValue='LIBRARY_VALUE' ></p-dropdown>
+                                                <label for="stDrop4">Follow up after discontinue</label>
+                                                <div *ngIf="addOrEditStudy.controls.FOLLOWUP_DIS.errors && addOrEditStudy.controls.FOLLOWUP_DIS.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                                  <div *ngIf="addOrEditStudy.controls.FOLLOWUP_DIS.errors['required']  ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group ">
+                                                <span class="p-float-label">
+                                                    <p-dropdown  inputId="stDrop5" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="general_types"   formControlName="SUBGROUP"  optionLabel="LIBRARY_ID" optionValue='LIBRARY_VALUE' ></p-dropdown>
+                                                    <label for="stDrop5">Sub Group</label>
+                                                </span>
+                                                <div *ngIf="addOrEditStudy.controls.SUBGROUP.errors && addOrEditStudy.controls.SUBGROUP.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                                  <div *ngIf="addOrEditStudy.controls.SUBGROUP.errors['required']  ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group p-float-label">
+                                                <p-dropdown  inputId="stDrop6" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="general_types"   formControlName="STRATA_FACTOR"  optionLabel="LIBRARY_ID" optionValue='LIBRARY_VALUE' ></p-dropdown>
+                                                <label for="stDrop6">Stratification Factor</label>
+                                                <div *ngIf="addOrEditStudy.controls.STRATA_FACTOR.errors && addOrEditStudy.controls.STRATA_FACTOR.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                                  <div *ngIf="addOrEditStudy.controls.STRATA_FACTOR.errors['required']  ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group p-float-label">
+                                                <p-dropdown  inputId="stDrop7" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="general_types"   formControlName="DTP"  optionLabel="LIBRARY_ID" optionValue='LIBRARY_VALUE' ></p-dropdown>
+                                                <label for="stDrop7">Direct To Subject</label>
+                                                <div *ngIf="addOrEditStudy.controls.DTP.errors && addOrEditStudy.controls.DTP.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                                  <div *ngIf="addOrEditStudy.controls.DTP.errors['required']  ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div  class="card" *blockUI="'addStudies'; message: 'Loading'"  >
+                            <div class="card-title titleStyle" >
+                            Force Randomization
+                            </div>
+                            <div class="card-body"   >
+                                <div class="form-body"  >
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group ">
+                                                <span class="p-float-label">
+                                                    <p-dropdown  inputId="stDrop13" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="general_types"   formControlName="FORCED_RAND"  optionLabel="LIBRARY_ID" optionValue='LIBRARY_VALUE' ></p-dropdown>
+                                                    <label for="stDrop13">Allow Force Randomization</label>
+                                                </span>
+                                                <div *ngIf="addOrEditStudy.controls.FORCED_RAND.errors && addOrEditStudy.controls.FORCED_RAND.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                                  <div *ngIf="addOrEditStudy.controls.FORCED_RAND.errors['required']  ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group ">
+                                                <span class="p-float-label">
+                                                    <p-dropdown  inputId="stDrop14" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="rand_types"   formControlName="FORCED_TYPE" [disabled]="addOrEditStudy.controls.FORCED_RAND.value!='Yes'" [required]="addOrEditStudy.controls.FORCED_RAND.value=='Yes'"  optionLabel="LIBRARY_ID" optionValue='LIBRARY_VALUE' ></p-dropdown>
+                                                    <label for="stDrop14">Type</label>
+                                                </span>
+                                                <div *ngIf="addOrEditStudy.controls.FORCED_TYPE.errors && addOrEditStudy.controls.FORCED_TYPE.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                                  <div *ngIf="addOrEditStudy.controls.FORCED_TYPE.errors['required']  ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" *ngIf="addOrEditStudy.controls.FORCED_TYPE.value=='Limited'">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <span class="p-float-label">
+                                                    <input id="studies9" class="form-control" type="number"  [required]="addOrEditStudy.controls.FORCED_TYPE.value=='Limited'" formControlName="FORCED_COUNT" pInputText > 
+                                                    <label for="studies9">Count</label>
+                                                </span>  
+                                                <div *ngIf="addOrEditStudy.controls.FORCED_COUNT.errors && addOrEditStudy.controls.FORCED_COUNT.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                                    <div *ngIf="addOrEditStudy.controls.FORCED_COUNT.errors['required'] ">Field is required</div>
+                                                    <div *ngIf="addOrEditStudy.controls.FORCED_COUNT.errors['min'] ">Minimum 1 is required</div>
+                                                    <div *ngIf="addOrEditStudy.controls.FORCED_COUNT.errors['max'] ">Limit exceeded</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div  class="card" *blockUI="'addStudies'; message: 'Loading'"  >
+                            <div class="card-title titleStyle" >
+                            Supplies
+                            </div>
+                            <div class="card-body"   >
+                                <div class="form-body"  >
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <span class="p-float-label">
+                                                    <input id="studies8" class="form-control" type="number" formControlName="SHIPMENT_ID" pInputText > 
+                                                    <label for="studies8">Shipment ID Format</label>
+                                                </span>  
+                                                <div *ngIf="addOrEditStudy.controls.SHIPMENT_ID.errors && addOrEditStudy.controls.SHIPMENT_ID.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                                                    <div *ngIf="addOrEditStudy.controls.SHIPMENT_ID.errors['required'] ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group ">
+                                                <span class="p-float-label">
+                                                    <p-dropdown  inputId="stDrop8" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="general_types"   formControlName="AUTO_ORDER"  optionLabel="LIBRARY_ID" optionValue='LIBRARY_VALUE' ></p-dropdown>
+                                                    <label for="stDrop8">Auto Order</label>
+                                                </span>
+                                                <div *ngIf="addOrEditStudy.controls.AUTO_ORDER.errors && addOrEditStudy.controls.AUTO_ORDER.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                                  <div *ngIf="addOrEditStudy.controls.AUTO_ORDER.errors['required']  ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group p-float-label">
+                                                <p-dropdown  inputId="stDrop9" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="kit_rep_types"   formControlName="KIT_REPLACEMENT"  optionLabel="LIBRARY_ID" optionValue='LIBRARY_VALUE' ></p-dropdown>
+                                                <label for="stDrop9">Kit Replacement Type</label>
+                                                <div *ngIf="addOrEditStudy.controls.KIT_REPLACEMENT.errors && addOrEditStudy.controls.KIT_REPLACEMENT.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                                  <div *ngIf="addOrEditStudy.controls.KIT_REPLACEMENT.errors['required']  ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group ">
+                                                <span class="p-float-label">
+                                                    <p-dropdown  inputId="stDrop10" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="inventory_types"   formControlName="INVENTORY"  optionLabel="LIBRARY_ID" optionValue='LIBRARY_VALUE' ></p-dropdown>
+                                                    <label for="stDrop10">Inventory</label>
+                                                </span>
+                                                <div *ngIf="addOrEditStudy.controls.INVENTORY.errors && addOrEditStudy.controls.INVENTORY.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                                  <div *ngIf="addOrEditStudy.controls.INVENTORY.errors['required']  ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group p-float-label">
+                                                <p-dropdown  inputId="stDrop11" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="general_types"   formControlName="KIT_DESTRUCTION"  optionLabel="LIBRARY_ID" optionValue='LIBRARY_VALUE' ></p-dropdown>
+                                                <label for="stDrop11">Kit Destruction</label>
+                                                <div *ngIf="addOrEditStudy.controls.KIT_DESTRUCTION.errors && addOrEditStudy.controls.KIT_DESTRUCTION.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                                  <div *ngIf="addOrEditStudy.controls.KIT_DESTRUCTION.errors['required']  ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group p-float-label">
+                                                <p-dropdown  inputId="stDrop12" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="general_types"   formControlName="DRUG_POOLING"  optionLabel="LIBRARY_ID" optionValue='LIBRARY_VALUE' ></p-dropdown>
+                                                <label for="stDrop12">Drug Pooling</label>
+                                                <div *ngIf="addOrEditStudy.controls.DRUG_POOLING.errors && addOrEditStudy.controls.DRUG_POOLING.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                                  <div *ngIf="addOrEditStudy.controls.DRUG_POOLING.errors['required']  ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div  class="card" *blockUI="'addStudies'; message: 'Loading'"  >
+                            <div class="card-title titleStyle" >
+                            Cohort
+                            </div>
+                            <div class="card-body"   >
+                                <div class="form-body"  >
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group p-float-label">
+                                                <p-dropdown  inputId="stDrop16" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="general_types"   formControlName="COHORT"  optionLabel="LIBRARY_ID" optionValue='LIBRARY_VALUE' ></p-dropdown>
+                                                <label for="stDrop16">Allow</label>
+                                                <div *ngIf="addOrEditStudy.controls.COHORT.errors && addOrEditStudy.controls.COHORT.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                                  <div *ngIf="addOrEditStudy.controls.COHORT.errors['required']  ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div  class="card" *blockUI="'addStudies'; message: 'Loading'"  >
+                            <div class="card-title titleStyle" >
+                            Study and Screening Cap
+                            </div>
+                            <div class="card-body"   >
+                                <div class="form-body"  >
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <span class="p-float-label">
+                                                    <input id="studies11" class="form-control" type="number" formControlName="SCREENING_CAP" pInputText > 
+                                                    <label for="studies11">Screening Cap</label>
+                                                </span>  
+                                                <div *ngIf="addOrEditStudy.controls.SCREENING_CAP.errors && addOrEditStudy.controls.SCREENING_CAP.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                                                    <div *ngIf="addOrEditStudy.controls.SCREENING_CAP.errors['required'] ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <span class="p-float-label">
+                                                    <input id="studies12" class="form-control" type="number" formControlName="SCREENING_ALERT" pInputText > 
+                                                    <label for="studies12">Screening Alert</label>
+                                                </span>  
+                                                <div *ngIf="addOrEditStudy.controls.SCREENING_ALERT.errors && addOrEditStudy.controls.SCREENING_ALERT.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                                                    <div *ngIf="addOrEditStudy.controls.SCREENING_ALERT.errors['required'] ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <span class="p-float-label">
+                                                    <input id="studies13" class="form-control" type="number" formControlName="STUDY_CAP" pInputText > 
+                                                    <label for="studies13">Study Cap</label>
+                                                </span>  
+                                                <div *ngIf="addOrEditStudy.controls.STUDY_CAP.errors && addOrEditStudy.controls.STUDY_CAP.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                                                    <div *ngIf="addOrEditStudy.controls.STUDY_CAP.errors['required'] ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <span class="p-float-label">
+                                                    <input id="studies14" class="form-control" type="number" formControlName="STUDY_CAP_ALERT" pInputText > 
+                                                    <label for="studies14">Study Cap Alert</label>
+                                                </span>  
+                                                <div *ngIf="addOrEditStudy.controls.STUDY_CAP_ALERT.errors && addOrEditStudy.controls.STUDY_CAP_ALERT.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                                                    <div *ngIf="addOrEditStudy.controls.STUDY_CAP_ALERT.errors['required'] ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions" style="padding:20px 0 0 0;margin-bottom: 32px;">
+                    <button type="button" pButton (click)="resetForm()" class=" p-button-warning mr-2">
+                        <i class="feather ft-x"></i> Reset
+                    </button>
+                    <button type="submit" pButton  (click)="saveStudies()" [disabled]="addOrEditStudy.invalid" class="p-button-success">
+                        <i class="feather ft-check"></i> {{submitButton}}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+  

@@ -1,0 +1,271 @@
+<div class="app-content content">
+    <div class="content-wrapper">
+      <div class="content-header row" >
+        <app-breadcrumb class="col-12 content-header-title" [title]="false" [action]="false" [breadcrumb]="breadcrumb"></app-breadcrumb>
+      </div>
+      <div class="content-body ">
+        <form class="form" [formGroup]="addOrEditRole">
+          <div class="row">
+            <div class="col-md-12">
+              <div  class="card" *blockUI="'addRole'; message: 'Loading'"  >
+                <div class="card-title titleStyle" >
+                  {{title}}
+                </div>
+                <div class="card-body"   >
+                    <div class="form-body"  >
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <span class="p-float-label">
+                              <input id="roleD2" class="form-control" type="text" formControlName="RoleName" pInputText > 
+                              <label for="roleD2">Role Name</label>
+                            </span>  
+                            <div *ngIf="addOrEditRole.controls.RoleName.errors && addOrEditRole.controls.RoleName.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                              <div *ngIf="addOrEditRole.controls.RoleName.errors['maxlength'] ">Maximum 50 characters</div>
+                              <div *ngIf="addOrEditRole.controls.RoleName.errors['required'] ">Field is required</div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 16px;">
+                <div class="col-md-12">
+                    <div  class="card"  >
+                        <div class="card-title titleStyle" >
+                            Permissions
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div  class="card pull-up1 roleCard" >
+                                        <div class="card-title roleStyle " >
+                                            <span *ngIf="dashboard_cat?.length>0" style="padding-left: 1rem;">
+                                                <p-checkbox [(ngModel)]="isMasterSelDash" inputId="dash" [binary]='true'   [ngModelOptions]="{standalone: true}" (onChange)="selectAllDash(1)"></p-checkbox>
+                                            </span>
+                                            <span style="margin-left: 20%;">Dashboard</span> 
+                                        </div>
+                                        <perfect-scrollbar  class="scroll-container"  [config]="config" >
+                                            <div class="card-content" >
+                                                <div class="card-body"  *ngIf="dashboard_cat?.length>0" >
+                                                    <div *ngFor="let category of dashboard_cat" class="p-field-checkbox" >
+                                                        <p-checkbox name="category"  [value]="category.ID" [inputId]="category.ID"  [binary]='true' [ngModelOptions]="{standalone: true}"  [(ngModel)]="category.selected" (onChange)="isAllSelected(1)" ></p-checkbox>
+                                                        <label [for]="category.id">{{category.ROLE_NAME}}</label>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body nodata1"  *ngIf="dashboard_cat?.length==0" >
+                                                    No Data found
+                                                </div>
+                                            </div>
+                                        </perfect-scrollbar>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div  class="card pull-up1 roleCard">
+                                        <div class="card-title roleStyle" >
+                                            <span *ngIf="study_roles?.length>0" style="padding-left: 1rem;">
+                                                <p-checkbox [(ngModel)]="isMasterSelStudy" inputId="dash" [binary]='true'   [ngModelOptions]="{standalone: true}" (onChange)="selectAllDash(2)"></p-checkbox>
+                                            </span>
+                                            <span style="margin-left: 20%;">Study Management</span> 
+                                            
+                                        </div>
+                                        <perfect-scrollbar  class="scroll-container"  [config]="config" >
+                                            <div class="card-content" >
+                                                <div class="card-body" *ngIf="study_roles?.length>0" >
+                                                    <div *ngFor="let category of study_roles" class="p-field-checkbox" > 
+                                                        <p-checkbox name="category"  [value]="category.ID" [inputId]="category.ID" [binary]='true' [ngModelOptions]="{standalone: true}"  [(ngModel)]="category.selected" (onChange)="isAllSelected(2)" ></p-checkbox>
+                                                        <label [for]="category.id">{{category.ROLE_NAME}}</label>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body nodata1" *ngIf="study_roles?.length==0" >
+                                                    No data Found
+                                                </div>
+                                            </div>
+                                        </perfect-scrollbar>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div  class="card pull-up1 roleCard">
+                                        <div class="card-title roleStyle" >
+                                            <span *ngIf="data_changes?.length>0"  style="padding-left: 1rem;">
+                                                <p-checkbox [(ngModel)]="isMasterSelData" inputId="dash" [binary]='true'   [ngModelOptions]="{standalone: true}" (onChange)="selectAllDash(3)"></p-checkbox>
+                                            </span>
+                                            <span style="margin-left: 20%;">Data Changes</span> 
+                                        </div>
+                                        <perfect-scrollbar  class="scroll-container"  [config]="config" >
+                                            <div class="card-content" >
+                                                <div class="card-body"*ngIf="data_changes?.length>0"  >
+                                                    <div *ngFor="let category of data_changes" class="p-field-checkbox" > 
+                                                        <p-checkbox name="category"  [value]="category.ID" [inputId]="category.ID" [binary]='true' [ngModelOptions]="{standalone: true}"  [(ngModel)]="category.selected" (onChange)="isAllSelected(3)" ></p-checkbox>
+                                                        <label [for]="category.id">{{category.ROLE_NAME}}</label>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body nodata1" *ngIf="data_changes?.length==0"  >
+                                                    No data Found
+                                                </div>
+                                            </div>
+                                        </perfect-scrollbar>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div  class="card pull-up1 roleCard">
+                                        <div class="card-title roleStyle" >
+                                            <span  *ngIf="depots?.length>0" style="padding-left: 1rem;">
+                                                <p-checkbox [(ngModel)]="isMasterSelDepot" inputId="dash" [binary]='true'   [ngModelOptions]="{standalone: true}" (onChange)="selectAllDash(4)"></p-checkbox>
+                                            </span>
+                                            <span style="margin-left: 20%;">Depot Management</span> 
+                                        </div>
+                                        <perfect-scrollbar  class="scroll-container"  [config]="config" >
+                                            <div class="card-content" >
+                                                <div class="card-body"  *ngIf="depots?.length>0">
+                                                    <div *ngFor="let category of depots" class="p-field-checkbox" > 
+                                                        <p-checkbox name="category"  [value]="category.ID" [inputId]="category.ID" [binary]='true' [ngModelOptions]="{standalone: true}"  [(ngModel)]="category.selected" (onChange)="isAllSelected(4)" ></p-checkbox>
+                                                        <label [for]="category.id">{{category.ROLE_NAME}}</label>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body nodata1" *ngIf="depots?.length==0"  >
+                                                    No data Found
+                                                </div>
+                                            </div>
+                                        </perfect-scrollbar>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div  class="card pull-up1 roleCard">
+                                        <div class="card-title roleStyle" >
+                                            <span *ngIf="sites?.length>0" style="padding-left: 1rem;">
+                                                <p-checkbox [(ngModel)]="isMasterSelSite" inputId="dash" [binary]='true'   [ngModelOptions]="{standalone: true}" (onChange)="selectAllDash(5)"></p-checkbox>
+                                            </span>
+                                            <span style="margin-left: 20%;">Site Management</span> 
+                                        </div>
+                                        <perfect-scrollbar  class="scroll-container"  [config]="config" >
+                                            <div class="card-content" >
+                                                <div class="card-body" *ngIf="sites?.length>0">
+                                                    <div *ngFor="let category of sites" class="p-field-checkbox" > 
+                                                        <p-checkbox name="category"  [value]="category.ID" [inputId]="category.ID" [binary]='true' [ngModelOptions]="{standalone: true}"  [(ngModel)]="category.selected" (onChange)="isAllSelected(5)" ></p-checkbox>
+                                                        <label [for]="category.id">{{category.ROLE_NAME}}</label>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body nodata1" *ngIf="sites?.length==0"  >
+                                                    No data Found
+                                                </div>
+                                            </div>
+                                        </perfect-scrollbar>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div  class="card pull-up1 roleCard">
+                                        <div class="card-title roleStyle" >
+                                            <span *ngIf="supplies?.length>0" style="padding-left: 1rem;">
+                                                <p-checkbox [(ngModel)]="isMasterSelSupplies" inputId="dash" [binary]='true'   [ngModelOptions]="{standalone: true}" (onChange)="selectAllDash(6)"></p-checkbox>
+                                            </span>
+                                            <span style="margin-left: 20%;">Supplies Management</span> 
+                                        </div>
+                                        <perfect-scrollbar  class="scroll-container"  [config]="config" >
+                                            <div class="card-content" >
+                                                <div class="card-body" *ngIf="supplies?.length>0" >
+                                                    <div *ngFor="let category of supplies" class="p-field-checkbox" > 
+                                                        <p-checkbox name="category"  [value]="category.ID" [inputId]="category.ID" [binary]='true' [ngModelOptions]="{standalone: true}"  [(ngModel)]="category.selected" (onChange)="isAllSelected(6)" ></p-checkbox>
+                                                        <label [for]="category.id">{{category.ROLE_NAME}}</label>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body nodata1" *ngIf="supplies?.length==0"  >
+                                                    No data Found
+                                                </div>
+                                            </div>
+                                        </perfect-scrollbar>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div  class="card pull-up1 roleCard">
+                                        <div class="card-title roleStyle" >
+                                            <span *ngIf="subjects?.length>0" style="padding-left: 1rem;">
+                                                <p-checkbox [(ngModel)]="isMasterSelSubject" inputId="dash" [binary]='true'   [ngModelOptions]="{standalone: true}" (onChange)="selectAllDash(7)"></p-checkbox>
+                                            </span>
+                                            <span style="margin-left: 20%;">Subject Management</span> 
+                                        </div>
+                                        <perfect-scrollbar  class="scroll-container"  [config]="config" >
+                                            <div class="card-content" >
+                                                <div class="card-body" *ngIf="subjects?.length>0">
+                                                    <div *ngFor="let category of subjects" class="p-field-checkbox" > 
+                                                        <p-checkbox name="category"  [value]="category.ID" [inputId]="category.ID" [binary]='true' [ngModelOptions]="{standalone: true}"  [(ngModel)]="category.selected" (onChange)="isAllSelected(7)" ></p-checkbox>
+                                                        <label [for]="category.id">{{category.ROLE_NAME}}</label>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body nodata1" *ngIf="subjects?.length==0"  >
+                                                    No data Found
+                                                </div>
+                                            </div>
+                                        </perfect-scrollbar>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div  class="card pull-up1 roleCard">
+                                        <div class="card-title roleStyle" >
+                                            <span *ngIf="sub_acc?.length>0" style="padding-left: 1rem;">
+                                                <p-checkbox [(ngModel)]="isMasterSelSubjectAcc" inputId="dash" [binary]='true'   [ngModelOptions]="{standalone: true}" (onChange)="selectAllDash(8)"></p-checkbox>
+                                            </span>
+                                            <span style="margin-left: 20%;">Subject Accountability</span> 
+                                        </div>
+                                        <perfect-scrollbar  class="scroll-container"  [config]="config" >
+                                            <div class="card-content" >
+                                                <div class="card-body" *ngIf="sub_acc?.length>0">
+                                                    <div *ngFor="let category of sub_acc" class="p-field-checkbox" > 
+                                                        <p-checkbox name="category"  [value]="category.ID" [inputId]="category.ID" [binary]='true' [ngModelOptions]="{standalone: true}"  [(ngModel)]="category.selected" (onChange)="isAllSelected(8)" ></p-checkbox>
+                                                        <label [for]="category.id">{{category.ROLE_NAME}}</label>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body nodata1" *ngIf="sub_acc?.length==0"  >
+                                                    No data Found
+                                                </div>
+                                            </div>
+                                        </perfect-scrollbar>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div  class="card pull-up1 roleCard">
+                                        <div class="card-title roleStyle" >
+                                            <span *ngIf="reports?.length>0" style="padding-left: 1rem;">
+                                                <p-checkbox [(ngModel)]="isMasterSelReport" inputId="dash" [binary]='true'   [ngModelOptions]="{standalone: true}" (onChange)="selectAllDash(9)"></p-checkbox>
+                                            </span>
+                                            <span style="margin-left: 20%;">Reports</span> 
+                                        </div>
+                                        <perfect-scrollbar  class="scroll-container"  [config]="config" >
+                                            <div class="card-content" >
+                                                <div class="card-body" *ngIf="reports?.length>0">
+                                                    <div *ngFor="let category of reports" class="p-field-checkbox" > 
+                                                        <p-checkbox name="category"  [value]="category.ID" [inputId]="category.ID" [binary]='true' [ngModelOptions]="{standalone: true}"  [(ngModel)]="category.selected" (onChange)="isAllSelected(9)" ></p-checkbox>
+                                                        <label [for]="category.id">{{category.ROLE_NAME}}</label>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body nodata1" *ngIf="reports?.length==0"  >
+                                                    No data Found
+                                                </div>
+                                            </div>
+                                        </perfect-scrollbar>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+          </div>
+          </div>
+          <div class="form-actions" style="padding:20px 0 0 0;margin-bottom: 48px;">
+            <button type="submit" pButton  (click)="saveUpdateRoles()" [disabled]="addOrEditRole.invalid" class="p-button-success">
+              <i class="feather ft-check"></i> {{submitButton}}
+            </button>
+            <code>{{checkedCategoryList}}</code>
+ 
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

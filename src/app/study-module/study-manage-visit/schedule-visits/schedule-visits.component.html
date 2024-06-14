@@ -1,0 +1,163 @@
+<div class="app-content content">
+    <div class="content-wrapper">
+      <div class="content-header row ">
+        <app-breadcrumb class="col-12 content-header-title" [title]="true" [action]="false" [breadcrumb]="breadcrumb"></app-breadcrumb>
+      </div>
+      <div class="content-body ">
+        <div class="row">
+          <div class="col-md-12" *blockUI="'addUser'; message: 'Loading'" >
+            <m-card [options]="options">
+              <ng-container mCardBody >
+                <form class="form" [formGroup]="scheduleSetup" style="padding:1rem">
+                  <div class="form-body" >
+                    <div class="row">
+                        <div class="col-md-6" *ngIf="studyDetails?.COHORT!='No'" >
+                            <span class="p-float-label">
+                                <p-dropdown  inputId="stDrop881" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="cohort_list"  [required]="studyDetails?.COHORT!='No'"  formControlName="COHORT_ID"  optionLabel="NAME" optionValue='ID' ></p-dropdown>
+                                <label for="stDrop881">Select Cohort</label>
+                            </span>
+                            <div *ngIf="scheduleSetup.controls.COHORT_ID.errors && scheduleSetup.controls.COHORT_ID.touched" style="margin-top:8px;" class="invalid-feedback1">
+                              <div *ngIf="scheduleSetup.controls.COHORT_ID.errors['required']  ">Field is required</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <span class="p-float-label">
+                              <input id="schedulevisit1" class="form-control" type="text" formControlName="VISITNAME" pInputText > 
+                              <label for="schedulevisit1">Visit Name</label>
+                            </span>
+  
+                            <div *ngIf="scheduleSetup.controls.VISITNAME.errors && scheduleSetup.controls.VISITNAME.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                              <div *ngIf="scheduleSetup.controls.VISITNAME.errors['required'] ">Field is required</div>
+                              <div *ngIf="scheduleSetup.controls.VISITNAME.errors['maxlength'] ">Maximum 200 characters</div>
+  
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="row ">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <span class="p-float-label">
+                            <input id="schedulevisit2" class="form-control" type="number" formControlName="VISITORDER" pInputText> 
+                            <label for="schedulevisit2">Visit Order</label>
+                          </span>
+                          <div *ngIf="scheduleSetup.controls.VISITORDER.errors && scheduleSetup.controls.VISITORDER.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                            <div *ngIf="scheduleSetup.controls.VISITORDER.errors['required'] ">Field is required</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                          <div class="form-group">
+                              <span class="p-float-label">
+                                  <p-dropdown  inputId="visitd1" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="window_types"   formControlName="WINDOW_TYPE"  optionLabel="LIBRARY_VALUE" optionValue='LIBRARY_ID'></p-dropdown>
+                                  <label for="visitd1">Window Type</label>
+                                  <div *ngIf="scheduleSetup.controls.WINDOW_TYPE.errors && scheduleSetup.controls.WINDOW_TYPE.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                    <div *ngIf="scheduleSetup.controls.WINDOW_TYPE.errors['required'] ">Field is required</div>
+                                  </div>
+                              </span>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="row ">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                            <span class="p-float-label">
+                              <input id="schedulevisit21" class="form-control" type="number" formControlName="TARGETDAYS" pInputText> 
+                              <label for="schedulevisit21">Target Days</label>
+                            </span>
+                            <div *ngIf="scheduleSetup.controls.TARGETDAYS.errors && scheduleSetup.controls.TARGETDAYS.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                              <div *ngIf="scheduleSetup.controls.TARGETDAYS.errors['required'] ">Field is required</div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <span class="p-float-label">
+                            <input id="schedulevisit4" class="form-control" type="number" formControlName="MINDAYS" pInputText> 
+                            <label for="schedulevisit4">Min Days</label>
+                          </span>
+                          <div *ngIf="scheduleSetup.controls.MINDAYS.errors && scheduleSetup.controls.MINDAYS.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                            <div *ngIf="scheduleSetup.controls.MINDAYS.errors['required'] ">Field is required</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row ">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <span class="p-float-label">
+                            <input id="schedulevisit5" class="form-control" type="number" formControlName="MAXDAYS" pInputText> 
+                            <label for="schedulevisit5">Max Days</label>
+                          </span>
+                          <div *ngIf="scheduleSetup.controls.MAXDAYS.errors && scheduleSetup.controls.MAXDAYS.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                            <div *ngIf="scheduleSetup.controls.MAXDAYS.errors['required'] ">Field is required</div>
+                          </div>
+                        </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <span class="p-float-label">
+                                    <p-dropdown  inputId="visitd3" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="general_types"   formControlName="RANDOMIZATION"  optionLabel="LIBRARY_VALUE" optionValue='LIBRARY_ID'></p-dropdown>
+                                    <label for="visitd3">Randomization</label>
+                                    <div *ngIf="scheduleSetup.controls.RANDOMIZATION.errors && scheduleSetup.controls.RANDOMIZATION.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                      <div *ngIf="scheduleSetup.controls.RANDOMIZATION.errors['required'] ">Field is required</div>
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row ">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                            <span class="p-float-label">
+                                <p-dropdown  inputId="visitd4" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="general_types"   formControlName="ASSIGN_TREATMENT"  optionLabel="LIBRARY_VALUE" optionValue='LIBRARY_ID'></p-dropdown>
+                                <label for="visitd4">Dispense Visit</label>
+                                <div *ngIf="scheduleSetup.controls.ASSIGN_TREATMENT.errors && scheduleSetup.controls.ASSIGN_TREATMENT.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                  <div *ngIf="scheduleSetup.controls.ASSIGN_TREATMENT.errors['required'] ">Field is required</div>
+                                </div>
+                            </span>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                            <span class="p-float-label">
+                                <p-dropdown  inputId="visitd5" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="general_types"   formControlName="NEXTVISIT"  optionLabel="LIBRARY_VALUE" optionValue='LIBRARY_ID'></p-dropdown>
+                                <label for="visitd5">Reset Next Visit Dates</label>
+                                <div *ngIf="scheduleSetup.controls.NEXTVISIT.errors && scheduleSetup.controls.NEXTVISIT.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                  <div *ngIf="scheduleSetup.controls.NEXTVISIT.errors['required'] ">Field is required</div>
+                                </div>
+                            </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6" >
+                        <span class="p-float-label">
+                            <textarea id="float-inputvisit3" rows="5" cols="50" required class="form-control"  formControlName="DESCRIPTION" pInputTextarea> </textarea>
+                            <label for="float-inputvisit3">Description</label>
+                          </span>
+                          <div *ngIf="scheduleSetup.controls.DESCRIPTION.errors && scheduleSetup.controls.DESCRIPTION.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                            <div *ngIf="scheduleSetup.controls.DESCRIPTION.errors['required'] ">Field is required</div>
+                            <div *ngIf="scheduleSetup.controls.DESCRIPTION.errors['maxlength'] ">Maximum 200 characters</div>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-actions" style="padding:20px 0 0 0">
+                    <button type="button" pButton (click)="resetForm()" class=" p-button-warning mr-2">
+                      <i class="feather ft-x"></i> Reset
+                    </button>
+                    <button type="submit" pButton  (click)="saveSetup()" [disabled]="scheduleSetup.invalid" class="p-button-success">
+                      <i class="feather ft-check"></i> {{submitButton}}
+                    </button>
+                  </div>
+                </form>
+              </ng-container>
+            </m-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

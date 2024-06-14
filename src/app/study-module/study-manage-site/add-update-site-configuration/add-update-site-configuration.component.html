@@ -1,0 +1,118 @@
+<div class="app-content content">
+    <div class="content-wrapper">
+      <div class="content-header row ">
+        <app-breadcrumb class="col-12 content-header-title" [title]="true" [action]="false" [breadcrumb]="breadcrumb"></app-breadcrumb>
+      </div>
+      <div class="content-body ">
+        <div class="row">
+          <div class="col-md-12" *blockUI="'siteConfig'; message: 'Loading'" >
+            <m-card [options]="options">
+              <!-- <perfect-scrollbar  class="scroll-container"  [config]="config" > -->
+              <ng-container mCardBody >
+                <form class="form" [formGroup]="addUpdateConfig" style="padding:1rem">
+                  <div class="form-body" >
+                    <div class="row">
+                      <div class="col-md-5 p-ml-auto p-mr-auto">
+                        <div class="form-group">
+                            <span class="p-float-label">
+                                <p-dropdown  inputId="addUpdateConfigd1" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="sites"   formControlName="Site_ID"  optionLabel="NAME" optionValue='ID'></p-dropdown>
+                                <label for="addUpdateConfigd1">Sites</label>
+                            </span>
+                            <div *ngIf="addUpdateConfig.controls.Site_ID.errors && addUpdateConfig.controls.Site_ID.touched" style="margin-top:8px;" class="invalid-feedback1">
+                              <div *ngIf="addUpdateConfig.controls.Site_ID.errors['required'] ">Field is required</div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 p-ml-auto p-mr-auto">
+                            <div class="form-group">
+                                <span class="p-float-label">
+                                  <input id="float-inputDConfig1" class="form-control" type="number" formControlName="SITE_CAP" pInputText> 
+                                  <label for="float-inputDConfig1">Randomization Cap</label>
+                                </span>
+                                
+                                <div *ngIf="addUpdateConfig.controls.SITE_CAP.errors && addUpdateConfig.controls.SITE_CAP.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                                  <div *ngIf="addUpdateConfig.controls.SITE_CAP.errors['max'] ">Maximum 500</div>
+                                  <div *ngIf="addUpdateConfig.controls.SITE_CAP.errors['required'] ">Field is required</div>
+      
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 p-ml-auto p-mr-auto">
+                            <div class="form-group">
+                                <span class="p-float-label">
+                                  <input id="float-inputDConfig2" class="form-control" type="number" formControlName="SITE_CAP_ALERT_LEVEL" pInputText> 
+                                  <label for="float-inputDConfig2">Randomization Cap Alert Level</label>
+                                </span>
+                                
+                                <div *ngIf="addUpdateConfig.controls.SITE_CAP_ALERT_LEVEL.errors && addUpdateConfig.controls.SITE_CAP_ALERT_LEVEL.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                                  <div *ngIf="addUpdateConfig.controls.SITE_CAP_ALERT_LEVEL.errors['max'] ">Maximum 500</div>
+                                  <div *ngIf="addUpdateConfig.controls.SITE_CAP_ALERT_LEVEL.errors['required'] ">Field is required</div>
+      
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 p-ml-auto p-mr-auto">
+                          <div class="form-group">
+                              <span class="p-float-label">
+                                  <p-dropdown  inputId="addUpdateConfigd3" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="order_approvals"   formControlName="ORDER_APPROVAL"  optionLabel="LIBRARY_ID" optionValue='LIBRARY_VALUE'></p-dropdown>
+                                  <label for="addUpdateConfigd3">Order Approval</label>
+                              </span>
+                              <div *ngIf="addUpdateConfig.controls.ORDER_APPROVAL.errors && addUpdateConfig.controls.ORDER_APPROVAL.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                <div *ngIf="addUpdateConfig.controls.ORDER_APPROVAL.errors['required'] ">Field is required</div>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 p-ml-auto p-mr-auto">
+                            <div class="form-group">
+                                <span class="p-float-label">
+                                  <p-multiSelect inputId="multiConfigd4" pTooltip="Select Sub group" [options]="subgroup" formControlName="SITE_SUBGROUP"  optionLabel="NAME" optionValue='ID' 
+                                    selectedItemsLabel="{0} columns selected" [style]="{'width':'100%'}" placeholder="Subgroup"></p-multiSelect>
+                                    <label for="multiConfigd4">Select Subgroup</label>
+
+                                </span>
+                                <div *ngIf="addUpdateConfig.controls.SITE_SUBGROUP.errors && addUpdateConfig.controls.SITE_SUBGROUP.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                  <div *ngIf="addUpdateConfig.controls.SITE_SUBGROUP.errors['required'] ">Field is required</div>
+                                </div>
+                            </div>
+                          </div>
+                    </div>
+                    <div class="row" *ngIf="studyDetails.DTP=='Yes'">
+                      <div class="col-md-5 p-ml-auto p-mr-auto">
+                        <div class="form-group">
+                            <span class="p-float-label">
+                                <p-dropdown  inputId="addUpdateConfigd4" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="dtp_list"   formControlName="SITE_DTS"  optionLabel="LIBRARY_VALUE" optionValue='LIBRARY_VALUE' [required]="studyDetails.DTP=='Yes'"></p-dropdown>
+                                <label for="addUpdateConfigd4">Select DTS</label>
+                            </span>
+                            <div *ngIf="addUpdateConfig.controls.SITE_DTS.errors && addUpdateConfig.controls.SITE_DTS.touched" style="margin-top:8px;" class="invalid-feedback1">
+                              <div *ngIf="addUpdateConfig.controls.SITE_DTS.errors['required'] ">Field is required</div>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+                  </div>
+                  <div class="form-actions" style="padding:20px 0 0 0">
+                    <button type="button" pButton (click)="resetForm()" class=" p-button-warning mr-2">
+                      <i class="feather ft-x"></i> Reset
+                    </button>
+                    <button type="submit" pButton  (click)="saveConfig()" [disabled]="addUpdateConfig.invalid" class="p-button-success">
+                      <i class="feather ft-check"></i> {{submitButton}}
+                    </button>
+                  </div>
+                </form>
+              </ng-container>
+              <!-- </perfect-scrollbar> -->
+            </m-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

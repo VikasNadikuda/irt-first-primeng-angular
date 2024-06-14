@@ -1,0 +1,102 @@
+<div class="app-content content">
+    <div class="content-wrapper">
+      <div class="content-header row" >
+        <app-breadcrumb class="col-12 content-header-title" [title]="false" [action]="false" [breadcrumb]="breadcrumb"></app-breadcrumb>
+      </div>
+      <div class="content-body ">
+        <form class="form" [formGroup]="addOrEditKit">
+          <div class="row">
+            <div class="col-md-12">
+              <div  class="card" *blockUI="'addKitType'; message: 'Loading'"  >
+                <div class="card-title titleStyle" >
+                  Add Kit Types
+                </div>
+                <div class="card-body"   >
+                    <div class="form-body"  >
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <span class="p-float-label">
+                              <input id="SKTfloat-inputD22" class="form-control" type="text" formControlName="KitTypeId" pInputText> 
+                              <label for="SKTfloat-inputD22">Kit ID</label>
+                            </span>
+                            
+                            <div *ngIf="addOrEditKit.controls.KitTypeId.errors && addOrEditKit.controls.KitTypeId.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                              <div *ngIf="addOrEditKit.controls.KitTypeId.errors['maxlength'] ">Maximum 100 characters</div>
+                              <div *ngIf="addOrEditKit.controls.KitTypeId.errors['required'] ">Field is required</div>
+
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <span class="p-float-label">
+                              <input id="SKTfloat-inputD2" class="form-control" type="text" formControlName="KitTypeName" pInputText> 
+                              <label for="SKTfloat-inputD2">Kit Type</label>
+                            </span>
+                            
+                            <div *ngIf="addOrEditKit.controls.KitTypeName.errors && addOrEditKit.controls.KitTypeName.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                              <div *ngIf="addOrEditKit.controls.KitTypeName.errors['maxlength'] ">Maximum 100 characters</div>
+                              <div *ngIf="addOrEditKit.controls.KitTypeName.errors['required'] ">Field is required</div>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <span class="p-float-label">
+                              <p-dropdown  inputId="stDrop115" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="inventory_types"   formControlName="Inventory_Type"  optionLabel="LIBRARY_ID" optionValue='LIBRARY_VALUE' ></p-dropdown>
+                              <label for="stDrop115">Inventory Type</label>
+                            </span>  
+                            <div *ngIf="addOrEditKit.controls.Inventory_Type.errors && addOrEditKit.controls.Inventory_Type.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                              <div *ngIf="addOrEditKit.controls.Inventory_Type.errors['maxlength'] ">Maximum 50 characters</div>
+                              <div *ngIf="addOrEditKit.controls.Inventory_Type.errors['required'] ">Field is required</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <span class="p-float-label">
+                              <input id="SKTfloat-inputD3" class="form-control" type="text" formControlName="Category" pInputText> 
+                              <label for="SKTfloat-inputD3">Category</label>
+                            </span>
+                            
+                            <div *ngIf="addOrEditKit.controls.Category.errors && addOrEditKit.controls.Category.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                              <div *ngIf="addOrEditKit.controls.Category.errors['maxlength'] ">Maximum 50 characters</div>
+                              <div *ngIf="addOrEditKit.controls.Category.errors['required'] ">Field is required</div>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group p-float-label">
+                              <p-dropdown  inputId="skdrop23"  [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="replacement_types"   formControlName="Regular_Replace"  optionLabel="LIBRARY_VALUE" optionValue='LIBRARY_ID' ></p-dropdown>
+                              <label for="skdrop23">Replacement kits same as dispense</label>
+                              <div *ngIf="addOrEditKit.controls.Regular_Replace.errors && addOrEditKit.controls.Regular_Replace.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                <div *ngIf="addOrEditKit.controls.Regular_Replace['required'] ">Field is required</div>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-actions" style="padding:20px 0 0 0">
+                        <button type="button" pButton (click)="resetForm()" class=" p-button-warning mr-2">
+                          <i class="feather ft-x"></i> Reset
+                        </button>
+                        <button type="submit" pButton  (click)="saveKitType()" [disabled]="addOrEditKit.invalid" class="p-button-success">
+                          <i class="feather ft-check"></i> {{submitButton}}
+                        </button>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,87 @@
+<div class="app-content content">
+    <div class="content-wrapper">
+      <div class="content-header row ">
+        <app-breadcrumb class="col-12 content-header-title" [title]="true" [action]="false" [breadcrumb]="breadcrumb"></app-breadcrumb>
+      </div>
+      <div class="content-body ">
+        <div class="row">
+          <div class="col-md-12" *blockUI="'assignUsers'; message: 'Loading'" >
+            <m-card [options]="options">
+              <ng-container mCardBody >
+                <form class="form" [formGroup]="assignUser" style="padding:1rem">
+                  <div class="form-body" >
+                    <div class="row">
+                      <div class="col-md-5 p-ml-auto p-mr-auto">
+                        <div class="form-group">
+                            <span class="p-float-label">
+                                <p-dropdown  inputId="assignUserd1" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="user_list"   formControlName="USER_ID"  optionLabel="EMAIL_ADDRESS" optionValue='ID'></p-dropdown>
+                                <label for="assignUserd1">Email Id</label>
+                            </span>
+                            <div *ngIf="assignUser.controls.USER_ID.errors && assignUser.controls.USER_ID.touched" style="margin-top:8px;" class="invalid-feedback1">
+                              <div *ngIf="assignUser.controls.USER_ID.errors['required'] ">Field is required</div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 p-ml-auto p-mr-auto">
+                          <div class="form-group">
+                              <span class="p-float-label">
+                                <p-multiSelect pTooltip="Select Depots/Sites" [options]="depot_list" formControlName="SITE_ID"  optionLabel="NAME" optionValue='ID' *ngIf="depot_list?.length>0"
+                                  selectedItemsLabel="{0} columns selected" [style]="{'width':'100%'}" placeholder="Depots/Sites"></p-multiSelect>
+                                  <!-- <p-dropdown  inputId="assignUserd2" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="depot_list"   formControlName="SITE_ID"  optionLabel="NAME" optionValue='ID'></p-dropdown>
+                                  <label for="assignUserd2">Depots/Sites</label> -->
+                                  
+                              </span>
+                              <div *ngIf="assignUser.controls.SITE_ID.errors && assignUser.controls.SITE_ID.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                <div *ngIf="assignUser.controls.SITE_ID.errors['required'] ">Field is required</div>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 p-ml-auto p-mr-auto">
+                          <div class="form-group">
+                              <span class="p-float-label">
+                                  <p-dropdown  inputId="assignUserd3" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="roles_list"   formControlName="ROLE_ID"  optionLabel="NAME" optionValue='ID'></p-dropdown>
+                                  <label for="assignUserd3">Select Role</label>
+                                  
+                              </span>
+                              <div *ngIf="assignUser.controls.ROLE_ID.errors && assignUser.controls.ROLE_ID.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                <div *ngIf="assignUser.controls.ROLE_ID.errors['required'] ">Field is required</div>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 p-ml-auto p-mr-auto">
+                          <div class="form-group">
+                              <span class="p-float-label">
+                                  <p-dropdown  inputId="assignUserd4" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="blinded_types"   formControlName="USER_TYPE"  optionLabel="LIBRARY_VALUE" optionValue='LIBRARY_ID'></p-dropdown>
+                                  <label for="assignUserd4">Blinded Type</label>
+                                  
+                              </span>
+                              <div *ngIf="assignUser.controls.USER_TYPE.errors && assignUser.controls.USER_TYPE.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                <div *ngIf="assignUser.controls.USER_TYPE.errors['required'] ">Field is required</div>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="form-actions" style="padding:20px 0 0 0">
+                    <button type="button" pButton (click)="resetForm()" class=" p-button-warning mr-2">
+                      <i class="feather ft-x"></i> Reset
+                    </button>
+                    <button type="submit" pButton  (click)="saveUsers()" [disabled]="assignUser.invalid" class="p-button-success">
+                      <i class="feather ft-check"></i> {{submitButton}}
+                    </button>
+                  </div>
+                </form>
+              </ng-container>
+            </m-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

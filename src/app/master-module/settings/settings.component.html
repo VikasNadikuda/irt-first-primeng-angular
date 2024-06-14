@@ -1,0 +1,103 @@
+<div class="app-content content">
+    <div class="content-wrapper">
+        <div class="content-header row ">
+            <h3 class="col-12 content-header-title" >
+                  Configure Settings
+            </h3>
+        </div>
+        <div class="content-body " style="margin-bottom:32px;margin-top: 16px;">
+            <div class="row">
+                <div class="col-md-12" *blockUI="'viewSettings'; message: 'Loading'" >
+                  <m-card [options]="options">
+                    <ng-container mCardBody >
+                      <form class="form" [formGroup]="configureSettings" style="padding:1rem">
+                        <div class="form-body" >
+                            <div class="row marginTop">
+                                <div class="col-md-3 offset-md-1 ">
+                                    <div style="font-family: Quicksand,Georgia,Times New Roman,Times,serif;padding-top: 8px;text-align:end">
+                                        <h5 class="font500">Session Timeout <span class="invalid-feedback1">*</span>  </h5>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <span class="p-float-label">
+                                        <input type="number" pInputText class="form-control" id="Session"  formControlName="Session"  >
+                                        <label for="Session">Minutes</label>
+                                    </span>
+                                    <div *ngIf="configureSettings.controls.Session.errors && configureSettings.controls.Session.dirty"  class="invalid-feedback1">
+                                        <div *ngIf="configureSettings.controls.Session.errors['required'] ">Field is required</div>
+                                        <!-- <div *ngIf="configureSettings.controls.Session.errors['min'] ">Minimum 1 user is required</div> -->
+                                        <div *ngIf="configureSettings.controls.Session.errors['pattern'] ">Only integers allowed</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row marginTop">
+                                <div class="col-md-3 offset-md-1">
+                                    <div style="font-family: Quicksand,Georgia,Times New Roman,Times,serif;padding-top: 8px;text-align:end">
+                                        <h5 class="font500">Log Attempts<span class="invalid-feedback1">*</span></h5>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <span class=" p-float-label">
+                                        <input type="number" pInputText class="form-control" id="LockDays"  formControlName="LockDays"  >
+                                        <!-- <label for="LockDays">Minutes</label> -->
+                                    </span>
+                                    <div *ngIf="configureSettings.controls.LockDays.errors && configureSettings.controls.LockDays.dirty"  class="invalid-feedback1">
+                                        <div *ngIf="configureSettings.controls.LockDays.errors['required'] ">Field is required</div>
+                                        <!-- <div *ngIf="configureSettings.controls.LockDays.errors['min'] ">Minimum 1 user is required</div> -->
+                                        <div *ngIf="configureSettings.controls.LockDays.errors['pattern'] ">Only integers allowed</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row marginTop">
+                                <div class="col-md-3 offset-md-1">
+                                    <div style="font-family: Quicksand,Georgia,Times New Roman,Times,serif;padding-top: 8px;text-align:end">
+                                        <h5 class="font500">Force Change Password<span class="invalid-feedback1">*</span></h5>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <span class="p-float-label">
+                                        <input type="number" pInputText class="form-control" id="PasswordDays"  formControlName="PasswordDays"  >
+                                        <label for="PasswordDays">days</label>
+                                    </span>
+                                    <div *ngIf="configureSettings.controls.PasswordDays.errors && configureSettings.controls.PasswordDays.dirty"  class="invalid-feedback1">
+                                        <div *ngIf="configureSettings.controls.PasswordDays.errors['required'] ">Field is required</div>
+                                        <!-- <div *ngIf="configureSettings.controls.PasswordDays.errors['min'] ">Minimum 1 user is required</div> -->
+                                        <div *ngIf="configureSettings.controls.PasswordDays.errors['pattern'] ">Only integers allowed</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row marginTop">
+                                <div class="col-md-3 offset-md-1 ">
+                                    <div style="font-family: Quicksand,Georgia,Times New Roman,Times,serif;padding-top: 8px;text-align:end">
+                                        <h5 class="font500">Administer Email<span class="invalid-feedback1">*</span></h5>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <span class="p-float-label">
+                                        <input id="AdminEmail" class="form-control" type="text" formControlName="AdminEmail" pInputText> 
+                                        <!-- <label for="AdminEmail">AdminEmail</label> -->
+                                    </span>
+                                    <div *ngIf="configureSettings.controls.AdminEmail.errors && configureSettings.controls.AdminEmail.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                                        <div *ngIf="configureSettings.controls.AdminEmail.errors['required'] ">Field is required</div>
+                                        <div *ngIf="configureSettings.controls.AdminEmail.errors['maxlength'] ">Maximum 50 characters</div>
+                                        <div *ngIf="configureSettings.controls.AdminEmail.errors['email'] ">Enter Valid Email Address</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row marginTop">
+                                <div class="p-ml-auto p-mr-auto">
+                                    <button pButton pRipple type="button" icon="pi pi-check" label="Update" (click)="saveSettings()" class="p-button-outlined p-mr-2"></button>
+                                    <button pButton pRipple type="button" icon="pi pi-times" label="Cancel" class="p-button-outlined p-button-danger"></button>
+
+                                </div>
+                            </div>
+                        </div>
+                      </form>
+                    </ng-container>
+                  </m-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

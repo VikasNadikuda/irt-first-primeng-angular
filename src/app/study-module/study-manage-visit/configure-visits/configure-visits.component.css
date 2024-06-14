@@ -1,0 +1,13 @@
+.titleDialog{
+    color: white;
+    background: #217ba7;
+}
+.dialogTitleFont{
+    font-weight: 500;
+    font-size: 1.15rem;
+}
+:host::ng-deep.p-dialog .p-dialog-header .p-dialog-header-icon {
+    
+        color: white !important;
+    
+}

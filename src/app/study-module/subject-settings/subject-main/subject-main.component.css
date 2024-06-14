@@ -1,0 +1,270 @@
+
+
+ :host ::ng-deep .tab-content{
+    margin-top: 15px;
+  }
+
+:host ::ng-deep ._bottom {
+  border-bottom : 0px !important;
+}
+
+  :host ::ng-deep .nav-vertical .borderleft .nav-tabs{
+    float: left;
+    border-bottom: 0;
+    border-radius: 0;
+    display: table;
+
+  }
+  :host ::ng-deep .nav-vertical .borderright .nav-tabs{
+    float: right;
+    border-bottom: 0;
+    border-radius: 0;
+    display: table;
+
+  }
+:host ::ng-deep .card {
+  margin-bottom: 1.875rem;
+  border: none;
+  /* height: 283px; */
+  -webkit-box-shadow: 0 1px 15px 1px rgba(62, 57, 107, .07);
+  box-shadow: 0 1px 15px 1px rgba(62, 57, 107, .07);
+}
+:host ::ng-deep .nav-vertical .nav-left.nav-tabs li.nav-item a.nav-link {
+  min-width: 7.5rem;
+  border-right: 1px solid #ddd;
+}
+:host ::ng-deep .nav-vertical .nav-left.nav-tabs.nav-border-left li.nav-item a.nav-link.active {
+  color: #555;
+  border-left: 3px solid #ff4961;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: white;
+}
+
+:host ::ng-deep .nav-vertical .nav-left.nav-tabs.nav-left li.nav-item a.nav-link.active {
+  color: #555;
+  border-right: white;
+}
+:host ::ng-deep .nav .nav-tabs .justify-content-start{
+  margin-right: 10px;
+}
+
+/*Vertical Tabs*/
+.mdl-tabs__panel {
+    display: none;
+  }
+  .vertical-mdl-tabs {
+      margin-top: 30px;
+  }
+  .vertical-mdl-tabs .mdl-tabs__tab-bar {
+      -webkit-flex-direction: column;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      padding-bottom: 35px;
+      height: inherit;
+      border-bottom: none;
+      border-right: 1px solid rgba(10, 11, 49, 0.20);
+  }
+  
+  .vertical-mdl-tabs .mdl-tabs__tab {
+      width: 100%;
+      height: 35px;
+      line-height: 35px;
+      box-sizing: border-box;
+      letter-spacing: 2px;
+  }
+  
+  .vertical-mdl-tabs .mdl-tabs__tab:hover {
+    background: rgba(158, 158, 158, 0.34);
+    color: black;
+  }
+  
+  .vertical-mdl-tabs.mdl-tabs.is-upgraded a.mdl-tabs__tab.is-active {
+      border-right: 3px solid #ED462F;
+  }
+  .vertical-mdl-tabs.mdl-tabs.is-upgraded .mdl-tabs__tab.is-active:after {
+      content: inherit;
+      height: 0;
+  }
+  
+  .vertical-mdl-tabs.mdl-tabs.is-upgraded .mdl-tabs__panel.is-active, .mdl-tabs__panel {
+      padding: 0 30px;
+  }
+  
+  .vertical-mdl-tabs.mdl-tabs .mdl-tabs__tab {
+      text-align: left;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .mdl-tabs.is-upgraded .mdl-tabs__tab.is-active {
+     color: #E21549;
+  }
+  .tabs-left, .tabs-right {
+    border-bottom: none;
+    padding-top: 2px;
+}
+.tabs-left {
+    border-right: 1px solid #ddd;
+}
+.tabs-right {
+    border-left: 1px solid #ddd;
+}
+.tabs-left>li, .tabs-right>li {
+    float: none;
+    margin-bottom: 2px;
+}
+.tabs-left>li {
+    margin-right: -1px;
+}
+.tabs-right>li {
+    margin-left: -1px;
+}
+.tabs-left>li.active>a,
+.tabs-left>li.active>a:hover,
+.tabs-left>li.active>a:focus {
+    border-bottom-color: #ddd;
+    border-right-color: transparent;
+}
+
+.tabs-right>li.active>a,
+.tabs-right>li.active>a:hover,
+.tabs-right>li.active>a:focus {
+    border-bottom: 1px solid #ddd;
+    border-left-color: transparent;
+}
+.tabs-left>li>a {
+    border-radius: 4px 0 0 4px;
+    margin-right: 0;
+    display:block;
+}
+.tabs-right>li>a {
+    border-radius: 0 4px 4px 0;
+    margin-right: 0;
+}
+.sideways {
+    margin-top:50px;
+    border: none;
+    position: relative;
+}
+.sideways>li {
+    height: 20px;
+    width: 120px;
+    margin-bottom: 100px;
+}
+.sideways>li>a {
+    border-bottom: 1px solid #ddd;
+    border-right-color: transparent;
+    text-align: center;
+    border-radius: 4px 4px 0px 0px;
+}
+.sideways>li.active>a,
+.sideways>li.active>a:hover,
+.sideways>li.active>a:focus {
+    border-bottom-color: transparent;
+    border-right-color: #ddd;
+    border-left-color: #ddd;
+}
+.sideways.tabs-left {
+    left: -50px;
+}
+.sideways.tabs-right {
+    right: -50px;
+}
+.sideways.tabs-right>li {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+.sideways.tabs-left>li {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+.showTab{
+    display: block !important;
+}
+.hideTab{
+    display: none !important;
+}
+.tab {
+    float: left;
+    width: 100%;
+  }
+  
+  /* Style the buttons inside the tab */
+  .tab button {
+    display: block;
+    margin-bottom: 2px;
+    /* background-color: white; */
+    color: black;
+    padding: 10px 1px 10px 10px;
+    background: transparent;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: left;
+    cursor: pointer;
+    letter-spacing: 0.2px;
+    font-family: "Quicksand", Georgia, "Times New Roman", Times, serif;
+    font-weight: 400;
+    transition: 0.3s;
+    font-size: 15px;
+  }
+  .tab button :after 
+{
+content: "";
+position: absolute;
+bottom: -25px;
+left: 175px;
+border-style: solid;
+border-width: 25px 25px 0;
+border-color: #FFFFFF transparent;
+display: block;
+width: 0;
+z-index: 1;
+}
+
+.tab button :before 
+{
+content: "";
+position: absolute;
+top: 250px;
+left: 174px;
+border-style: solid;
+border-width: 26px 26px 0;
+border-color: #000 transparent;
+display: block;
+width: 0;
+z-index: 0;
+}
+  .titleCard{
+    font-weight: bold !important;
+    padding: 16px 0 16px 16px !important;
+    color:rgb(23, 109, 152) ;
+    border-bottom: 1px solid rgb(23, 109, 152);
+  }
+  
+  /* Change background color of buttons on hover */
+  .tab button:hover {
+    background-color: #ddd;
+  }
+  
+  /* Create an active/current "tab button" class */
+  .tab button.tablinks.active {
+      color:white;
+      background: rgb(23, 109, 152);
+  }
+  
+  /* Style the tab content */
+.labelCustom{
+  text-align: end;
+  padding-top: 8px;
+  font-weight: bold;
+}

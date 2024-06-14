@@ -1,0 +1,29 @@
+<div class="app-content content">
+    <div class="content-wrapper">
+        <div class="content-header row" >
+            <app-breadcrumb class="col-12 content-header-title" [title]="true" [action]="false" [breadcrumb]="breadcrumb"></app-breadcrumb>
+        </div>
+        <div class="content-body" style="margin-bottom:32px" *blockUI="'settAccount'; message: 'Loading'">
+            <div  class="card "  >
+                <div class="card-body"  style="padding-left: 8px;padding-top: 40px;" >
+                    <div class="row" >
+                        <div class="col-6 offset-4" *ngFor="let acc of accList;let i = index;"  style="padding-left: 10%;margin-bottom: 16px;" >
+                            <!-- <div class="col-3"  style="padding-left: 10%;"> -->
+                                <div class="p-field-checkbox">
+                                    <p-checkbox name="{{acc}}"  [(ngModel)]="selectedSubjects"  [value]="acc" inputId="{{acc}}"></p-checkbox>
+                                    <label for="{{acc}}">{{acc}}</label>
+                                </div>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row p-ml-auto p-mr-auto">
+                        <button pButton pRipple type="button" icon="pi pi-check" label="{{submitButton}}" (click)="saveAcc()" class="p-button-outlined p-mr-2"></button>
+                        <button pButton pRipple type="button" icon="pi pi-times" label="Cancel" (click)="cancel()" class="p-button-outlined p-button-danger"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

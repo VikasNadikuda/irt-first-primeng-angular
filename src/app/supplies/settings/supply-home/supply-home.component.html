@@ -1,0 +1,354 @@
+<div class="app-content content">
+    <div class="content-wrapper">
+        <div class="content-header row ">
+            <h3 class="col-12 content-header-title" >
+                  Settings
+            </h3>
+        </div>
+        <div class="content-body" style="margin-bottom:32px;margin-top: 16px;" *blockUI="'supSetttings'; message: 'Loading'">
+            <div class="row">
+                <div class="col-xl-4 col-md-6">
+                  <div class="card pull-up ">
+                    <div class="card-content">
+                        <div class="card-header head12">
+                            <a [routerLink]="" class="headTitle">
+                                Suppy Info
+                            </a>
+                        </div>
+                        <div class="card-body fixHeight cleartfix">
+                            <div class="media align-items-stretch">
+                                <div class="media-body">
+                                    <!-- <h4 style="font-weight: bold;">Suppy Info</h4> -->
+                                    <div class="row" style="margin-top: 16px;">
+                                        <div class="col-7"  style="font-weight: bold;" >
+                                            Sequence Number :
+                                        </div>
+                                        <div class="col-5">
+                                            Yes
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer" style="    border-top: none; float: right;">
+                            <div style="align-items: flex-end;">
+                                <button pButton pRipple icon="pi pi-chevron-right"  pTooltip="Edit" tooltipPosition="bottom" class="p-button  d p-button-info p-button-outlined p-mr-2" (click)="route('supplyInfo')"></button>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                  <div class="card pull-up">
+                    <div class="card-content">
+                        <div class="card-header head12">
+                            <a [routerLink]="" class="headTitle">
+                                View Kit Lists
+                            </a>
+                        </div>
+                        <div class="card-body fixHeight cleartfix">
+                            <div class="media align-items-stretch">
+                                <div class="media-body">
+                                    <!-- <h4 style="font-weight: bold;">Kits Workflow</h4> -->
+                                    <!-- *ngIf="studyDetails.INVENTORY=='Bulk' || studyDetails.INVENTORY=='Bulk & Discrete'" -->
+                                    <div class="row" style="margin-top: 16px;" >
+                                        <div class="col-7"  style="font-weight: bold;" >
+                                            Bulk Kit Lists :
+                                        </div>
+                                        <div class="col-5">
+                                            3
+                                        </div>
+                                    </div>
+                                    <!-- *ngIf="studyDetails.INVENTORY=='Discrete' || studyDetails.INVENTORY=='Bulk & Discrete'" -->
+                                    <div class="row" style="margin-top: 16px;" >
+                                        <div class="col-7"  style="font-weight: bold;" >
+                                            Discrete Kit Lists :
+                                        </div>
+                                        <div class="col-5">
+                                            3
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer" style="    border-top: none; float: right;">
+                            <div style="align-items: flex-end;">
+                                <button pButton pRipple icon="pi pi-chevron-right"  pTooltip="Edit" tooltipPosition="bottom" class="p-button  d p-button-info p-button-outlined p-mr-2" (click)="route('kitLists')"></button>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                    <div class="card pull-up">
+                      <div class="card-content">
+                        <div class="card-header head12">
+                            <a [routerLink]="" class="headTitle">
+                                Inventory Release
+                            </a>
+                        </div>
+                        <div class="card-body fixHeight cleartfix">
+                            <div class="media align-items-stretch">
+                                <div class="media-body">
+                                    <!-- <h4 style="font-weight: bold;">Inventory Release</h4> -->
+                                    <div class="row" style="margin-top: 16px;">
+                                        <div class="col-7"  style="font-weight: bold;" >
+                                            Kit List Count :
+                                        </div>
+                                        <div class="col-5">
+                                            3
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer" style="    border-top: none; float: right;">
+                            <div style="align-items: flex-end;">
+                                <button pButton pRipple icon="pi pi-chevron-right"  pTooltip="Edit" tooltipPosition="bottom" class="p-button  d p-button-info p-button-outlined p-mr-2" (click)="route('inventoryRelease')"></button>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-4 col-md-6">
+                    <div class="card pull-up ">
+                      <div class="card-content">
+                          <div class="card-header head12">
+                              <a [routerLink]="" class="headTitle">
+                                  Auto Order Allocation
+                              </a>
+                          </div>
+                          <div class="card-body fixHeight cleartfix">
+                              <div class="media align-items-stretch">
+                                  <div class="media-body">
+                                      <!-- <h4 style="font-weight: bold;">Auto Order Allocation</h4> -->
+                                      <div class="row" style="margin-top: 16px;">
+                                          <div class="col-7"  style="font-weight: bold;" >
+                                              Intial Order :
+                                          </div>
+                                          <div class="col-5">
+                                              Yes
+                                          </div>
+                                      </div>
+                                      <div class="row" style="margin-top: 16px;">
+                                          <div class="col-7"  style="font-weight: bold;" >
+                                              Buffer Strategy :
+                                          </div>
+                                          <div class="col-5">
+                                              Yes
+                                          </div>
+                                      </div>
+                                      <div class="row" style="margin-top: 16px;">
+                                          <div class="col-7"  style="font-weight: bold;" >
+                                              Prediction Strategy :
+                                          </div>
+                                          <div class="col-5">
+                                              Yes
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="card-footer" style="    border-top: none; float: right;">
+                              <div style="align-items: flex-end;">
+                                  <button pButton pRipple icon="pi pi-chevron-right"  pTooltip="Edit" tooltipPosition="bottom" class="p-button  d p-button-info p-button-outlined p-mr-2"  (click)="route('allocationSettings')"></button>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                  <div class="card pull-up">
+                    <div class="card-content">
+                        <div class="card-header head12">
+                            <a [routerLink]="" class="headTitle">
+                                DND, DNS & DNC
+                            </a>
+                        </div>
+                        <div class="card-body fixHeight cleartfix">
+                            <div class="media align-items-stretch">
+                                <div class="media-body">
+                                    <!-- <h4 style="font-weight: bold;">DND, DNS & DNC</h4> -->
+                                    <div class="row" style="margin-top: 16px;">
+                                        <div class="col-7"  style="font-weight: bold;" >
+                                            Do not dispense :
+                                        </div>
+                                        <div class="col-5">
+                                            3
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 16px;">
+                                        <div class="col-7"  style="font-weight: bold;" >
+                                            Number of Sites :
+                                        </div>
+                                        <div class="col-5">
+                                            30
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 16px;">
+                                        <div class="col-7"  style="font-weight: bold;" >
+                                            Number of Depots :
+                                        </div>
+                                        <div class="col-5">
+                                            23
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer" style="    border-top: none; float: right;">
+                            <div style="align-items: flex-end;">
+                                <button pButton pRipple icon="pi pi-chevron-right"  pTooltip="Edit" tooltipPosition="bottom" class="p-button  d p-button-info p-button-outlined p-mr-2" (click)="route('dispenseSettings')"></button>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                    <div class="card pull-up">
+                      <div class="card-content">
+                        <div class="card-header head12">
+                            <a [routerLink]="" class="headTitle">
+                                Auto Order Settings
+                            </a>
+                        </div>
+                        <div class="card-body fixHeight cleartfix">
+                            <div class="media align-items-stretch">
+                                <div class="media-body">
+                                    <!-- <h4 style="font-weight: bold;">Auto Order Settings</h4> -->
+                                    <div class="row" style="margin-top: 16px;">
+                                        <div class="col-7"  style="font-weight: bold;" >
+                                            Intial Order :
+                                        </div>
+                                        <div class="col-5">
+                                            Yes
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 16px;">
+                                        <div class="col-7"  style="font-weight: bold;" >
+                                            Buffer Strategy :
+                                        </div>
+                                        <div class="col-5">
+                                            Yes
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 16px;">
+                                        <div class="col-7"  style="font-weight: bold;" >
+                                            Prediction Strategy :
+                                        </div>
+                                        <div class="col-5">
+                                            Yes
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer" style="    border-top: none; float: right;">
+                            <div style="align-items: flex-end;">
+                                <button pButton pRipple icon="pi pi-chevron-right"  pTooltip="Edit" tooltipPosition="bottom" class="p-button  d p-button-info p-button-outlined p-mr-2"  (click)="route('strategySettings')"></button>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-4 col-md-6">
+                    <div class="card pull-up ">
+                      <div class="card-content">
+                          <div class="card-header head12">
+                              <a [routerLink]="" class="headTitle">
+                                  Country Release
+                              </a>
+                          </div>
+                          <div class="card-body fixHeight cleartfix">
+                              <div class="media align-items-stretch">
+                                  <div class="media-body">
+                                      <!-- <h4 style="font-weight: bold;">Country Release</h4> -->
+                                      <div class="row" style="margin-top: 16px;">
+                                          <div class="col-7"  style="font-weight: bold;" >
+                                              Number of Countries :
+                                          </div>
+                                          <div class="col-5">
+                                              23
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="card-footer" style="    border-top: none; float: right;">
+                              <div style="align-items: flex-end;">
+                                  <button pButton pRipple icon="pi pi-chevron-right"  pTooltip="Edit" tooltipPosition="bottom" class="p-button  d p-button-info p-button-outlined p-mr-2" (click)="route('countryRelease')"></button>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                  <div class="card pull-up">
+                    <div class="card-content">
+                        <div class="card-header head12">
+                            <a [routerLink]="" class="headTitle">
+                                Accountability
+                            </a>
+                        </div>
+                        <div class="card-body fixHeight cleartfix">
+                            <div class="media align-items-stretch">
+                                <div class="media-body">
+                                    <!-- <h4 style="font-weight: bold;">Accountability</h4> -->
+                                    <div class="row" style="margin-top: 16px;">
+                                        <div class="col-7"  style="font-weight: bold;" >
+                                            Available Settings :
+                                        </div>
+                                        <div class="col-5">
+                                            Reconcile Returns
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer" style="    border-top: none; float: right;">
+                            <div style="align-items: flex-end;">
+                                <button pButton pRipple icon="pi pi-chevron-right"  pTooltip="Edit" tooltipPosition="bottom" class="p-button  d p-button-info p-button-outlined p-mr-2" (click)="route('accountability')"></button>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                    <div class="card pull-up">
+                      <div class="card-content">
+                        <div class="card-header head12">
+                            <a [routerLink]="" class="headTitle">
+                                Inventory Release
+                            </a>
+                        </div>
+                        <div class="card-body fixHeight cleartfix">
+                            <div class="media align-items-stretch">
+                                <div class="media-body">
+                                    <div class="row" style="margin-top: 16px;">
+                                        <div class="col-7"  style="font-weight: bold;" >
+                                            Kit List Count :
+                                        </div>
+                                        <div class="col-5">
+                                            3
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer" style="    border-top: none; float: right;">
+                            <div style="align-items: flex-end;">
+                                <button pButton pRipple icon="pi pi-chevron-right"  pTooltip="Edit" tooltipPosition="bottom" class="p-button  d p-button-info p-button-outlined p-mr-2" ></button>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

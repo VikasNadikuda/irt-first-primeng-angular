@@ -1,0 +1,86 @@
+<div class="app-content content">
+    <div class="content-wrapper">
+      <div class="content-header row" >
+        <app-breadcrumb class="col-12 content-header-title" [title]="false" [action]="false" [breadcrumb]="breadcrumb"></app-breadcrumb>
+      </div>
+      <div class="content-body ">
+        <form class="form" [formGroup]="addOrEditTreatment">
+          <div class="row">
+            <div class="col-md-12">
+              <div  class="card" *blockUI="'addTreatment'; message: 'Loading'"  >
+                <div class="card-title titleStyle" >
+                  Add Treatment
+                </div>
+                <div class="card-body"   >
+                    <div class="form-body"  >
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <span class="p-float-label">
+                              <input id="Stfloat-inputD2" class="form-control" type="text" formControlName="TreatmentID" pInputText> 
+                              <label for="Stfloat-inputD2">Treatment ID</label>
+                            </span>
+                            
+                            <div *ngIf="addOrEditTreatment.controls.TreatmentID.errors && addOrEditTreatment.controls.TreatmentID.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                              <div *ngIf="addOrEditTreatment.controls.TreatmentID.errors['maxlength'] ">Maximum 100 characters</div>
+                              <div *ngIf="addOrEditTreatment.controls.TreatmentID.errors['required'] ">Field is required</div>
+
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <span class="p-float-label">
+                              <input id="Stfloat-inputD1" class="form-control" type="text" formControlName="TreatmentName" pInputText [disabled]='true' > 
+                              <label for="Stfloat-inputD1">Treatment Name</label>
+                            </span>
+  
+                            <div *ngIf="addOrEditTreatment.controls.TreatmentName.errors && addOrEditTreatment.controls.TreatmentName.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                              <div *ngIf="addOrEditTreatment.controls.TreatmentName.errors['maxlength'] ">Maximum 100 characters</div>
+                              <div *ngIf="addOrEditTreatment.controls.TreatmentName.errors['required'] ">Field is required</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                            <span class="p-float-label">
+                                <input type="number"  pInputText class="form-control" id="Ratio"  formControlName="Ratio"   >
+                                <label for="Ratio">Ratio</label>
+                            </span>
+                            <div *ngIf="addOrEditTreatment.controls.Ratio.errors  && addOrEditTreatment.controls.Ratio.dirty" class="invalid-feedback1">
+                                <div *ngIf="addOrEditTreatment.controls.Ratio.errors['required'] ">Field is required</div>
+                                <div *ngIf="addOrEditTreatment.controls.Ratio.errors['min'] ">Minimum 0 is required</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <span class="p-float-label">
+                                <textarea id="STfloat-input3" rows="3" cols="50" required class="form-control"  formControlName="Description" pInputTextarea> </textarea>
+                                <label for="STfloat-input3">Description</label>
+                              </span>
+                              <div *ngIf="addOrEditTreatment.controls.Description.errors && addOrEditTreatment.controls.Description.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                                <div *ngIf="addOrEditTreatment.controls.Description.errors['required'] ">Field is required</div>
+                                <div *ngIf="addOrEditTreatment.controls.Description.errors['maxlength'] ">Maximum 250 characters</div>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-actions" style="padding:20px 0 0 0">
+                        <button type="button" pButton (click)="resetForm()" class=" p-button-warning mr-2">
+                          <i class="feather ft-x"></i> Reset
+                        </button>
+                        <button type="submit" pButton  (click)="saveTreatment()" [disabled]="addOrEditTreatment.invalid" class="p-button-success">
+                          <i class="feather ft-check"></i> {{submitButton}}
+                        </button>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

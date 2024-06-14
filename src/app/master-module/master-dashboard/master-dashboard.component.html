@@ -1,0 +1,110 @@
+<div class="app-content content">
+  <div class="content-wrapper">
+    <div class="content-body " *blockUI="'data'; message: 'Loading'">
+      <div class="row" style="font-weight: bold;color: rgb(37, 27, 27)">
+        <div class="col-md-6" >
+          <div mCard [options]="hitRateOptions" #mCard class="card cardStyle" >
+            <div class="card-content p-ml-auto "#mCardContent  >
+                <ngx-charts-advanced-pie-chart
+                [view]="view"
+                [scheme]="colorScheme"
+                [results]="single1"
+                label='Total Users'
+                [gradient]="gradient"
+                (select)="onSelect($event)"
+                (activate)="onActivate($event)"
+                (deactivate)="onDeactivate($event)"
+                >
+                <!-- <ng-template #tooltipTemplate let-model="model">
+                  This is the single point tooltip template
+                  <pre>{{model|json}}</pre>
+                </ng-template> -->
+              </ngx-charts-advanced-pie-chart>
+            </div>
+          </div >
+        </div>
+        <div class="col-md-6" >
+          <div mCard #mCard class="card cardStyle" >
+            <div class="card-content p-ml-auto " #mCardContent  >
+                <ngx-charts-advanced-pie-chart
+                [view]="view"
+                [scheme]="colorScheme"
+                [results]="single"
+                label='Total Organisations'
+                [gradient]="gradient"
+                (select)="onSelect($event)"
+                (activate)="onActivate($event)"
+                (deactivate)="onDeactivate($event)"
+                >
+              </ngx-charts-advanced-pie-chart>
+            </div>
+          </div >
+        </div>
+      </div>
+      <div *blockUI="'dashTable'; message: 'Loading'"  style="margin-bottom: 32px;margin-left: 4px;">
+        <p-table #dashboardT  [columns]="selectedColumns"  [value]="organisations" dataKey="Organization_ID" [rows]="6" [exportFilename]="'organisations_list'"  [showCurrentPageReport]="true"
+          [rowsPerPageOptions]="[6,12,18]" styleClass="p-datatable-striped"
+          [paginator]="organisations?.length>0"  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          [globalFilterFields]="colum" >
+          <ng-template pTemplate="caption">
+              <div class="p-d-flex">
+                <h4 style="font-weight: 600;padding-top: 8px;">
+                  Organisations Information
+                </h4>
+                  <!-- <p-multiSelect pTooltip="Choose columns to display" [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header"
+                  selectedItemsLabel="{0} columns selected" [style]="{minWidth: '200px'}" placeholder="Choose Column to display"></p-multiSelect> -->
+                  <span class="p-input-icon-left p-ml-auto">
+                      <i class="pi pi-search"></i>
+                      <input pInputText type="text" *ngIf="organisations.length>0" (input)="dashboardT.filterGlobal($event.target.value, 'contains')" placeholder="Global Search" />
+                      <button pButton pRipple label="New" [routerLink]="['/master/manageOrganisation/addOrEditOrganisation']" pTooltip="Add an organisation" tooltipPosition="bottom" icon="pi pi-plus" class="p-button-info" style="margin-left:8px;margin-bottom: 3px;" ></button>
+                  </span>
+              </div>
+          </ng-template>
+          <ng-template pTemplate="header" let-columns>
+              <tr style="border-bottom: 1px solid black !important;">
+                  <th pSortableColumn="Organization_ID" class="marginRight" >
+                      <div class="p-d-flex p-jc-between p-ai-center">
+                          Organisation ID
+                          <p-sortIcon field="Organization_ID"></p-sortIcon>
+                          <p-columnFilter type="text" field="Organization_ID"  placeholder="Search " class="p-mr-auto"  display="menu"></p-columnFilter>
+                      </div>
+                  </th>
+                  <th pSortableColumn="{{col.field}}"   *ngFor="let col of columns" class="marginRight">
+                      <div class="p-d-flex p-jc-between p-ai-center">
+                          {{col.header}}
+                          <p-sortIcon field="{{col.field}}"></p-sortIcon>
+                          <p-columnFilter type="text" field="{{col.field}}"  placeholder="Search "  display="menu" class="p-mr-auto"></p-columnFilter>
+                      </div>
+                  </th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-organisation let-columns="columns">
+            <tr class="p-selectable-row">
+                  <td>
+                      <span class="p-column-title">Organisation ID</span>
+                      {{organisation.Organization_ID}}
+                  </td>
+                  <td *ngFor="let col of columns">
+                    <span *ngIf="col.field!='Status'">{{organisation[col.field]}}</span>
+                    <span *ngIf="col.field=='Status'">
+                        <span *ngIf="organisation[col.field]==1">
+                            Active
+                        </span>
+                        <span *ngIf="organisation[col.field]==0">
+                            Inactive
+                        </span>                        
+                    </span>                      
+                  </td>
+            </tr>
+          </ng-template>
+        </p-table>
+        <div class="caption1 nodata" *ngIf="organisations.length<=0">
+          "No Organisations found."
+          <!-- <tr>
+              <td colspan="12" class="p-d-flex">No Organisations found.</td>
+          </tr>                         -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

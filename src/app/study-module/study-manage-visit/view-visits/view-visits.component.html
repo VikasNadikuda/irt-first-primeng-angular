@@ -1,0 +1,66 @@
+<div class="app-content content">
+    <div class="content-wrapper">
+        <div class="content-header row ">
+            <h3 class="col-12 content-header-title" >
+                  Visits Information
+            </h3>
+        </div>
+        <div class="content-body " style="margin-top: 16px;" *blockUI="'visitsPage'; message: 'Loading'">
+            <p-table #visit [columns]="selectedColumns" [resizableColumns]="true"  responsiveLayout="scroll"  [value]="visits" dataKey="VISITNAME" [rows]="6" [exportFilename]="'visits_list'"  [showCurrentPageReport]="true"
+                    [rowsPerPageOptions]="[6,12,18]" styleClass="p-datatable-striped"
+                    [paginator]="visits?.length>0" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [globalFilterFields]="colum" >
+                    <ng-template pTemplate="caption">
+                        <div class="p-d-flex">
+                            <p-multiSelect pTooltip="Choose columns to display" [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header" *ngIf="visits.length>0"
+                            selectedItemsLabel="{0} columns selected" [style]="{minWidth: '200px'}" placeholder="Choose Column to display"></p-multiSelect>
+                            <span class="p-input-icon-left p-ml-auto">
+                                <i *ngIf="visits.length>0" class="pi pi-search"></i>
+                                <input *ngIf="visits.length>0" pInputText type="text" (input)="visit.filterGlobal($event.target.value, 'contains')" placeholder="Global Search" />
+                                <button pButton pRipple label="New" [routerLink]="['/study/manageVisit/scheduleVisits']" pTooltip="Visit Schedule Setup" tooltipPosition="bottom" icon="pi pi-plus" class="p-button-info" style="margin-left:8px;margin-bottom: 3px;" ></button>
+                            </span>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header" let-columns>
+                        <tr style="border-bottom: 1px solid black !important;">
+                            <th pSortableColumn="{{col.field}}"   *ngFor="let col of columns" class="marginRight">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    {{col.header}}
+                                    <p-sortIcon field="{{col.field}}"></p-sortIcon>
+                                    <p-columnFilter type="text" field="{{col.field}}"  placeholder="Search "  display="menu" class="p-mr-auto"></p-columnFilter>
+                                </div>
+                            </th>
+                            <th style="color: #176d98;">
+                                Kit Configuration
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-visit let-columns="columns">
+                        <tr class="p-selectable-row">
+                            <td *ngFor="let col of columns">
+                                <span>{{visit[col.field]}}</span>
+                            <td>
+                                <span class="p-column-title">Kit Configuration</span>
+                                <button pButton pRipple icon="pi pi-cog"  pTooltip="Configure" tooltipPosition="bottom" class="p-button-rounded  d p-button-info p-button-outlined p-mr-2"  (click)="configure(visit)"></button>
+                                <button pButton pRipple icon="pi pi-pencil"  pTooltip="Edit Visit" tooltipPosition="bottom" class="p-button-rounded  d p-button-info p-button-outlined p-mr-2"  (click)="edit(visit)"></button>
+
+                            </td>
+                        </tr>
+                    </ng-template>
+                  
+            </p-table>
+
+            <p-toolbar styleClass="p-mb-4" *ngIf="visits?.length>0">
+                <ng-template pTemplate="left">
+                    <button type="button" pButton pRipple icon="pi pi-file-o" (click)="exportExcel('csv')" class="p-mr-2" style="margin-right: 8px;" pTooltip="CSV" tooltipPosition="bottom"></button>
+                    <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel('xlsx')" class="p-button-success p-mr-2" style="margin-right: 8px;" pTooltip="XLS" tooltipPosition="bottom"></button>
+                    <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning p-mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+                </ng-template>
+            </p-toolbar>
+            <div class="caption1 nodata" *ngIf="visits?.length<=0">
+                "No visits found."
+           </div>
+        </div>
+    </div>
+</div>
+

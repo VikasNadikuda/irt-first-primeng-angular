@@ -1,0 +1,90 @@
+<div class="app-content content">
+    <div class="content-wrapper">
+        <div class="content-header row ">
+            <h3 class="col-12 content-header-title" >
+                  Login Audit Trail
+            </h3>
+        </div>
+        <div class="content-body " style="margin-bottom:32px;margin-top: 16px;" *blockUI="'logTrail'; message: 'Loading'">
+            <m-card >
+                <ng-container mCardBody >
+                    <div class="row">
+                        <div  style="padding-top:8px;font-weight: 600;padding-left: 32px;color: black;"  class="col-md-2">
+                            <span>From Date:</span>
+                        </div>
+                        <div class="p-field col-md-3">
+                            <p-calendar [(ngModel)]="fromDate"  dateFormat='dd-M-yy'   [maxDate]="today"  [showIcon]="true" inputId="iconCal"></p-calendar>
+                        </div>
+                        <div  style="padding-top:8px;font-weight: 600;padding-left: 32px;color: black"  class="col-md-2">
+                            <span style="padding-top:8px" >To Date:</span>
+                        </div>
+                        <div class="p-field col-md-3">
+                            <p-calendar   [minDate]="fromDate"  dateFormat='dd-M-yy' [maxDate]="today" [(ngModel)]="toDate" [showIcon]="true" inputId="iconCal1"></p-calendar>
+                        </div>
+                        <div class="p-field col-md-2">
+                            <button pButton pRipple type="button" (click)="displayTable()" icon="pi pi-eye" label="View" class="p-button-outlined "></button>
+                        </div>
+                    </div>
+                </ng-container>
+            </m-card>
+            <div class="row"  *ngIf="display">
+                <div class="col-md-12">
+                    <p-table #loginTrail [columns]="selectedColumns"  [value]="loginTrails" dataKey="ID" [rows]="6" [exportFilename]="'loginTrails_list'"  [showCurrentPageReport]="true"
+                    [rowsPerPageOptions]="[6,12,18]" styleClass="p-datatable-striped"
+                    [paginator]="loginTrails?.length>0" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [globalFilterFields]="colum">
+                    <ng-template pTemplate="caption" *ngIf="loginTrails.length>0">
+                        <div class="p-d-flex">
+                            <span class="p-input-icon-left p-ml-auto">
+                                <i *ngIf="loginTrails.length>0" class="pi pi-search"></i>
+                                <input *ngIf="loginTrails.length>0" pInputText type="text" (input)="loginTrail.filterGlobal($event.target.value, 'contains')" placeholder="Global Search" />
+                                <!-- <button pButton pRipple label="New" [routerLink]="['/manageUsers/addOrEditUser']" pTooltip="Add an user" tooltipPosition="bottom" icon="pi pi-plus" class="p-button-info" style="margin-left:8px;margin-bottom: 3px;" ></button> -->
+                            </span>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header" let-columns>
+                        <tr style="border-bottom: 1px solid black !important;">
+                            <th pSortableColumn="{{col.field}}"   *ngFor="let col of columns" class="marginRight">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    {{col.header}}
+                                    <p-sortIcon field="{{col.field}}"></p-sortIcon>
+                                    <p-columnFilter type="text" field="{{col.field}}"  placeholder="Search "  display="menu" class="p-mr-auto"></p-columnFilter>
+                                </div>
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template  pTemplate="body" let-trail let-columns="columns">
+                        <tr id="trailBody" class="p-selectable-row">
+                        
+                            <td *ngFor="let col of columns">
+                                <span *ngIf="col.field!='LOGIN_STATUS' && col.field!='LOGIN_DATE'">{{trail[col.field]}}</span>
+                                <span *ngIf="col.field=='LOGIN_STATUS' && col.field!='LOGIN_DATE'">
+                                    <span *ngIf="trail[col.field]==1">
+                                        Success
+                                    </span>
+                                    <span *ngIf="trail[col.field]==0">
+                                        Failed
+                                    </span>                        
+                                </span> 
+                                <span *ngIf="col.field=='LOGIN_DATE'">
+                                    {{trail[col.field] | date : 'dd-MMM-yyyy'}}
+                                </span>                        
+                            </td>
+                        </tr>
+                    </ng-template>
+                    </p-table>
+                    <div class="caption1 nodata" *ngIf="loginTrails.length<=0">
+                        "No loginTrails found."
+                    </div>
+                    <p-toolbar styleClass="p-mb-4" *ngIf="loginTrails.length>0">
+                        <ng-template pTemplate="left">
+                            <button type="button" pButton pRipple icon="pi pi-file-o" (click)="exportExcel('csv')" class="p-mr-2" style="margin-right: 8px;" pTooltip="CSV" tooltipPosition="bottom"></button>
+                            <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel('xlsx')" class="p-button-success p-mr-2" style="margin-right: 8px;" pTooltip="XLS" tooltipPosition="bottom"></button>
+                            <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning p-mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+                        </ng-template>
+                    </p-toolbar>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

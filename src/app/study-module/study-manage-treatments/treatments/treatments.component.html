@@ -1,0 +1,88 @@
+<div class="app-content content">
+    <div class="content-wrapper">
+        <div class="content-header row ">
+            <h3 class="col-12 content-header-title" >
+                  Treatments Information
+            </h3>
+        </div>
+        <div class="content-body " style="margin-top: 16px;" *blockUI="'treat'; message: 'Loading'">
+            <p-table #dt2 [columns]="selectedColumns"  [value]="treatments" dataKey="SITE_ID" [rows]="6" [exportFilename]="'treatments_list'"  [showCurrentPageReport]="true"
+                    [rowsPerPageOptions]="[6,12,18]" styleClass="p-datatable-striped"
+                    [paginator]="treatments?.length>0" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [globalFilterFields]="colum.concat(['TreatmentID','TreatmentName'])" >
+                    <ng-template pTemplate="caption">
+                        <div class="p-d-flex">
+                            <p-multiSelect pTooltip="Choose columns to display" [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header" *ngIf="treatments.length>0"
+                            selectedItemsLabel="{0} columns selected" [style]="{minWidth: '200px'}" placeholder="Choose Column to display"></p-multiSelect>
+                            <span class="p-input-icon-left p-ml-auto">
+                                <i *ngIf="treatments.length>0" class="pi pi-search"></i>
+                                <input *ngIf="treatments.length>0" pInputText type="text" (input)="dt2.filterGlobal($event.target.value, 'contains')" placeholder="Global Search" />
+                                <button pButton pRipple label="New" [routerLink]="['/study/manageTreatments/addOrEditTreatment']" pTooltip="Add a Site" tooltipPosition="bottom" icon="pi pi-plus" class="p-button-info" style="margin-left:8px;margin-bottom: 3px;" ></button>
+                            </span>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header" let-columns>
+                        <tr style="border-bottom: 1px solid black !important;">
+                            <th pSortableColumn="SITE_ID" class="marginRight" >
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Treatment ID
+                                    <p-sortIcon field="SITE_ID"></p-sortIcon>
+                                    <p-columnFilter type="text" field="SITE_ID"  placeholder="Search " class="p-mr-auto"  display="menu"></p-columnFilter>
+                                </div>
+                            </th>
+                            <th pSortableColumn="SITE_NAME" class="marginRight" >
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Treatment Name
+                                    <p-sortIcon field="SITE_NAME"></p-sortIcon>
+                                    <p-columnFilter type="text" field="SITE_NAME"  placeholder="Search " class="p-mr-auto"  display="menu"></p-columnFilter>
+                                </div>
+                            </th>
+                            <th pSortableColumn="{{col.field}}"   *ngFor="let col of columns" class="marginRight">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    {{col.header}}
+                                    <p-sortIcon field="{{col.field}}"></p-sortIcon>
+                                    <p-columnFilter type="text" field="{{col.field}}"  placeholder="Search "  display="menu" class="p-mr-auto"></p-columnFilter>
+                                </div>
+                            </th>
+                            <th style="color: #176d98;">
+                                Action
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-treatment let-columns="columns">
+                        <tr class="p-selectable-row">
+                            <td>
+                                <span class="p-column-title">Treatment Id</span>
+                                {{treatment.TREATMENT_ID}}
+                            </td>
+                            <td>
+                                <span class="p-column-title">Treatment Name</span>
+                                {{treatment.TREATMENT_NAME}}
+                            </td>
+                            <td *ngFor="let col of columns">
+                                <span *ngIf="col.field!='CREATED_DATE'">{{treatment[col.field]}}</span>
+                                <span *ngIf="col.field=='CREATED_DATE'">{{treatment[col.field] |  date:'dd-MMM-yyyy'}}</span>
+
+                            <td>
+                                <span class="p-column-title">Action</span>
+                                <button pButton pRipple icon="pi pi-pencil"  pTooltip="Edit treatment" tooltipPosition="bottom" class="p-button-rounded  d p-button-info p-button-outlined p-mr-2"  (click)="edittreatment(treatment)"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                  
+            </p-table>
+
+            <p-toolbar styleClass="p-mb-4" *ngIf="treatments?.length>0">
+                <ng-template pTemplate="left">
+                    <button type="button" pButton pRipple icon="pi pi-file-o" (click)="exportExcel('csv')" class="p-mr-2" style="margin-right: 8px;" pTooltip="CSV" tooltipPosition="bottom"></button>
+                    <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel('xlsx')" class="p-button-success p-mr-2" style="margin-right: 8px;" pTooltip="XLS" tooltipPosition="bottom"></button>
+                    <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning p-mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+                </ng-template>
+            </p-toolbar>
+            <div class="caption1 nodata" *ngIf="treatments?.length<=0">
+                "No treatments found."
+           </div>
+        </div>
+    </div>
+</div>
+

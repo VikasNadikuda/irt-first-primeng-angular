@@ -1,0 +1,856 @@
+<div class="app-content content">
+  <div class="content-wrapper">
+    <div class="content-header row ">
+        <h3 class="col-12 content-header-title" >
+            Subject Settings
+        </h3>
+    </div>
+    <div class="content-body " style="margin-top: 16px;" >
+        <div class="row " style="border-right:1px solid #ccc">
+            <div class="card card-body col-3" style="padding-left: 0px;padding-right: 0px !important;;height: 502px;" >
+                <div class="tab" style="height: 32px;margin-bottom: 8px;border-bottom: 1px solid #ccc;">
+                    <span style="font-weight: bold;padding-left: 16px;">
+                        Settings
+                    </span>
+                </div>
+                <div class="tab" style="padding-left: 8px;">
+                    <button class="tablinks" (click)="openCity($event, 'subject')" id="defaultOpen">Subject Edit Data Points </button>
+                    <button class="tablinks" (click)="openCity($event, 'screening')">Screening Configuration</button>
+                    <button class="tablinks" (click)="openCity($event, 'visit')" >Visit Configuration</button>
+                    <button class="tablinks" (click)="openCity($event, 'subgroup')"> SubGroup Configuration</button>
+                    <button class="tablinks" (click)="openCity($event, 'discontinue')">Discontinue Configuration</button>
+                    <button class="tablinks" (click)="openCity($event, 'reporting')" >Reporting Status</button>
+                    <button class="tablinks" (click)="openCity($event, 'status')">Study Status</button>
+                </div>
+            </div>
+            <div class="col-9">
+                  <div id="subject" class="tabcontent">
+                        <div  class="card "  style="height: 502px"  >
+                            <div class="card-title titleCard" >
+                                Subject Edit Data Points 
+                            </div>
+                            <perfect-scrollbar  class="scroll-container"  [config]="config" >
+                                <div class="card-body"  style="padding-left: 8px;" >
+                                    <div class="row" >
+                                        <div class="col-4" *ngFor="let subject of subjectList;let i = index;"  style="padding-left: 10%;margin-bottom: 16px;" >
+                                            <!-- <div class="col-3"  style="padding-left: 10%;"> -->
+                                                <div class="p-field-checkbox">
+                                                    <p-checkbox name="{{subject.FIELD_NAME}}"  [(ngModel)]="selectedSubjects"  [value]="subject.FIELD_NAME" inputId="{{subject.ID}}"></p-checkbox>
+                                                    <label for="{{subject.ID}}">{{subject.FIELD_NAME}}</label>
+                                                </div>
+                                            <!-- </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </perfect-scrollbar>
+                            <div class="card-footer">
+                                <div class="row" style="text-align: center;">
+                                    <div class="col-6 offset-3">
+                                            <button type="submit" pButton (click)="updateSubjets()"   class="p-button-success">
+                                            <i class="feather ft-check"></i> Update
+                                            </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                  </div>
+                  
+                <div id="screening" class="tabcontent">
+                    <div  class="card "  style="height: 502px" >
+                        <div class="card-title titleCard" >
+                            Screening Configuration 
+                        </div>
+                        <perfect-scrollbar  class="scroll-container"  [config]="config" >
+                            <div class="card-body"  style="padding-left: 8px;" >
+                                <form class="form" [formGroup]="screening">
+                                    <div class="row">
+                                        <div class="col-4 labelCustom" style="text-align: end;" >
+                                            DOB Validation:
+                                        </div>
+                                        <div class="col-6 float-left" >
+                                            <div class="form-group">
+                                                <span class="p-float-label">
+                                                    <p-dropdown  inputId="subjectDrop5" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="general_types"   formControlName="DOBREQUIRED"  optionLabel="LIBRARY_ID" optionValue='LIBRARY_VALUE' ></p-dropdown>
+                                                    <label for="subjectDrop5">Select DOB</label>
+                                                
+                                                </span>
+                                                <div *ngIf="screening.controls.DOBREQUIRED.errors && screening.controls.DOBREQUIRED.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                                  <div *ngIf="screening.controls.DOBREQUIRED.errors['required']  ">Field is required</div>
+                                                </div>
+                                            </div>
+
+                                           
+                                        </div>
+                                        <!-- <div class="col-6 float-left" *ngIf="!editScreening">
+                                            {{screenDet.DOBREQUIRED}}
+                                        </div> -->
+                                    </div>
+                                    <div class="row" *ngIf="screening.controls.DOBREQUIRED.value=='Yes'">
+                                        <div class="col-4 labelCustom" style="text-align: end;" >
+                                            Minimum Age:
+                                        </div>
+                                        <div class="col-6 float-left" >
+                                            <div class="form-group">
+                                                <span class="p-float-label">
+                                                    <input id="subjectLen" class="form-control" type="number" formControlName="MIN_VALUE" [required]="screening.controls.DOBREQUIRED.value=='Yes'" pInputText > 
+                                                </span>  
+                                                <div *ngIf="screening.controls.MIN_VALUE.errors && screening.controls.MIN_VALUE.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                                                    <div *ngIf="screening.controls.MIN_VALUE.errors['required'] ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-6 float-left" *ngIf="!editScreening">
+                                            {{screenDet.MIN_VALUE}}
+                                        </div> -->
+                                    </div>
+                                    <div class="row" *ngIf="screening.controls.DOBREQUIRED.value=='Yes'">
+                                        <div class="col-4 labelCustom" style="text-align: end;" >
+                                            Maximum Age:
+                                        </div>
+                                        <div class="col-6 float-left" >
+                                            <div class="form-group">
+                                                <span class="p-float-label">
+                                                    <input id="subjectLen1" class="form-control" type="number" formControlName="MAX_VALUE" [required]="screening.controls.DOBREQUIRED.value=='Yes'" pInputText > 
+                                                </span>  
+                                                <div *ngIf="screening.controls.MAX_VALUE.errors && screening.controls.MAX_VALUE.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                                                    <div *ngIf="screening.controls.MAX_VALUE.errors['required'] ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-6 float-left" *ngIf="!editScreening">
+                                            {{screenDet.MAX_VALUE}}
+                                        </div> -->
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4 labelCustom" style="text-align: end;" >
+                                            Gender Eligibility for Study:
+                                        </div>
+                                        <div class="col-6 float-left" >
+                                            <div class="form-group">
+                                                <span class="p-float-label">
+                                                    <p-dropdown  inputId="subjectDrop1" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="gender_types"   formControlName="GENDER_TYPE"  optionLabel="LIBRARY_ID" optionValue='LIBRARY_VALUE' ></p-dropdown>
+                                                    <label for="subjectDrop1">Select Eligibility</label>
+                                                </span>
+                                                <div *ngIf="screening.controls.GENDER_TYPE.errors && screening.controls.GENDER_TYPE.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                                  <div *ngIf="screening.controls.GENDER_TYPE.errors['required']  ">Field is required</div>
+                                                </div>
+                                            </div>
+
+                                           
+                                        </div>
+                                        <!-- <div class="col-6 float-left" *ngIf="!editScreening">
+                                            {{screenDet.GENDER_TYPE}}
+                                        </div> -->
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4 labelCustom" style="text-align: end;" >
+                                            Subject ID Auto Generation:
+                                        </div>
+                                        <div class="col-6 float-left" >
+                                            <div class="form-group">
+                                                <span class="p-float-label">
+                                                    <p-dropdown  inputId="subjectDrop2" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="general_types"   formControlName="SUB_AUTOGEN"  optionLabel="LIBRARY_ID" optionValue='LIBRARY_VALUE' ></p-dropdown>
+                                                    <label for="subjectDrop2">Select Auto Generation</label>
+                                                </span>
+                                                <div *ngIf="screening.controls.SUB_AUTOGEN.errors && screening.controls.SUB_AUTOGEN.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                                  <div *ngIf="screening.controls.SUB_AUTOGEN.errors['required']  ">Field is required</div>
+                                                </div>
+                                            </div>
+
+                                           
+                                        </div>
+                                        <!-- <div class="col-6 float-left" *ngIf="!editScreening">
+                                            {{screenDet.SUB_AUTOGEN}}
+                                        </div> -->
+                                    </div>
+                                    <div class="row" *ngIf="screening.controls.SUB_AUTOGEN.value=='Yes'">
+                                        <div class="col-4 labelCustom" style="text-align: end;" >
+                                            Subject Start ID:
+                                        </div>
+                                        <div class="col-6 float-left" >
+                                            <div class="form-group">
+                                                <span class="p-float-label">
+                                                    <input id="subjectLen12" class="form-control" type="number" formControlName="START_ID" pInputText [required]="screening.controls.SUB_AUTOGEN.value=='Yes'"> 
+                                                </span>  
+                                                <div *ngIf="screening.controls.START_ID.errors && screening.controls.START_ID.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                                                    <div *ngIf="screening.controls.START_ID.errors['required'] ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-6 float-left" *ngIf="!editScreening">
+                                            {{screenDet.START_ID}}
+                                        </div> -->
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4 labelCustom" style="text-align: end;" >
+                                            Re-screening:
+                                        </div>
+                                        <div class="col-6 float-left" >
+                                            <div class="form-group">
+                                                <span class="p-float-label">
+                                                    <p-dropdown  inputId="subjectDrop3" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="general_types"   formControlName="RESCREEN"  optionLabel="LIBRARY_ID" optionValue='LIBRARY_VALUE' ></p-dropdown>
+                                                    <label for="subjectDrop3">Selct Rescreening</label>
+                                                </span>
+                                                <div *ngIf="screening.controls.RESCREEN.errors && screening.controls.RESCREEN.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                                  <div *ngIf="screening.controls.RESCREEN.errors['required']  ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-6 float-left" *ngIf="!editScreening">
+                                            {{screenDet.RESCREEN}}
+                                        </div> -->
+                                    </div>
+                                    <div *ngFor="let factorValue of getValues(screening); let j=index">
+                                        <div class="row" style="margin-top: 8px;">
+                                            <div class="col-4 labelCustom" style="text-align: end;">
+                                                <span  *ngIf="j==0" >
+                                                    Sub Group:
+                                                </span>
+                                            </div>
+                                            <div class="col-6 float-left" >
+                                                <div formArrayName="SUBJECT_SCREEN_SUBGROUP">
+                                                    <div [formGroupName]="j">
+                                                        <div class="row"  >
+                                                            <div class="col-10">
+                                                                <input id="cohorts12" class="form-control" type="text" formControlName="factorValue" pInputText > 
+                                                            </div>
+                                                            <div class="col-1"  style="padding-left:0px" *ngIf="j>1">
+                                                                <button pButton pRipple type="button" *ngIf="j>0" icon="pi pi-trash " pTooltip="Delete Value" tooltipPosition="bottom" class=""  (click)="removeStrat(j)" class="p-button-rounded p-button-text p-button-danger"></button>    
+                                                            </div>
+                                                            <div class="col-1"  style="padding-left:0px" >
+                                                                <button pButton pRipple type="button" *ngIf="j==0 " icon="pi pi-plus" pTooltip="Add Value" tooltipPosition="bottom"  (click)="addFactor(j)" class="p-button-rounded p-button-text"></button>    
+                                                            </div>
+                                                        </div>
+                                                       
+                                                        
+                                                        <!-- <div *ngIf="addStrata.controls.factor.factorValue.errors && addStrata.controls.factor.factorValue.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                                                            <div *ngIf="addStrata.controls.factor.factorValue.errors['required'] ">Field is required</div>
+                                                        </div> -->
+                                                    </div>  
+                                                </div>
+                                            </div>
+                                            <!-- <div class="col-2">
+                                                <button pButton pRipple type="button" icon="pi pi-plus" (click)="addFactor(i)" class="p-button-rounded p-button-text"></button>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </perfect-scrollbar>
+                        <div class="card-footer">
+                            <div class="row" style="text-align: center;">
+                                <div class="col-6 offset-3">
+                                        <button type="submit" pButton (click)="updateScreens('UPDATE')"  *ngIf="!addScreen" class="p-button-success mr-2">
+                                        <i class="feather ft-check"></i> Update
+                                        </button>
+                                        <button type="submit" pButton (click)="updateScreens('ADD')"  *ngIf="addScreen" class="p-button-success mr-2">
+                                            <i class="feather ft-check"></i> Add
+                                            </button>
+                                        <!-- <button type="button" pButton (click)="cancelScreen()" *ngIf="!addScreen"  class=" p-button-warning ">
+                                            <i class="feather ft-x"></i> Cancel
+                                          </button> -->
+                                        <!-- <button type="submit" pButton (click)="editScreen()" *ngIf="! && !addScreen"  class="p-button-success mr-2">
+                                        <i class="feather ft-check"></i> Edit
+                                        </button> -->
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                  
+                  <div id="visit" class="tabcontent">
+                    <div  class="card "  style="height: 502px" >
+                        <div class="card-title titleCard" >
+                            Visit Configuration
+                        </div>
+                        <perfect-scrollbar  class="scroll-container"  [config]="config" >
+                            <div class="card-body"  style="padding-left: 8px;" >
+                                <form class="form" [formGroup]="visitConfig">
+                                    <div class="row">
+                                        <div class="col-4 labelCustom" style="text-align: end;" >
+                                            Skipping Visit:
+                                        </div>
+                                        <div class="col-6 float-left" >
+                                            <div class="form-group">
+                                                <span class="p-float-label">
+                                                    <p-dropdown  inputId="visitDrop1" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="general_types"   formControlName="SKIPPING_VISIT"  optionLabel="LIBRARY_ID" optionValue='LIBRARY_VALUE' ></p-dropdown>
+                                                    <label for="visitDrop1">Select skipping Visit</label>
+                                                </span>
+                                                <div *ngIf="visitConfig.controls.SKIPPING_VISIT.errors && visitConfig.controls.SKIPPING_VISIT.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                                <div *ngIf="visitConfig.controls.SKIPPING_VISIT.errors['required']  ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-6 float-left" style="min-height:64px" *ngIf="!editVisit">
+                                            {{visitDet?.SKIPPING_VISIT}}
+                                        </div> -->
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4 labelCustom" style="text-align: end;" >
+                                            Unschedule Visit:
+                                        </div>
+                                        <div class="col-6 float-left" >
+                                            <div class="form-group">
+                                                <span class="p-float-label">
+                                                    <p-dropdown  inputId="visitDrop2" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="general_types"   formControlName="UNSCHEDULE_VISIT"  optionLabel="LIBRARY_ID" optionValue='LIBRARY_VALUE' ></p-dropdown>
+                                                    <label for="visitDrop2">Select Unschedule Visit</label>
+                                                </span>
+                                                <div *ngIf="visitConfig.controls.UNSCHEDULE_VISIT.errors && visitConfig.controls.UNSCHEDULE_VISIT.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                                <div *ngIf="visitConfig.controls.UNSCHEDULE_VISIT.errors['required']  ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-6 float-left" style="min-height:64px" *ngIf="!editVisit">
+                                            {{visitDet?.UNSCHEDULE_VISIT}}
+                                        </div> -->
+                                    </div>
+                                    <div class="row" *ngIf="visitConfig.controls.UNSCHEDULE_VISIT.value=='Yes'">
+                                        <div class="col-4 labelCustom" style="text-align: end;" >
+                                            Unschedule Visit Type:
+                                        </div>
+                                        <div class="col-6 float-left" >
+                                            <div class="form-group">
+                                                <span class="p-float-label">
+                                                    <p-dropdown  inputId="visitDrop3" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="limited_types"   formControlName="UNSCHEDULE_VISITTYPE"  optionLabel="LIBRARY_ID" optionValue='LIBRARY_VALUE' [required]="visitConfig.controls.UNSCHEDULE_VISIT.value=='Yes'"></p-dropdown>
+                                                    <label for="visitDrop3">Select Visit Type</label>
+                                                </span>
+                                                <div *ngIf="visitConfig.controls.UNSCHEDULE_VISITTYPE.errors && visitConfig.controls.UNSCHEDULE_VISITTYPE.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                                <div *ngIf="visitConfig.controls.UNSCHEDULE_VISITTYPE.errors['required']  ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-6 float-left" style="min-height:64px" *ngIf="!editVisit">
+                                            {{visitDet?.UNSCHEDULE_VISITTYPE}}
+                                        </div> -->
+                                    </div>
+                                    <div class="row" *ngIf="visitConfig.controls.UNSCHEDULE_VISITTYPE.value=='Limited'">
+                                        <div class="col-4 labelCustom" style="text-align: end;" >
+                                            Visit Count:
+                                        </div>
+                                        <div class="col-6 float-left" >
+                                            <div class="form-group">
+                                                <span class="p-float-label">
+                                                    <input id="subjectLen1" class="form-control" type="number" formControlName="VISIT_COUNT" [required]="visitConfig.controls.UNSCHEDULE_VISITTYPE.value=='Limited'" pInputText > 
+                                                </span>  
+                                                <div *ngIf="visitConfig.controls.VISIT_COUNT.errors && visitConfig.controls.VISIT_COUNT.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                                                    <div *ngIf="visitConfig.controls.VISIT_COUNT.errors['required'] ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-6 float-left" style="min-height:64px" *ngIf="!editVisit">
+                                            {{visitDet?.VISIT_COUNT}}
+                                        </div> -->
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4 labelCustom" style="text-align: end;" >
+                                            Run in Failure:
+                                        </div>
+                                        <div class="col-6 float-left" >
+                                            <div class="form-group">
+                                                <span class="p-float-label">
+                                                    <p-dropdown  inputId="visitDrop4" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="general_types"   formControlName="RUN_IN_FAILURE"  optionLabel="LIBRARY_ID" optionValue='LIBRARY_VALUE' ></p-dropdown>
+                                                    <label for="visitDrop4">Select Run in Falure</label>
+                                                </span>
+                                                <div *ngIf="visitConfig.controls.RUN_IN_FAILURE.errors && visitConfig.controls.RUN_IN_FAILURE.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                                <div *ngIf="visitConfig.controls.RUN_IN_FAILURE.errors['required']  ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-6 float-left" style="min-height:64px" *ngIf="!editVisit">
+                                            {{visitDet?.RUN_IN_FAILURE}}
+                                        </div> -->
+                                    </div>
+                                    <div class="row" *ngIf="visitConfig.controls.RUN_IN_FAILURE.value=='Yes'">
+                                        <div class="col-4 labelCustom" style="text-align: end;" >
+                                            Select Visit:
+                                        </div>
+                                        <div class="col-6 float-left" >
+                                            <div class="form-group">
+                                                <span class="p-float-label">
+                                                    <p-dropdown  inputId="visitDrop5" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="visitList"   formControlName="VISIT_ID"  optionLabel="LIBRARY_ID" optionValue='LIBRARY_VALUE' [required]="visitConfig.controls.RUN_IN_FAILURE.value=='Yes'"></p-dropdown>
+                                                    <label for="visitDrop5">Select Visit</label>
+                                                </span>
+                                                <div *ngIf="visitConfig.controls.VISIT_ID.errors && visitConfig.controls.VISIT_ID.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                                <div *ngIf="visitConfig.controls.VISIT_ID.errors['required']  ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-6 float-left" style="min-height:64px" *ngIf="!editVisit">
+                                            {{visitDet?.VISIT_ID}}
+                                        </div> -->
+                                    </div> 
+                                </form>
+                            </div>
+                        </perfect-scrollbar>
+                        <div class="card-footer">
+                            <div class="row" style="text-align: center;">
+                                <div class="col-6 offset-3">
+                                    <button type="submit" pButton (click)="updateVisit('UPDATE')" [disabled]="visitConfig.invalid" *ngIf=" !addVisit" class="p-button-success mr-2">
+                                        <i class="feather ft-check"></i> Update
+                                    </button>
+                                    <button type="submit" pButton (click)="updateVisit('ADD')" [disabled]="visitConfig.invalid" *ngIf="addVisit" class="p-button-success mr-2">
+                                        <i class="feather ft-check"></i> Add
+                                    </button>
+                                    <!-- <button type="button" pButton (click)="cancelVisit()" *ngIf="!addVisit"   class=" p-button-warning ">
+                                        <i class="feather ft-x"></i> Cancel
+                                        </button>
+                                    <button type="submit" pButton (click)="editVisits()" *ngIf="!editVisit && !addVisit"  class="p-button-success mr-2">
+                                    <i class="feather ft-check"></i> Edit
+                                    </button> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                  <div id="subgroup" class="tabcontent">
+                    <div  class="card "  style="height: 502px" >
+                        <div class="card-title titleCard" >
+                            Subgroup Configuration
+                        </div>
+                        <perfect-scrollbar  class="scroll-container"  [config]="config" >
+                            <div class="card-body"  style="padding-left: 8px;padding-top: 0px;" >
+                                <p-table #vt1 [rowsPerPageOptions]="[4,8,12]" [rows]="4" [value]="subgroupList" >
+                                <ng-template pTemplate="caption">
+                                    <div class="p-d-flex">
+                                        <span class="p-input-icon-left p-ml-auto">
+                                            <i *ngIf="subgroupList.length>0" class="pi pi-search"></i>
+                                            <input *ngIf="subgroupList.length>0" pInputText type="text" (input)="vt1.filterGlobal($event.target.value, 'contains')" placeholder="Global Search" />
+                                            <button pButton pRipple (click)="editSubGroup(null)" pTooltip="Add a Subgroup" tooltipPosition="bottom" icon="pi pi-plus" class="p-button-info" style="margin-left:8px;margin-bottom: 3px;" ></button>
+                                        </span>
+                                    </div>
+                                </ng-template>
+                                <ng-template pTemplate="header" let-columns>
+                                    <tr style="border-bottom: 1px solid black !important;">
+                                        <th pSortableColumn="SITE_ID" class="marginRight" >
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Subgroup
+                                                <p-sortIcon field="SUBJECT_SUBGROUP"></p-sortIcon>
+                                            </div>
+                                        </th>
+                                        <th pSortableColumn="SITE_NAME" class="marginRight" >
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Treatment Group
+                                                <p-sortIcon field="ARM_ID"></p-sortIcon>
+                                            </div>
+                                        </th>
+                                        <th pSortableColumn="Depot_Type" class="marginRight" >
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Subgroup Cap
+                                                <p-sortIcon field="CAP"></p-sortIcon>
+                                            </div>
+                                        </th>
+                                        <th style="color: #176d98;">
+                                            Action
+                                        </th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-subgroup >
+                                    <tr class="p-selectable-row">
+                                        <td>
+                                            <span class="p-column-title">subgroup</span>
+                                            {{subgroup.SUBJECT_SUBGROUP}}
+                                        </td>
+                                        <td>
+                                            <span class="p-column-title">Treatment Group</span>
+                                            {{subgroup.ARM_NAME}}
+                                        </td>
+                                        <td>
+                                            <span class="p-column-title">Subgroup Cap</span>
+                                            {{subgroup.CAP}}
+                                        </td>
+                                        <td>
+                                            <span class="p-column-title">Action</span>
+                                            <button pButton pRipple icon="pi pi-pencil"  pTooltip="Edit subgroup" tooltipPosition="bottom" class="p-button-rounded p-button-text  p-mr-2"  (click)="editSubGroup(subgroup)"></button>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                            <div class="caption1 nodata" *ngIf="subgroupList.length<=0">
+                                "No subgroups found."
+                            </div>
+                            <p-dialog [modal]='true' header="{{subGroupTitle}}" [style]="{width: '50vw',height:'33vw',top:'0'}" [baseZIndex]="10000" [(visible)]="displaySubgroup">
+                                <form class="form" [formGroup]="subgroup">
+                                    <div class="row mt-3">
+                                        <div class="col-6 offset-3">
+                                           <div class="form-group">
+                                                <span class="p-float-label">
+                                                    <p-dropdown  inputId="subgroupDrop1" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="treatList"   formControlName="ARM_ID"  optionLabel="NAME" optionValue='ID'></p-dropdown>
+                                                    <label for=""></label>
+                                                    <label for="subgroupDrop1">Treatment Group</label>
+                                                </span>
+                                                <div *ngIf="subgroup.controls.ARM_ID.errors && subgroup.controls.ARM_ID.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                                    <div *ngIf="subgroup.controls.ARM_ID.errors['required']  ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 offset-3">
+                                           <div class="form-group">
+                                                <span class="p-float-label">
+                                                    <p-dropdown  inputId="subgroupDrop2" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="sgList"   formControlName="SUBJECT_SUBGROUP"  optionLabel="LIBRARY_ID" optionValue='LIBRARY_VALUE' ></p-dropdown>
+                                                    <label for="subgroupDrop2">Subgroup</label>
+                                                </span>
+                                                <div *ngIf="subgroup.controls.SUBJECT_SUBGROUP.errors && subgroup.controls.SUBJECT_SUBGROUP.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                                    <div *ngIf="subgroup.controls.SUBJECT_SUBGROUP.errors['required']  ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 offset-3">
+                                            <div class="form-group">
+                                                <span class="p-float-label">
+                                                    <input id="subgroupInput" class="form-control" type="number" formControlName="CAP"  pInputText > 
+                                                    <label for="subgroupInput">Subgroup Cap</label>
+                                                </span>  
+                                                <div *ngIf="subgroup.controls.CAP.errors && subgroup.controls.CAP.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                                                    <div *ngIf="subgroup.controls.CAP.errors['required'] ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <ng-template pTemplate="footer">
+                                    <p-button icon="pi pi-check" *ngIf=" !editSG" [disabled]="subgroup.invalid" (click)="saveSubgroup('ADD')"  label="Add" class="p-button-text"></p-button>
+                                    <p-button icon="pi pi-check" *ngIf="editSG" [disabled]="subgroup.invalid" (click)="saveSubgroup('UPDATE')"  label="Update" class="p-button-text"></p-button>
+                                    <p-button icon="pi pi-times" (click)="displaySubgroup=false" label="Cancel"></p-button>
+                                </ng-template>
+                            </p-dialog>
+                            </div>
+                        </perfect-scrollbar>
+                    </div>
+                  </div>
+                  
+                  <div id="discontinue" class="tabcontent">
+                    <div  class="card "  style="height: 502px" >
+                        <div class="card-title titleCard" >
+                            Discontinue Visit Configuration
+                        </div>
+                        <perfect-scrollbar  class="scroll-container"  [config]="config" >
+                            <div class="card-body"  style="padding-left: 8px;padding-top: 0px;" >
+                                <p-table #vt2 [rowsPerPageOptions]="[4,8,12]" [rows]="4" [value]="disSubgroupList" >
+                                <ng-template pTemplate="caption">
+                                    <div class="p-d-flex">
+                                        <span class="p-input-icon-left p-ml-auto">
+                                            <i *ngIf="disSubgroupList.length>0" class="pi pi-search"></i>
+                                            <input *ngIf="disSubgroupList.length>0" pInputText type="text" (input)="vt2.filterGlobal($event.target.value, 'contains')" placeholder="Global Search" />
+                                            <button pButton pRipple (click)="editdisSubGroup(null)" pTooltip="Add a Configuration" tooltipPosition="bottom" icon="pi pi-plus" class="p-button-info" style="margin-left:8px;margin-bottom: 3px;" ></button>
+                                        </span>
+                                    </div>
+                                </ng-template>
+                                <ng-template pTemplate="header" let-columns>
+                                    <tr style="border-bottom: 1px solid black !important;">
+                                        <th pSortableColumn="SITE_ID" class="marginRight" >
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Visit Name
+                                                <p-sortIcon field="VISIT_ID"></p-sortIcon>
+                                            </div>
+                                        </th>
+                                        <th pSortableColumn="SITE_NAME" class="marginRight" >
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Min Days
+                                                <p-sortIcon field="MINDAYS"></p-sortIcon>
+                                            </div>
+                                        </th>
+                                        <th pSortableColumn="Depot_Type" class="marginRight" >
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Target Days
+                                                <p-sortIcon field="TARGETDAYS"></p-sortIcon>
+                                            </div>
+                                        </th>
+                                        <th pSortableColumn="Depot_Type" class="marginRight" >
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Max Days
+                                                <p-sortIcon field="MAXDAYS"></p-sortIcon>
+                                            </div>
+                                        </th>
+                                        <th style="color: #176d98;">
+                                            Action
+                                        </th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-disSubgroup >
+                                    <tr class="p-selectable-row">
+                                        <td>
+                                            <span class="p-column-title">Visit</span>
+                                            {{disSubgroup.VISIT_NAME}}
+                                        </td>
+                                        <td>
+                                            <span class="p-column-title">Min Days</span>
+                                            {{disSubgroup.MINDAYS}}
+                                        </td>
+                                        <td>
+                                            <span class="p-column-title">Target Days</span>
+                                            {{disSubgroup.TARGETDAYS}}
+                                        </td>
+                                        <td>
+                                            <span class="p-column-title">Max Days</span>
+                                            {{disSubgroup.MAXDAYS}}
+                                        </td>
+                                        <td>
+                                            <span class="p-column-title">Action</span>
+                                            <button pButton pRipple icon="pi pi-pencil"  pTooltip="Edit Configuration" tooltipPosition="bottom" class="p-button-rounded p-button-text p-mr-2"  (click)="editdisSubGroup(disSubgroup)"></button>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                            <div class="caption1 nodata" *ngIf="disSubgroupList.length<=0">
+                                "No Configurations found."
+                            </div>
+                            <p-dialog [modal]='true' header="{{disSubGroupTitle}}" [style]="{width: '50vw',height:'33vw',top:'0'}" [baseZIndex]="10000" [(visible)]="displaydisSubgroup">
+                                <form class="form" [formGroup]="disSubgroup">
+                                    <div class="row mt-3">
+                                        <div class="col-6 offset-3">
+                                           <div class="form-group">
+                                                <span class="p-float-label">
+                                                    <p-dropdown  inputId="disSubgroupDrop1" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="visitsList"   formControlName="VISIT_ID"  optionLabel="VISITNAME" optionValue='ID'></p-dropdown>
+                                                    <label for=""></label>
+                                                    <label for="disSubgroupDrop1">Visit Name</label>
+                                                </span>
+                                                <div *ngIf="disSubgroup.controls.VISIT_ID.errors && disSubgroup.controls.VISIT_ID.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                                    <div *ngIf="disSubgroup.controls.VISIT_ID.errors['required']  ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 offset-3">
+                                            <div class="form-group">
+                                                <span class="p-float-label">
+                                                    <input id="disSubgroupInput1" class="form-control" type="number" formControlName="MINDAYS"  pInputText > 
+                                                    <label for="disSubgroupInput1">Min Days</label>
+                                                </span>  
+                                                <div *ngIf="disSubgroup.controls.MINDAYS.errors && disSubgroup.controls.MINDAYS.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                                                    <div *ngIf="disSubgroup.controls.MINDAYS.errors['required'] ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 offset-3">
+                                            <div class="form-group">
+                                                <span class="p-float-label">
+                                                    <input id="disSubgroupInput2" class="form-control" type="number" formControlName="MAXDAYS"  pInputText > 
+                                                    <label for="disSubgroupInput2">Max Days</label>
+                                                </span>  
+                                                <div *ngIf="disSubgroup.controls.MAXDAYS.errors && disSubgroup.controls.MAXDAYS.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                                                    <div *ngIf="disSubgroup.controls.MAXDAYS.errors['required'] ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 offset-3">
+                                            <div class="form-group">
+                                                <span class="p-float-label">
+                                                    <input id="disSubgroupInput" class="form-control" type="number" formControlName="TARGETDAYS"  pInputText > 
+                                                    <label for="disSubgroupInput">Target Days</label>
+                                                </span>  
+                                                <div *ngIf="disSubgroup.controls.TARGETDAYS.errors && disSubgroup.controls.TARGETDAYS.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                                                    <div *ngIf="disSubgroup.controls.TARGETDAYS.errors['required'] ">Field is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <ng-template pTemplate="footer">
+                                    <p-button icon="pi pi-check" *ngIf=" !editDSG" [disabled]="disSubgroup.invalid" (click)="savedisSubgroup('ADD')"  label="Add" class="p-button-text"></p-button>
+                                    <p-button icon="pi pi-check" *ngIf="editDSG" [disabled]="disSubgroup.invalid" (click)="savedisSubgroup('UPDATE')"  label="Update" class="p-button-text"></p-button>
+                                    <p-button icon="pi pi-times" (click)="displaydisSubgroup=false" label="Cancel"></p-button>
+                                </ng-template>
+                            </p-dialog>
+                            </div>
+                        </perfect-scrollbar>
+                    </div>
+                  </div>  
+                  <div id="reporting" class="tabcontent">
+                    <div  class="card "  style="height: 502px" >
+                        <div class="card-title titleCard" >
+                            Reporting Status
+                        </div>
+                        <perfect-scrollbar  class="scroll-container"  [config]="config" >
+                            <div class="card-body"  style="padding-left: 8px;padding-top: 0px !important;" >
+                                <p-table #vt3 [rowsPerPageOptions]="[4,8,12]" [rows]="4" [value]="label_list" >
+                                    <ng-template pTemplate="caption">
+                                        <div class="p-d-flex">
+                                            <span class="p-input-icon-left p-ml-auto">
+                                                <i *ngIf="label_list.length>0" class="pi pi-search"></i>
+                                                <input *ngIf="label_list.length>0" pInputText type="text" (input)="vt3.filterGlobal($event.target.value, 'contains')" placeholder="Global Search" />
+                                                <button pButton pRipple (click)="openeditLabel(null)" pTooltip="Add a Label" tooltipPosition="bottom" icon="pi pi-plus" class="p-button-info" style="margin-left:8px;margin-bottom: 3px;" ></button>
+                                            </span>
+                                        </div>
+                                    </ng-template>
+                                    <ng-template pTemplate="header" let-columns>
+                                        <tr style="border-bottom: 1px solid black !important;">
+                                            <th pSortableColumn="LABEL" class="marginRight" >
+                                                <div class="p-d-flex p-jc-between p-ai-center">
+                                                    Label
+                                                    <p-sortIcon field="LABEL"></p-sortIcon>
+                                                </div>
+                                            </th>
+                                            <th pSortableColumn="LABEL_NAME" class="marginRight" >
+                                                <div class="p-d-flex p-jc-between p-ai-center">
+                                                    Label Name
+                                                    <p-sortIcon field="LABEL_NAME"></p-sortIcon>
+                                                </div>
+                                            </th>
+                                            <th style="color: #176d98;">
+                                                Action
+                                            </th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-label >
+                                        <tr class="p-selectable-row">
+                                            <td>
+                                                <span class="p-column-title">Visit</span>
+                                                {{label.LABEL}}
+                                            </td>
+                                            <td>
+                                                <span class="p-column-title">Min Days</span>
+                                                {{label.LABEL_NAME}}
+                                            </td>
+                                            <td>
+                                                <span class="p-column-title">Action</span>
+                                                <button pButton pRipple icon="pi pi-pencil"  pTooltip="Edit Label" tooltipPosition="bottom" class="p-button-rounded p-button-text p-mr-2"  (click)="openeditLabel(label)"></button>
+                                            </td>
+                                        </tr>
+                                    </ng-template>
+                                </p-table>
+                                <div class="caption1 nodata" *ngIf="label_list.length<=0">
+                                    "No Labels found."
+                                </div>
+                                    <p-dialog [modal]='true' header="{{statusTitle}}" [style]="{width: '50vw',height:'33vw',top:'0'}" [baseZIndex]="10000" [(visible)]="showAddReport">
+                                        <form class="form"  [formGroup]="reportStatus">
+                                            <div class="row mt-5" >
+                                                <div class="col-4 labelCustom" style="text-align: end;padding-top: 8px;" >
+                                                    Select Label:
+                                                </div>
+                                                <div class="col-6 float-left">
+                                                    <div class="form-group">
+                                                        <span class="p-float-label">
+                                                            <p-dropdown  inputId="reportStatusDrop1" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="library_list" formControlName="SUBJECT_SEPARATE"  optionLabel="Country_Name" optionValue="Country_Name"  ></p-dropdown>
+                                                            <label for="reportStatusDrop1">Select Label</label>
+                                                        </span>
+                                                    </div>
+                                                    <div *ngIf="reportStatus.controls.SUBJECT_SEPARATE.errors && reportStatus.controls.SUBJECT_SEPARATE.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                                                        <div *ngIf="reportStatus.controls.SUBJECT_SEPARATE.errors['required'] ">Field is required</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-1">
+                                                <div class="col-4 labelCustom" style="text-align: end;;padding-top: 8px;" >
+                                                    Label Name:
+                                                </div>
+                                                <div class="col-6 float-left">
+                                                    <div class="form-group">
+                                                        <span class="p-float-label">
+                                                            <input id="reportStatus2" class="form-control" type="text" formControlName="DESCRIPTION"  required  pInputText > 
+                                                        </span>  
+                                                    </div>
+                                                    <div *ngIf="reportStatus.controls.DESCRIPTION.errors && reportStatus.controls.DESCRIPTION.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                                                        <div *ngIf="reportStatus.controls.DESCRIPTION.errors['required'] ">Field is required</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <ng-template pTemplate="footer">
+                                            <p-button icon="pi pi-check"  [disabled]="reportStatus.invalid" *ngIf="!editLabel" (click)="addUpdateReport('ADD')"  label="Add" class="p-button-text"></p-button>
+                                            <p-button icon="pi pi-check"  [disabled]="reportStatus.invalid" *ngIf="editLabel" (click)="addUpdateReport('UPDATE')"  label="Update" class="p-button-text"></p-button>
+                                            <p-button icon="pi pi-times" (click)="showAddReport=false" label="Cancel"></p-button>
+                                        </ng-template>
+                                    
+                                    </p-dialog>
+                                <!-- </form> -->
+                            </div>
+                        </perfect-scrollbar>
+                        <!-- <div class="card-footer">
+                            <div class="row" style="text-align: center;">
+                                <div class="col-6 offset-3">
+                                    <button type="submit" pButton (click)="addUpdateReport('UPDATE')" [disabled]="labelObj.LABEL_NAME?.length<=0 || labelObj==null || labelObj.LABEL==null"  class="p-button-success mr-2">
+                                        <i class="feather ft-check"></i> Update
+                                    </button>
+                                    <button type="submit" pButton (click)="showAddReport=true" class="p-button-success mr-2">
+                                        <i class="feather ft-check"></i> Add
+                                    </button>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                  </div>
+                <div id="status" class="tabcontent">
+                    <div  class="card "  style="height: 502px" >
+                        <perfect-scrollbar  class="scroll-container"  [config]="config" >
+                            <div class="card-body"  style="padding-left: 8px;" >
+                                <ul class="nav nav-tabs _bottom nav-underline no-hover-bg tabsborder">
+                                    <ngb-tabset>
+                                      <ngb-tab title="Status">
+                                        <ng-template ngbTabContent>
+                                            <div class="row mt-5">
+                                                <div class="col-4 labelCustom" style="text-align: end;padding-top: 8px;" >
+                                                    Study Status:
+                                                </div>
+                                                <div class="col-6 float-left" >
+                                                    <div class="form-group">
+                                                        <span class="p-float-label">
+                                                            <p-dropdown  inputId="studyStatus" [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="statuses"   [(ngModel)]="studyStatus"  optionLabel="LIBRARY_VALUE" ></p-dropdown>
+                                                            <label for="studyStatus">Select Status</label>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="text-align: center;margin-top: 60px;">
+                                                <div class="col-6 offset-3">
+                                                        <button type="submit" pButton (click)="updateStatus1('UPDATE')"  [disabled]="studyStatus==null" class="p-button-success mr-2">
+                                                        <i class="feather ft-check"></i> Update
+                                                        </button>
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                      </ngb-tab>
+                                      <ngb-tab>
+                                        <ng-template ngbTabTitle>Commit/Uncommit</ng-template>
+                                        <ng-template ngbTabContent>
+                                            <div class="row mt-3" style="height: 48px;">
+                                                <div class="col-6 " style="text-align: end;font-weight: bold;" >
+                                                    Commit Status:
+                                                </div>
+                                                <div class="col-6 float-left" >
+                                                    <div *ngIf="studyObj?.checked">
+                                                        Committed
+                                                    </div>
+                                                    <div *ngIf="!studyObj?.checked">
+                                                        Uncommitted
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-1">
+                                                <div class="col-6 " style="text-align: end;font-weight: bold;" >
+                                                    Action:
+                                                </div>
+                                                <div class="col-6 float-left" >
+                                                    <div *ngIf="studyObj.COMMIT==1">
+                                                        <p-inputSwitch [(ngModel)]="studyObj.checked" (onChange)="updateStatus()"  pTooltip="Uncommit Now" tooltipPosition="bottom"  ></p-inputSwitch>
+                                                    </div>
+                                                    <div *ngIf="studyObj.COMMIT==0">
+                                                        <p-inputSwitch [(ngModel)]="studyObj.checked" (onChange)="updateStatus()"  pTooltip="Commit Now" tooltipPosition="bottom"  ></p-inputSwitch>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </ng-template>
+                                      </ngb-tab>
+                                    </ngb-tabset>
+                                  </ul>
+                            </div>
+                        </perfect-scrollbar>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+

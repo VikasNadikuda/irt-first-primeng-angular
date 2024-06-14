@@ -1,0 +1,156 @@
+<div class="app-content content">
+    <div class="content-wrapper">
+      <div class="content-header row" >
+        <app-breadcrumb class="col-12 content-header-title" [title]="false" [action]="false" [breadcrumb]="breadcrumb"></app-breadcrumb>
+      </div>
+      <div class="content-body ">
+        <div class="row">
+          <div class="col-md-12"  >
+            <div class="card" *blockUI="'addUser'; message: 'Loading'">
+              <div class="card-title titleStyle"  mCardTitle >
+                {{title}}
+              </div>
+              <div class="card-body" >
+                <form class="form" [formGroup]="addOrEditUser" style="padding:1rem">
+                  <div class="form-body" >
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <span class="p-float-label">
+                            <input id="orgUser1" class="form-control" type="text" formControlName="firstname" pInputText > 
+                            <label for="orgUser1">First Name</label>
+                          </span>
+
+                          <div *ngIf="addOrEditUser.controls.firstname.errors && addOrEditUser.controls.firstname.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                            <div *ngIf="addOrEditUser.controls.firstname.errors['required'] ">First Name is required</div>
+                            <div *ngIf="addOrEditUser.controls.firstname.errors['maxlength'] ">Maximum 15 characters</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <span class="p-float-label">
+                            <input id="orgUser2" class="form-control" type="text" formControlName="lastname" pInputText> 
+                            <label for="orgUser2">Last Name</label>
+                          </span>
+                          
+                          <div *ngIf="addOrEditUser.controls.lastname.errors && addOrEditUser.controls.lastname.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                            <div *ngIf="addOrEditUser.controls.lastname.errors['required'] ">Last Name is required</div>
+                            <div *ngIf="addOrEditUser.controls.lastname.errors['maxlength'] ">Maximum 15 characters</div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row ">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <span class="p-float-label">
+                            <textarea id="orgUser3" rows="5" cols="50" required class="form-control"  formControlName="address1" pInputTextarea> </textarea>
+                            <label for="orgUser3">Address</label>
+                          </span>
+                          <div *ngIf="addOrEditUser.controls.address1.errors && addOrEditUser.controls.address1.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                            <div *ngIf="addOrEditUser.controls.address1.errors['required'] ">Field is required</div>
+                            <div *ngIf="addOrEditUser.controls.address1.errors['maxlength'] ">Maximum 150 characters</div>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group p-float-label">
+                          <p-dropdown  inputId="drop24"  [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="countries"   formControlName="country"  optionLabel="LIBRARY_VALUE" optionValue='LIBRARY_ID'></p-dropdown>
+                          <label for="drop24">Select Country</label>
+                          <div *ngIf="addOrEditUser.controls.country.errors && addOrEditUser.controls.country.touched" style="margin-top:8px;" class="invalid-feedback1">
+                            <div *ngIf="addOrEditUser.controls.country.errors['required'] ">Field is required</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row ">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <span class="p-float-label">
+                            <input id="orgUser4" class="form-control" type="text" formControlName="contact" pInputText> 
+                            <label for="orgUser4">Phone Number</label>
+                          </span>
+                          <div *ngIf="addOrEditUser.controls.contact.errors && addOrEditUser.controls.contact.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                            <div *ngIf="addOrEditUser.controls.contact.errors['required'] ">Field is required</div>
+                            <div *ngIf="addOrEditUser.controls.contact.errors['maxlength'] ">Maximum 25 characters</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <span class="p-float-label">
+                            <input id="orgUser4" class="form-control" type="text" formControlName="email" pInputText> 
+                            <label for="orgUser4">Email</label>
+                          </span>
+                          <div *ngIf="addOrEditUser.controls.email.errors && addOrEditUser.controls.email.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                            <div *ngIf="addOrEditUser.controls.email.errors['required'] ">Field is required</div>
+                            <div *ngIf="addOrEditUser.controls.email.errors['maxlength'] ">Maximum 50 characters</div>
+                            <div *ngIf="addOrEditUser.controls.email.errors['email'] ">Enter Valid Email Address</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row ">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <span class="p-float-label">
+                            <input id="orgUser5" class="form-control" type="text" formControlName="company" pInputText> 
+                            <label for="orgUser5">Company</label>
+                          </span>
+                          <div *ngIf="addOrEditUser.controls.company.errors && addOrEditUser.controls.company.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                            <div *ngIf="addOrEditUser.controls.company.errors['required'] ">Field is required</div>
+                            <div *ngIf="addOrEditUser.controls.company.errors['maxlength'] ">Maximum 50 characters</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group p-float-label">
+                          <p-dropdown  inputId="drop25"  [autoDisplayFirst]="false" [style]="{'width':'100%'}" [options]="roles"   formControlName="role"  optionLabel="LIBRARY_VALUE" optionValue='LIBRARY_VALUE' ></p-dropdown>
+                          <label for="drop25">Select a Role</label>
+                          <div *ngIf="addOrEditUser.controls.role.errors && addOrEditUser.controls.role.touched" style="margin-top:8px;" class="invalid-feedback1">
+                            <div *ngIf="addOrEditUser.controls.role.errors['required']  ">Field is required</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row  ">
+                      <div class="col-md-6">
+                        <div class="form-group p-float-label">
+                          <p-dropdown  inputId="drop26"  [autoDisplayFirst]="false"  [style]="{'width':'100%'}" [options]="status"   formControlName="status"  optionLabel="LIBRARY_VALUE" optionValue="LIBRARY_ID"></p-dropdown>
+                          <label for="drop26">Select Status</label>
+                          <div *ngIf="addOrEditUser.controls.status.errors && addOrEditUser.controls.status.touched" style="margin-top:8px;" class="invalid-feedback1">
+                            <div *ngIf="addOrEditUser.controls.status.errors['required'] ">Field is required</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6" >
+                        <div class="form-group p-float-label">
+                          <p-dropdown  inputId="drop27"  [autoDisplayFirst]="false"  [style]="{'width':'100%'}" [options]="timeZones"   formControlName="timezone"  optionLabel="DisplayName" optionValue="Id"></p-dropdown>
+                          <label for="drop27">Select a Time Zone</label>
+                          <div *ngIf="addOrEditUser.controls.timezone.errors && addOrEditUser.controls.timezone.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                            <div *ngIf="addOrEditUser.controls.timezone.errors['required'] ">Field is required</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-actions" style="padding:20px 0 0 0">
+                    <button type="button" pButton (click)="resetForm()" class=" p-button-warning mr-2">
+                      <i class="feather ft-x"></i> Reset
+                    </button>
+                    <button type="submit" pButton  (click)="saveUser()" [disabled]="addOrEditUser.invalid" class="p-button-success">
+                      <i class="feather ft-check"></i> {{submitButton}}
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

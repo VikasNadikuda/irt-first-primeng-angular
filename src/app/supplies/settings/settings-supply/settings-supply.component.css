@@ -1,0 +1,20 @@
+.marginTop{
+    margin-top:24px
+}
+.radioLabel{
+    margin-left: 8px;
+    margin-bottom: 0px;
+    font-size: medium;
+}
+.invalid-feedback1{
+    color: #ff4961;
+}
+.isValid{
+    border-color: #ff4961;
+  }
+  .p-dropdown{
+      width: 100% !important;
+  }
+  .font500{
+      font-weight: 500;
+  }

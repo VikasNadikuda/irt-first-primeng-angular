@@ -1,0 +1,129 @@
+<div class="app-content content">
+    <div class="content-wrapper">
+        <div class="content-header row ">
+            <h3 class="col-12 content-header-title" >
+                  Stratification Factor
+            </h3>
+        </div>
+        <div class="content-body " style="margin-bottom:32px;margin-top: 16px;" *blockUI="'strata'; message: 'Loading'">
+            <form class="form" [formGroup]="addStrata">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row" style="margin-top: 16px;">
+                            <div class="col-md-12">
+                                <div  class="card"  >
+                                    <div class="card-title titleStyle" >
+                                      Add Factor
+                                    </div>
+                                    <div class="card-body">
+                                        <button pButton pRipple type="button" icon="pi pi-plus" *ngIf="getFactors(addStrata).length<4" pTooltip="Add factor" tooltipPosition="bottom"  class=" float-right p-button-rounded p-button-outlined" (click)="addStrat()" ></button>
+                                        <!-- <p-button icon="pi pi-plus" class="float-right p-button-outlined" (click)="addStrat()"   label="Add Factor"></p-button> -->
+                                        <!-- <button type="button" class="btn btn-primary">Add More</button> -->
+                                        <div class="row" >
+                                            <div  class="col-6" *ngFor="let factor of getFactors(addStrata); let i=index" >
+                                                <div formArrayName="factor">
+                                                    <div class="card roleCard"  [formGroupName]="i">
+                                                        <perfect-scrollbar  class="scroll-container"  [config]="config" >
+                                                            <div class="card-content">
+                                                                <div class="card-body" style="padding-top: 4px;padding-right: 16px;">
+                                                                    <div class="row float-right">
+                                                                        <div class="col-12  ">
+                                                                            <i class="pi pi-times" *ngIf="i!=0" style="color: red;cursor: pointer;" pTooltip="Remove Factor" tooltipPosition="bottom"  (click)="removeStrat(i)" ></i>
+                                                                            <!-- <button pButton pRipple  *ngIf="i!=0" type="button" icon="pi pi-times" (click)="removeStrat(i)" class="p-button-sm p-button-rounded p-button-text"></button>     -->
+                                                                        </div>
+                                                                    </div>
+                                                                    <br>
+                                                                    <div class="row" *ngIf="studyDetails?.COHORT!='No'">
+                                                                        <div class="col-3 labell" >
+                                                                            Cohort Name:
+                                                                        </div>
+                                                                        <div class="col-8">
+                                                                            <div class="form-group ">
+                                                                                <span class="p-float-label">
+                                                                                    <p-dropdown  inputId="stDrop88" [autoDisplayFirst]="false" [style]="{'width':'93%'}" [options]="cohort_list"  [required]="studyDetails?.COHORT!='No'"  formControlName="cohort"  optionLabel="NAME" optionValue='ID' ></p-dropdown>
+                                                                                    <label for="stDrop88">Select Cohort</label>
+                                                                                </span>
+                                                                                <!-- <div *ngIf="addOrEditStudy.controls.SUBGROUP.errors && addOrEditStudy.controls.SUBGROUP.touched" style="margin-top:8px;" class="invalid-feedback1">
+                                                                                  <div *ngIf="addOrEditStudy.controls.SUBGROUP.errors['required']  ">Field is required</div>
+                                                                                </div> -->
+                                                                            </div>
+                                                                            <!-- <input id="cohorts" style="width:93%" class="form-control" type="text" formControlName="cohort" [required]="studyDetails?.COHORT!='No'"  pInputText >  -->
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row" >
+                                                                        <div class="col-3 labell" >
+                                                                            Factor Name:
+                                                                        </div>
+                                                                        <div class="col-8">
+                                                                            <input id="cohorts1" style="width:93%" class="form-control" type="text" formControlName="factorName"  pInputText > 
+                                                                            <!-- <label for="cohorts1">Role Name</label> -->
+                                                                            <!-- <div *ngIf="addStrata.controls.factorName.errors && addStrata.controls.factorName.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                                                                                <div *ngIf="addStrata.controls.factorName.errors['required'] ">Field is required</div>
+                                                                            </div> -->
+                                                                        </div>
+                                                                    </div>
+                                                 
+                                                                    <div *ngFor="let factorValue of getValues(factor); let j=index">
+                                                                        <div class="row" style="margin-top: 16px;">
+                                                                            <div class="col-3 labell" >
+                                                                             <span *ngIf="j==0">
+                                                                                Factor Value:
+                                                                             </span>
+                                                                            </div>
+                                                                            <div class="col-9" >
+                                                                                <!-- <button type="button" (click)="addFactor(i)" class="btn btn-primary">Add More</button> -->
+                                                                                <div formArrayName="factorValues">
+                                                                                    <div [formGroupName]="j">
+                                                                                        <div class="row"  >
+                                                                                            <div class="col-10">
+                                                                                                <input id="cohorts1" class="form-control" type="text" formControlName="factorValue" pInputText > 
+                                                                                            </div>
+                                                                                            <div class="col-1"  style="padding-left:0px" *ngIf="j>1">
+                                                                                                <button pButton pRipple type="button" *ngIf="j>1" icon="pi pi-trash " pTooltip="Delete Value" tooltipPosition="bottom" class=""  (click)="removeFactor(i,j)" class="p-button-rounded p-button-text p-button-danger"></button>    
+                                                                                            </div>
+                                                                                            <div class="col-1"  style="padding-left:0px" >
+                                                                                                <button pButton pRipple type="button" *ngIf="j==0 && getValues(factor).length<6" icon="pi pi-plus" pTooltip="Add Value" tooltipPosition="bottom"  (click)="addFactor(i,j)" class="p-button-rounded p-button-text"></button>    
+                                                                                            </div>
+                                                                                        </div>
+                                                                                       
+                                                                                        
+                                                                                        <!-- <div *ngIf="addStrata.controls.factor.factorValue.errors && addStrata.controls.factor.factorValue.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                                                                                            <div *ngIf="addStrata.controls.factor.factorValue.errors['required'] ">Field is required</div>
+                                                                                        </div> -->
+                                                                                    </div>  
+                                                                                </div>
+                                                                            </div>
+                                                                            <!-- <div class="col-2">
+                                                                                <button pButton pRipple type="button" icon="pi pi-plus" (click)="addFactor(i)" class="p-button-rounded p-button-text"></button>
+                                                                            </div> -->
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </perfect-scrollbar>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="row" style="text-align: center;">
+                                            <div class="col-6 offset-3">
+                                                    <button type="submit" pButton (click)="addUpdate('UPDATE')" *ngIf="updateStrata" [disabled]="addStrata.invalid" class="p-button-success ">
+                                                    <i class="feather ft-check"></i> Update
+                                                    </button>
+                                                    <button type="submit" pButton (click)="addUpdate('ADD')"  *ngIf="!updateStrata"  [disabled]="addStrata.invalid" class="p-button-success ">
+                                                        <i class="feather ft-check"></i> ADD
+                                                    </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

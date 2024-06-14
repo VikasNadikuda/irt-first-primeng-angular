@@ -1,0 +1,27 @@
+.roleStyle{
+    padding: 8px;
+    font-weight: 600;
+    font-size: small;
+    background: #fff8e1;
+    color: black;
+    margin-bottom: 0 !important;
+}
+.roleCard{
+    border: 0.3px #217ba7 solid ;
+    height: 240px;
+    padding-bottom:16px ;
+}
+.pull-up1 {
+    transition: all 0.25s ease;
+}
+.pull-up1:hover{
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0px 14px 24px rgba(62, 57, 107, 0.2);
+    z-index: 30;
+    color: #217ba7 !important;
+}
+.nodata1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

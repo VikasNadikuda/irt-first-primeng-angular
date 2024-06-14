@@ -1,0 +1,187 @@
+<div class="app-content content">
+    <div class="content-wrapper">
+        <div class="content-header row ">
+            <h3 class="col-12 content-header-title" >
+                  Organisation Information
+            </h3>
+        </div>
+        <div class="content-body" style="margin-bottom:32px;margin-top: 16px;" *blockUI="'viewOrg'; message: 'Loading'">
+            <p-table #dt  [columns]="selectedColumns"  [value]="organisations" dataKey="Organization_ID" [rows]="6" [exportFilename]="'organisations_list'"  [showCurrentPageReport]="true"
+                [rowsPerPageOptions]="[6,12,18]" styleClass="p-datatable-striped"
+                [paginator]="organisations?.length>0"  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                [globalFilterFields]="colum.concat(['Organization_Name','Organization_ID'])">
+                <ng-template pTemplate="caption">
+                    <div class="p-d-flex">
+                        <p-multiSelect pTooltip="Choose columns to display" [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header"  *ngIf="organisations?.length>0"
+                        selectedItemsLabel="{0} columns selected" [style]="{minWidth: '200px'}" placeholder="Choose Column to display"></p-multiSelect>
+                        <span class="p-input-icon-left p-ml-auto">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text"  *ngIf="organisations?.length>0" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Global Search" />
+                            <button pButton pRipple label="New" [routerLink]="['/master/manageOrganisation/addOrEditOrganisation']"  pTooltip="Add an organisation" tooltipPosition="bottom" icon="pi pi-plus" class="p-button-info" style="margin-left:8px;margin-bottom: 3px;" ></button>
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header" let-columns>
+                    <tr style="border-bottom: 1px solid black !important;">
+                        <th pSortableColumn="Organization_Name" class="marginRight" >
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                Organisation ID
+                                <p-sortIcon field="Organization_Name"></p-sortIcon>
+                                <p-columnFilter type="text" field="Organization_Name"  placeholder="Search " class="p-mr-auto"  display="menu"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th pSortableColumn="Organization_ID" class="marginRight" >
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                Organisation Name
+                                <p-sortIcon field="Organization_ID"></p-sortIcon>
+                                <p-columnFilter type="text" field="Organization_ID"  placeholder="Search " class="p-mr-auto"  display="menu"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th pSortableColumn="{{col.field}}"   *ngFor="let col of columns" class="marginRight">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                {{col.header}}
+                                <p-sortIcon field="{{col.field}}"></p-sortIcon>
+                                <p-columnFilter type="text" field="{{col.field}}"  placeholder="Search "  display="menu" class="p-mr-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th style="color: #176d98;">
+                            Action
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-organisation let-columns="columns">
+                    <tr class="p-selectable-row">
+                        <td>
+                            <span class="p-column-title">Organisation ID</span>
+                            {{organisation?.Organization_ID}}
+                        </td>
+                        <td>
+                            <span class="p-column-title">Organisation Name</span>
+                            {{organisation?.Organization_Name}}
+                        </td>
+                        <td *ngFor="let col of columns">
+                            <span *ngIf="col.field!='Status'">{{organisation[col.field]}}</span>
+                            <span *ngIf="col.field=='Status'">
+                                <span *ngIf="organisation[col.field]==1">
+                                    Active
+                                </span>
+                                <span *ngIf="organisation[col.field]==0">
+                                    Inactive
+                                </span>                        
+                            </span>        
+                        </td>
+                        <td>
+                            <span class="p-column-title">Activity</span>
+                            <button pButton pRipple icon="pi pi-eye"  pTooltip="View Organisation Details" tooltipPosition="bottom" class="p-button-rounded p-button-info p-button-outlined p-mr-2" (click)="viewOrganisation(organisation)"></button>
+                            <button pButton pRipple icon="pi pi-pencil"  pTooltip="Edit Organisation" tooltipPosition="bottom" class="p-button-rounded  d p-button-info p-button-outlined p-mr-2" (click)="editOrganisation(organisation)"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+            <p-dialog [modal]='true' header="Organisation Details" [style]="{width: '60vw',height:'30vw',top:'0'}" [baseZIndex]="10001" [(visible)]="display">
+                <div class="row rowMargin">
+                    <div class="col-md-6">
+                        <span class="p-float-label">
+                            <input id="fl1" class="form-control" type="text" style="border:1px solid #3F51B5;" [value]="viewObj?.Organization_ID"  pInputText > 
+                            <label for="fl1" style="font-weight: 600;">Organisation Id</label>
+                        </span>
+                    </div>
+                    <div class="col-md-6">
+                        <span class="p-float-label">
+                            <input id="fl2" class="form-control" type="text" style="border:1px solid #3F51B5;" [value]="viewObj?.Organization_Name"  pInputText > 
+                            <label for="fl2">Organisation Name</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="row rowMargin">
+                    <div class="col-md-6">
+                        <span class="p-float-label">
+                            <input id="fl3" class="form-control" type="text" style="border:1px solid #3F51B5;" [value]="viewObj?.Address1"  pInputText > 
+                            <label for="fl3">Address 1</label>
+                        </span>
+                    </div>
+                    <div class="col-md-6">
+                        <span class="p-float-label">
+                            <input id="fl4" class="form-control" type="text" style="border:1px solid #3F51B5;" [value]="viewObj?.Address2"  pInputText > 
+                            <label for="fl4">Address 2</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="row rowMargin">
+                    <div class="col-md-6">
+                        <span class="p-float-label">
+                            <input id="fl5" class="form-control" type="text" style="border:1px solid #3F51B5;" [value]="viewObj?.State_Name"  pInputText > 
+                            <label for="fl5">State</label>
+                        </span>
+                    </div>
+                    <div class="col-md-6">
+                        <span class="p-float-label">
+                            <input id="fl6" class="form-control" type="text" style="border:1px solid #3F51B5;" [value]="viewObj?.Country_Name"  pInputText > 
+                            <label for="fl6">Country</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="row rowMargin">
+                    <div class="col-md-6">
+                        <span class="p-float-label">
+                            <input id="fl7" class="form-control" type="text" style="border:1px solid #3F51B5;" [value]="viewObj?.City_Name"  pInputText > 
+                            <label for="fl7">City </label>
+                        </span>
+                    </div>
+                    <div class="col-md-6">
+                        <span class="p-float-label">
+                            <input id="fl8" class="form-control" type="text" style="border:1px solid #3F51B5;" [value]="viewObj?.Zip"  pInputText > 
+                            <label for="fl8">Zip</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="row rowMargin">
+                    <div class="col-md-6">
+                        <span class="p-float-label">
+                            <input id="fl9" class="form-control" type="text" style="border:1px solid #3F51B5;" [value]="viewObj?.Contact"  pInputText > 
+                            <label for="fl9">Contact</label>
+                        </span>
+                    </div>
+                    <div class="col-md-6">
+                        <span class="p-float-label">
+                            <input id="fl10" *ngIf="viewObj?.Named_Users=='Limited'" class="form-control" type="text" style="border:1px solid #3F51B5;" [value]="viewObj?.Named_Users_Value"  pInputText > 
+                            <input id="fl10" *ngIf="viewObj?.Named_Users!='Limited'" class="form-control" type="text" style="border:1px solid #3F51B5;" [value]="'Unlimited'"  pInputText > 
+                            <label for="fl10">Number of Users</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="row rowMargin">
+                    <div class="col-md-6">
+                        <span class="p-float-label">
+                            <input id="fl11" *ngIf="viewObj?.Prodtype=='Limited'" class="form-control" type="text" style="border:1px solid #3F51B5;" [value]="viewObj?.Prodtype_Value"  pInputText > 
+                            <input id="fl11" *ngIf="viewObj?.Prodtype!='Limited'" class="form-control" type="text" style="border:1px solid #3F51B5;" [value]="'Unlimited'"  pInputText > 
+                            <label for="fl11">Number of Studies</label>
+                        </span>
+                    </div>
+                    <div class="col-md-6">
+                        <span class="p-float-label">
+                            <input id="fl12" *ngIf="viewObj?.Status==1" class="form-control" type="text" style="border:1px solid #3F51B5;" [value]="'Active'"  pInputText > 
+                            <input id="fl12" *ngIf="viewObj?.Status==0" class="form-control" type="text" style="border:1px solid #3F51B5;" [value]="'Inactive'"  pInputText > 
+                            <label for="fl12">Status</label>
+                        </span>
+                    </div>
+                </div>
+                        
+            </p-dialog>
+            <div class="caption1 nodata" *ngIf="organisations.length<=0">
+                "No Organisations found."
+                <!-- <tr>
+                    <td colspan="12" class="p-d-flex">No Organisations found.</td>
+                </tr>                         -->
+            </div>
+            <p-toolbar styleClass="p-mb-4" *ngIf="organisations.length>0">
+                <ng-template pTemplate="left">
+                    <button type="button" pButton pRipple icon="pi pi-file-o" (click)="exportExcel('csv')" class="p-mr-2" style="margin-right: 8px;" pTooltip="CSV" tooltipPosition="bottom"></button>
+                    <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel('xlsx')" class="p-button-success p-mr-2" style="margin-right: 8px;" pTooltip="XLS" tooltipPosition="bottom"></button>
+                    <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning p-mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+                </ng-template>
+            </p-toolbar>
+        </div>
+    </div>
+</div>
+

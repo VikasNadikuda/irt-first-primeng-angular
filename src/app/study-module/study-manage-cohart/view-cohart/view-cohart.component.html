@@ -1,0 +1,119 @@
+<div class="app-content content">
+    <div class="content-wrapper">
+        <div class="content-header row ">
+            <h3 class="col-12 content-header-title" >
+                  Manage Cohort
+            </h3>
+        </div>
+        <div class="content-body" style="margin-bottom:32px;margin-top: 16px;" *blockUI="'cohort'; message: 'Loading'">
+            <p-table #sc1 [columns]="selectedColumns" editMode="row" [value]="cohort_list" dataKey="CohortName" [rows]="6" [exportFilename]="'cohort_list'"  [showCurrentPageReport]="true"
+            [rowsPerPageOptions]="[6,12,18]" styleClass="p-datatable-striped"
+            [paginator]="cohort_list?.length>0" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [globalFilterFields]="colum">
+            <ng-template pTemplate="caption">
+                <div class="p-d-flex">
+                    <span class="p-input-icon-left p-ml-auto">
+                        <i *ngIf="cohort_list.length>0" class="pi pi-search"></i>
+                        <input *ngIf="cohort_list.length>0" pInputText type="text" (input)="sc1.filterGlobal($event.target.value, 'contains')" placeholder="Global Search" />
+                        <button pButton pRipple label="New" pTooltip="Add a Cohort" (click)="showDialog()" tooltipPosition="bottom" icon="pi pi-plus" class="p-button-info" style="margin-left:8px;margin-bottom: 3px;" ></button>
+                    </span>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header" let-columns>
+                <tr style="border-bottom: 1px solid black !important;">
+                    <th pSortableColumn="{{col.field}}" class="marginRight"  *ngFor="let col of columns">
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                            {{col.header}}
+                            <p-sortIcon field="{{col.field}}"></p-sortIcon>
+                            <p-columnFilter type="text" field="{{col.field}}"  placeholder="Search "  display="menu" class="p-mr-auto"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="color: #176d98;">
+                        Action
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-cohort let-columns="columns"  let-editing="editing" let-ri="rowIndex">
+                <tr [pEditableRow]="cohort" class="p-selectable-row">
+                    <td pEditableColumn>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" [(ngModel)]="cohort.COHORT_NAME">
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{cohort.COHORT_NAME}}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td pEditableColumn>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <p-dropdown [options]="status" [(ngModel)]="cohort.CURRENT_STATUS" [style]="{'width':'80%'}"></p-dropdown>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{cohort.CURRENT_STATUS}}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        {{cohort.ACTIVATED_DATE | date:'dd-MMM-yyyy'}}
+
+                    </td>
+                    <td>
+                        {{cohort.CREATED_DATE | date:'dd-MMM-yyyy'}}
+
+                    </td>
+                    <td>
+                        <span class="p-column-title">Action</span>
+                        <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" pTooltip="Edit cohort" tooltipPosition="bottom" (click)="onRowEditInit(cohort)" class="p-button-rounded p-button-text"></button>
+                        <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(cohort,ri)" class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
+                        <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(cohort, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
+                        <!-- <button pButton pRipple icon="pi pi-pencil"  pTooltip="Edit cohort" tooltipPosition="bottom" class="p-button-rounded p-button-info " (click)="editcohort(cohort)"></button> -->
+                    </td>
+                </tr>
+            </ng-template>
+        
+        </p-table>
+        <div class="caption1 nodata" *ngIf="cohort_list?.length<=0">
+            "No cohort list found."
+        </div>
+        </div>
+        <p-dialog [modal]='true' header="{{title}}" [style]="{width: '50vw',height:'25vw',top:'0'}" [baseZIndex]="10000" [(visible)]="display">
+            <div >
+                <form class="form" [formGroup]="addCohort" style="padding:1rem">
+                    <div class="form-body" >
+                        <div class="row " style="padding-top: 16px;">
+                            <div class="col-md-5 p-ml-auto p-mr-auto">
+                              <div class="form-group">
+                                <span class="p-float-label">
+                                    <input id="float-inputs1" class="form-control" type="text" formControlName="CohortName" pInputText > 
+                                    <label for="float-inputs1">Cohort Name</label>
+                                </span>     
+                                <div *ngIf="addCohort.controls.CohortName.errors && addCohort.controls.CohortName.dirty" style="margin-top:8px;" class="invalid-feedback1">
+                                    <div *ngIf="addCohort.controls.CohortName.errors['required'] ">Field is required</div>
+                                    <div *ngIf="addCohort.controls.CohortName.errors['maxlength'] ">Maximum 100 characters</div>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="row " style="padding-top: 16px;" >
+                            <div class="col-md-5 p-ml-auto p-mr-auto">
+                                <div class="form-group p-float-label">
+                                    <p-dropdown inputId="sdrop1" [autoDisplayFirst]="false"  [style]="{'width':'100%'}" [options]="statuses"   formControlName="Status" optionLabel="LIBRARY_VALUE" optionValue="LIBRARY_ID"></p-dropdown>
+                                    <label for="sdrop1">Select Status</label>
+                                    <div *ngIf="addCohort.controls.Status.errors && addCohort.controls.Status.touched"  class="invalid-feedback1">
+                                        <div *ngIf="addCohort.controls.Status.errors['required'] ">Field is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <ng-template pTemplate="footer">
+                <p-button icon="pi pi-check"  [disabled]="addCohort.invalid" (click)="saveCohort()"  label="Add" class="p-button-text"></p-button>
+                <p-button icon="pi pi-times" (click)="display=false" label="Cancel"></p-button>
+            </ng-template>
+        </p-dialog>
+    </div>
+</div>

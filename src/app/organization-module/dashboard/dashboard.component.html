@@ -1,0 +1,151 @@
+<div class="app-content content">
+    <div class="content-wrapper">
+      <div class="content-body" >
+        <div class="row">
+            <div class="col-xl-6 col-md-12">
+              <div class="card pull-up overflow-hidden">
+                <div class="card-content">
+                  <div class="card-body cleartfix">
+                    <div class="media align-items-stretch">
+                      <div class="align-self-center">
+                        <i class="icon-list info font-large-2 mr-2"></i>
+                      </div>
+                      <div class="media-body">
+                        <h4>Total Sites</h4>
+                        <span>Number of sites</span>
+                      </div>
+                      <div class="align-self-center">
+                        <h1>{{total_sites}}</h1>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-6 col-md-12">
+              <div class="card pull-up">
+                <div class="card-content">
+                  <div class="card-body cleartfix">
+                    <div class="media align-items-stretch">
+                      <div class="align-self-center">
+                        <i class="icon-home warning font-large-2 mr-2"></i>
+                      </div>
+                      <div class="media-body">
+                        <h4>Total Depots</h4>
+                        <span>Number of Depots</span>
+                      </div>
+                      <div class="align-self-center">
+                        <h1>{{total_depots}}</h1>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <div class="row" >
+            <div class="col-xl-7 col-md-8">
+                <div class="card  " >
+                    <div class="card-content">
+                        <div class="card-header">
+                            <h4 class="card-title" style="font-weight: 600;">User Information</h4>
+                          </div>
+                        <div class="card-body table-responsive  cleartfix" style="padding-top: 0 !important;">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">User</th>
+                                    <th scope="col">Role</th>
+                                    <th scope="col">Status</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let element of data |slice: (page-1) * pageSize : (page-1) * pageSize + pageSize" >
+                                    <td> {{element.username}} </td>
+                                    <td>{{ element.ROLE_NAME}}</td>
+                                    <td> {{element.STATUS}}  </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                
+                              <div class="d-flex justify-content-between float-right ">
+                                <ngb-pagination [collectionSize]="data?.length" [(page)]="page" [pageSize]="pageSize">
+                                </ngb-pagination>
+                              </div>
+                
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-5 col-md-4">
+                <div class="card pull-up overflow-hidden">
+                    <div class="card-content">
+                        <div class="card-body  cleartfix" style="padding-left: 16%;">
+                            <ngx-charts-pie-chart
+                            [results]="single1"
+                            label='Total Users'
+                            [view]="view"
+                            [labels]="true"
+                            (select)="onSelect($event)"
+                            (activate)="onActivate($event)"
+                            (deactivate)="onDeactivate($event)"
+                            >
+                            <ng-template #tooltipTemplate let-model='model' >
+                                <div >
+                                    {{model.label}}
+                                </div>
+                                <div>
+                                  Active:{{hoverObj?.Active}}
+                                </div>
+                                <div>
+                                    Inactive:{{hoverObj?.Inactive}}
+                                  </div>
+                              <!-- Active: {{model.Active}}
+                              Inactive: {{model.Inactive}} -->
+                              <!-- <pre>{{model|json}}</pre> -->
+                            </ng-template>
+                          </ngx-charts-pie-chart>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" >
+            <div class="col-xl-12 col-md-12">
+                <div class="card  " >
+                    <div class="card-content">
+                        <div class="card-header">
+                            <h4 class="card-title float-left" style="font-weight: 600;">Depot Wise Kit List</h4>
+                            <span class="float-right p-float-label">
+                                <p-dropdown inputId="drop2" [autoDisplayFirst]="false" [style]="{'width':'320px'}" [options]="depot_types" (onChange)="depotChanges()"  [(ngModel)]="depot" optionLabel="Column1" ></p-dropdown>
+                                <label for="drop2">Select Depot</label>
+
+                            </span>
+                        </div>
+                        <div class="card-body cleartfix" *ngIf="depot.kit_types?.length>0" style="display: grid;height: 320px;margin-top: 32px;margin-bottom: 32px;font-weight:600">
+                            <ngx-charts-bar-vertical
+                            [view]="view1"
+                            [legend]='showLegend'
+                            [results]="barChart"
+                            [xAxis]="showXAxis"
+                            [xAxisLabel]="xAxisLabel"
+                            [showXAxisLabel]="showXAxisLabel"
+                            [yAxis]="showYAxis"
+                            [legend]="showLegend"
+                            (select)="onSelect1($event)">
+                          </ngx-charts-bar-vertical>
+                        </div>
+                        <div class="card-body nodata cleartfix" *ngIf="depot.kit_types?.length==0" style="height: 320px;margin-top: 32px">
+                         <span >"No Kits found please change depot"</span> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div *blockUI="'dashTable'; message: 'Loading'">
+        </div> -->
+      </div>
+    </div>
+  </div>
+  

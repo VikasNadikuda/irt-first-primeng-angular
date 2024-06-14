@@ -1,0 +1,86 @@
+<div class="app-content content">
+    <div class="content-wrapper">
+        <div class="content-header row ">
+            <h3 class="col-12 content-header-title" >
+                  Site Information
+            </h3>
+        </div>
+        <div class="content-body " style="margin-top: 16px;" *blockUI="'viewSites'; message: 'Loading'">
+            <p-table #dt2 [columns]="selectedColumns"  [value]="sites" dataKey="SITE_ID" [rows]="6" [exportFilename]="'sites_list'"  [showCurrentPageReport]="true"
+                    [rowsPerPageOptions]="[6,12,18]" styleClass="p-datatable-striped"
+                    [paginator]="sites?.length>0" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [globalFilterFields]="colum.concat(['SITE_ID','SITE_NAME'])" >
+                    <ng-template pTemplate="caption">
+                        <div class="p-d-flex">
+                            <p-multiSelect pTooltip="Choose columns to display" [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header" *ngIf="sites.length>0"
+                            selectedItemsLabel="{0} columns selected" [style]="{minWidth: '200px'}" placeholder="Choose Column to display"></p-multiSelect>
+                            <span class="p-input-icon-left p-ml-auto">
+                                <i *ngIf="sites.length>0" class="pi pi-search"></i>
+                                <input *ngIf="sites.length>0" pInputText type="text" (input)="dt2.filterGlobal($event.target.value, 'contains')" placeholder="Global Search" />
+                                <button pButton pRipple label="New" [routerLink]="['/organisation/manageSite/addOrEditSite']" pTooltip="Add a Site" tooltipPosition="bottom" icon="pi pi-plus" class="p-button-info" style="margin-left:8px;margin-bottom: 3px;" ></button>
+                            </span>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header" let-columns>
+                        <tr style="border-bottom: 1px solid black !important;">
+                            <th pSortableColumn="SITE_ID" class="marginRight" >
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Site ID
+                                    <p-sortIcon field="SITE_ID"></p-sortIcon>
+                                    <p-columnFilter type="text" field="SITE_ID"  placeholder="Search " class="p-mr-auto"  display="menu"></p-columnFilter>
+                                </div>
+                            </th>
+                            <th pSortableColumn="SITE_NAME" class="marginRight" >
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Site Name
+                                    <p-sortIcon field="SITE_NAME"></p-sortIcon>
+                                    <p-columnFilter type="text" field="SITE_NAME"  placeholder="Search " class="p-mr-auto"  display="menu"></p-columnFilter>
+                                </div>
+                            </th>
+                            <th pSortableColumn="{{col.field}}"   *ngFor="let col of columns" class="marginRight">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    {{col.header}}
+                                    <p-sortIcon field="{{col.field}}"></p-sortIcon>
+                                    <p-columnFilter type="text" field="{{col.field}}"  placeholder="Search "  display="menu" class="p-mr-auto"></p-columnFilter>
+                                </div>
+                            </th>
+                            <th style="color: #176d98;">
+                                Action
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-site let-columns="columns">
+                        <tr class="p-selectable-row">
+                            <td>
+                                <span class="p-column-title">Site Id</span>
+                                {{site.SITE_ID}}
+                            </td>
+                            <td>
+                                <span class="p-column-title">Site Name</span>
+                                {{site.SITE_NAME}}
+                            </td>
+                            <td *ngFor="let col of columns">
+                                <span>{{site[col.field]}}</span>
+                            <td>
+                                <span class="p-column-title">Action</span>
+                                <button pButton pRipple icon="pi pi-pencil"  pTooltip="Edit Site" tooltipPosition="bottom" class="p-button-rounded  d p-button-info p-button-outlined p-mr-2"  (click)="editSite(site)"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                  
+            </p-table>
+
+            <p-toolbar styleClass="p-mb-4" *ngIf="sites?.length>0">
+                <ng-template pTemplate="left">
+                    <button type="button" pButton pRipple icon="pi pi-file-o" (click)="exportExcel('csv')" class="p-mr-2" style="margin-right: 8px;" pTooltip="CSV" tooltipPosition="bottom"></button>
+                    <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel('xlsx')" class="p-button-success p-mr-2" style="margin-right: 8px;" pTooltip="XLS" tooltipPosition="bottom"></button>
+                    <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning p-mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+                </ng-template>
+            </p-toolbar>
+            <div class="caption1 nodata" *ngIf="sites?.length<=0">
+                "No sites found."
+           </div>
+        </div>
+    </div>
+</div>
+
